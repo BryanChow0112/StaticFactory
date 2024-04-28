@@ -1,0 +1,45 @@
+package game.utils;
+
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.Location;
+
+import java.util.List;
+import java.util.Random;
+
+/**
+ * A utility class for generating random values and random selections.
+ */
+public class RandomUtils {
+    private static final Random RANDOM = new Random();
+
+    /**
+     * Returns a random double value between 0.0 (inclusive) and 1.0 (exclusive).
+     *
+     * @return A random double value.
+     */
+    public static double getRandomDouble() {
+        return RANDOM.nextDouble();
+    }
+
+    /**
+     * Returns a random integer value between 0 (inclusive) and the specified bound (exclusive).
+     *
+     * @param bound The exclusive upper bound for the random number.
+     * @return A random integer value.
+     */
+    public static int getRandomInt(int bound) {
+        return RANDOM.nextInt(bound);
+    }
+
+    /**
+     * Returns a random exit from the given location.
+     *
+     * @param location The location for which to get a random exit.
+     * @return A random exit from the location.
+     */
+    public static Exit getRandomExit(Location location) {
+        List<Exit> exits = location.getExits();
+        int randomIndex = RANDOM.nextInt(exits.size());
+        return exits.get(randomIndex);
+    }
+}
