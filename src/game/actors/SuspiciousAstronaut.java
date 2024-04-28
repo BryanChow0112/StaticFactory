@@ -21,11 +21,13 @@ public class SuspiciousAstronaut extends Enemy implements Spawnable{
 
     @Override
     public Actor create() {
-        return null;
+        return new SuspiciousAstronaut(player);
     }
 
     @Override
     public double getSpawnChance() {
-        return 0;
+        return 0.05;
     }
+
+}
 }
