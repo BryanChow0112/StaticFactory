@@ -7,11 +7,11 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.behaviours.CollectScrapBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.types.Ability;
+import game.utils.RandomUtils;
 
 import java.util.List;
 
 public class AlienBug extends Enemy implements Spawnable {
-
 
     private final Player playerToFollow;
 
@@ -19,14 +19,12 @@ public class AlienBug extends Enemy implements Spawnable {
      * Constructs a new AlienBug object.
      */
     public AlienBug(Player playerToFollow) {
-        super("Alien Bug", 'a', 2);
+        super("Feature-" + RandomUtils.getRandomInt(100, 999), 'a', 2);
         this.addBehaviour(0, new CollectScrapBehaviour());
         this.addBehaviour(1, new FollowBehaviour(playerToFollow));
         this.addCapability(Ability.PICK_UP_SCRAP);
         this.addCapability(Ability.ENTER_SPACESHIP);
         this.playerToFollow = playerToFollow;
-
-        // TODO: Implement naming “Feature-XXX”, where XXX is three random digits
     }
 
     @Override
