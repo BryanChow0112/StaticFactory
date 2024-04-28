@@ -14,6 +14,7 @@ import game.grounds.*;
 import game.grounds.flora.Sapling;
 import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
+import game.scraps.special.JarOfPickles;
 import game.scraps.special.MetalPipe;
 import game.scraps.regular.MetalSheet;
 
@@ -79,6 +80,15 @@ public class Application {
 
         Crater craterThree = new Crater(new HuntsmanSpider());
         gameMap.at(26, 12).setGround(craterThree);
+
+        Item jarOfPicklesTwo = new JarOfPickles();
+        gameMap.at(15,10).addItem(jarOfPicklesTwo);
+
+        Item jarOfPicklesThree = new JarOfPickles();
+        gameMap.at(14,10).addItem(jarOfPicklesThree);
+
+        Item jarOfPicklesFour = new JarOfPickles();
+        gameMap.at(13,10).addItem(jarOfPicklesFour);
 
         Player player = new Player("Intern", '@', 4);
         world.addPlayer(player, gameMap.at(15, 6));
