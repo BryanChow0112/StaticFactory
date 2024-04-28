@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import game.scraps.Consumable;
 
 public class Puddle extends Ground implements Consumable {
+    private final int INCREASE_HP = 1;
     public Puddle() {
         super('~');
     }
