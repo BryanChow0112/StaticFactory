@@ -1,9 +1,14 @@
 package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.behaviours.CollectScrapBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.types.Ability;
+
+import java.util.List;
 
 public class AlienBug extends Enemy implements Spawnable {
 
@@ -21,7 +26,6 @@ public class AlienBug extends Enemy implements Spawnable {
         this.addCapability(Ability.ENTER_SPACESHIP);
         this.playerToFollow = playerToFollow;
 
-        // TODO: Implement PickUpScrapBehaviour
         // TODO: Implement naming “Feature-XXX”, where XXX is three random digits
     }
 
@@ -35,5 +39,16 @@ public class AlienBug extends Enemy implements Spawnable {
         return 0.1;
     }
 
-    // TODO: Implement dropping all scraps when AlienBug dies
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        // Get the list of items in the actor's inventory
+        List<Item> items = this.getItemInventory();
+        // Get the current location of the actor
+        Location actorLocation = map.locationOf(this);
+        // Drop all the items at the actor's current location
+        for (Item item : items) {
+            actorLocation.addItem(item);
+        }
+        return super.unconscious(actor, map);
+    }
 }
