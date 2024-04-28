@@ -11,4 +11,6 @@ public class PotOfGold extends Scrap implements Consumable {
     }
 
 
+
+
 }
