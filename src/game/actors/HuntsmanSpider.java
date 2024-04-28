@@ -2,7 +2,6 @@ package game.actors;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
-import game.behaviours.WanderBehaviour;
 
 /**
  * Represents a Huntsman Spider enemy in the game.
@@ -15,8 +14,9 @@ public class HuntsmanSpider extends Enemy implements Spawnable {
      */
     public HuntsmanSpider() {
         super("Huntsman Spider", '8', 1);
-        this.addBehaviour(new AttackBehaviour());
-        this.addBehaviour(new WanderBehaviour());
+        // Add the AttackBehaviour with priority 0 to ensure the HuntsmanSpider
+        // attacks any nearby players before executing other behaviors
+        this.addBehaviour(0, new AttackBehaviour());
     }
 
     /**

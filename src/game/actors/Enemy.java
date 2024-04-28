@@ -7,18 +7,20 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
+import game.behaviours.WanderBehaviour;
 import game.types.Status;
 
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * An abstract class representing an enemy in the game.
  * Enemies are hostile to the player and can have behaviors that determine their actions.
  */
 public abstract class Enemy extends Actor {
-    private final ArrayList<Behaviour> behaviours = new ArrayList<>();
+
+    private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
     /**
      * Constructs a new Enemy object.
@@ -29,21 +31,22 @@ public abstract class Enemy extends Actor {
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        this.addBehaviour(999, new WanderBehaviour());
         this.addCapability(Status.HOSTILE_TO_PLAYER);
     }
 
     /**
-     * Adds a behaviour to the enemy.
+     * Select and return an action for the Enemy to perform on the current turn.
      *
-     * @param behaviour The behaviour to be added.
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the Action to be performed
      */
-    public void addBehaviour(Behaviour behaviour) {
-        this.behaviours.add(behaviour);
-    }
-
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours) {
+        for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
                 return action;
@@ -52,20 +55,33 @@ public abstract class Enemy extends Actor {
     }
 
     /**
-     * Returns the intrinsic weapon of the enemy.
-     * This method must be implemented by concrete subclasses.
+     * Returns a new collection of the Actions that the otherActor can do to the Enemy.
      *
-     * @return The intrinsic weapon of the enemy.
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A collection of Actions.
      */
-    @Override
-    public abstract IntrinsicWeapon getIntrinsicWeapon();
-
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+
+        // Check if the other actor (presumably the player) has the HOSTILE_TO_ENEMY capability
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            // Allow attacking for other actor (player) using the actor's intrinsic weapon
             actions.add(new AttackAction(this, direction));
         }
         return actions;
     }
+
+    /**
+     * Adds a behaviour to the enemy
+     *
+     * @param priority  the priority of the behaviour
+     * @param behaviour the behaviour
+     */
+    public void addBehaviour(int priority, Behaviour behaviour) {
+        this.behaviours.put(priority, behaviour);
+    }
+
 }
