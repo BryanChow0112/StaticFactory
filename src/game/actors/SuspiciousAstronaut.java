@@ -1,6 +1,8 @@
 package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.WanderBehaviour;
 
@@ -19,6 +21,9 @@ public class SuspiciousAstronaut extends Enemy implements Spawnable{
         this.addBehaviour(new AttackBehaviour());
         this.addBehaviour(new WanderBehaviour());
 
+
+
+
     @Override
     public Actor create() {
         return new SuspiciousAstronaut(player);
@@ -30,4 +35,10 @@ public class SuspiciousAstronaut extends Enemy implements Spawnable{
     }
 
 }
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+
+        int damage = player.getAttributeMaximum(BaseActorAttributes.HEALTH);
+        return new IntrinsicWeapon(damage, "bonks", 100);
+    }
 }
