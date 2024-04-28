@@ -35,4 +35,8 @@ public class Puddle extends Ground implements Consumable {
         }
         return actionList;
     }
+    @Override
+    public String toString(){
+        return "the puddle";
+    }
 }
