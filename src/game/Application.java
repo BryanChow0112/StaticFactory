@@ -83,10 +83,10 @@ public class Application {
         gameMap.at(26, 4).setGround(craterOne);
 
         // Create craters spawning AlienBugs
-        Crater craterTwo = new Crater(new AlienBug(player));
+        Crater craterTwo = new Crater(new AlienBug());
         gameMap.at(6, 5).setGround(craterTwo);
 
-        Crater craterThree = new Crater(new AlienBug(player));
+        Crater craterThree = new Crater(new AlienBug());
         gameMap.at(26, 12).setGround(craterThree);
 
         world.run();
