@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.AttackAction;
 import game.behaviours.CollectScrapBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.types.Ability;
@@ -52,6 +53,13 @@ public class AlienBug extends Enemy implements Spawnable {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+
+        // Check if the other actor (presumably the player) has the HOSTILE_TO_ENEMY capability
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            // Allow the other actor to attack using their intrinsic weapon
+            actions.add(new AttackAction(this, direction));
+        }
+
         // Get the current location of the AlienBug
         Location actorLocation = map.locationOf(this);
         List<Exit> exits = actorLocation.getExits();
