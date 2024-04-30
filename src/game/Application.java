@@ -16,6 +16,7 @@ import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
 import game.scraps.special.MetalPipe;
 import game.scraps.regular.MetalSheet;
+import game.scraps.special.PotOfGold;
 
 /**
  * The main class to start the game.
@@ -79,6 +80,9 @@ public class Application {
 
         Crater craterThree = new Crater(new HuntsmanSpider());
         gameMap.at(26, 12).setGround(craterThree);
+
+        Item potOfGoldOne = new PotOfGold();
+        gameMap.at(15,5).addItem(potOfGoldOne);
 
         Player player = new Player("Intern", '@', 4);
         world.addPlayer(player, gameMap.at(15, 6));
