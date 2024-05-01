@@ -17,12 +17,16 @@ import java.util.List;
 
 public class AlienBug extends Enemy implements Spawnable {
 
+    public static final int COLLECT_SCRAP_PRIORITY = 0;
+
+    public static final int FOLLOW_PRIORITY = 1;
+
     /**
      * Constructs a new AlienBug object.
      */
     public AlienBug() {
         super("Feature-" + RandomUtils.getRandomInt(100, 999), 'a', 2);
-        this.addBehaviour(0, new CollectScrapBehaviour());
+        this.addBehaviour(COLLECT_SCRAP_PRIORITY, new CollectScrapBehaviour());
         this.addCapability(Ability.PICK_UP_SCRAP);
         this.addCapability(Ability.ENTER_SPACESHIP);
     }
@@ -71,7 +75,7 @@ public class AlienBug extends Enemy implements Spawnable {
                 if (destination.containsAnActor()) {
                     // If the Intern is found, start following the Intern
                     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                        this.addBehaviour(1, new FollowBehaviour(otherActor));
+                        this.addBehaviour(FOLLOW_PRIORITY, new FollowBehaviour(otherActor));
                         break; // Exit the loop once the Intern is found
                     }
                 }
