@@ -51,7 +51,6 @@ public class JarOfPickles extends Scrap implements Consumable {
         return actor + " consumes Jar of Pickles";
     }
 
-
     /**
      * Returns a description of the effect of consuming this item.
      *
@@ -61,6 +60,4 @@ public class JarOfPickles extends Scrap implements Consumable {
     public String getConsumableDescription() {
         return "heal " + HIT_POINTS + " hit points.";
     }
-
-
 }
