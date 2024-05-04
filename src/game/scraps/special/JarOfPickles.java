@@ -10,10 +10,19 @@ import game.utils.RandomUtils;
 public class JarOfPickles extends Scrap implements Consumable {
     private static final int HIT_POINTS = 1;
 
+    /**
+     * Constructs a new LargeFruit object.
+     */
     public JarOfPickles() {
         super("Jar of Pickles", 'n');
     }
 
+    /**
+     * Returns the list of actions that can be performed with this item.
+     *
+     * @param owner The actor that owns this item.
+     * @return The list of allowable actions for this item.
+     */
     @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
@@ -21,6 +30,12 @@ public class JarOfPickles extends Scrap implements Consumable {
         return actionList;
     }
 
+    /**
+     * Handles the consumption of this item by the actor.
+     *
+     * @param actor The actor consuming this item.
+     * @return A description of the consumption effect.
+     */
     @Override
     public String handleConsume(Actor actor) {
 
@@ -28,13 +43,12 @@ public class JarOfPickles extends Scrap implements Consumable {
             // if less than 50% chance, it decreases player hp by 1
             actor.heal(HIT_POINTS*-1);
             actor.removeItemFromInventory(this);
-            return actor + "consumes Jar of Pickles to heal " + HIT_POINTS*-1 + " hit points.";
         } else {
             // if greater than 50% chance, it increases player hp by 1
             actor.heal(HIT_POINTS);
             actor.removeItemFromInventory(this);
-            return actor + "consumes Jar of Pickles to heal " + HIT_POINTS + " hit points.";
         }
+        return actor + " consumes Jar of Pickles";
     }
 
 
