@@ -1,9 +1,12 @@
 package game.scraps.special;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actions.ConsumeAction;
 import game.scraps.Scrap;
 import game.types.Buyable;
-import game.types.Consumable;
+import game.scraps.Consumable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
 
@@ -39,6 +42,13 @@ public class EnergyDrink extends Scrap implements Buyable, Consumable {
     }
 
     @Override
+    public ActionList allowableActions(Actor owner) {
+        ActionList actionList = new ActionList();
+        actionList.add(new ConsumeAction(this));
+        return actionList;
+    }
+
+    @Override
     public int getCost() {
         return WORTH_IN_CREDITS;
     }
@@ -51,7 +61,7 @@ public class EnergyDrink extends Scrap implements Buyable, Consumable {
     }
 
     @Override
-    public String getConsumableMenuDescription() {
+    public String getConsumableDescription() {
         return "heal by " + HIT_POINTS + " hit point.";
     }
 }
