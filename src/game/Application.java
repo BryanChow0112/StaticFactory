@@ -14,10 +14,9 @@ import game.grounds.*;
 import game.grounds.flora.Sapling;
 import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
-import game.scraps.special.JarOfPickles;
-import game.scraps.special.MetalPipe;
+import game.scraps.special.*;
 import game.scraps.regular.MetalSheet;
-import game.scraps.special.PotOfGold;
+import game.types.Buyable;
 
 /**
  * The main class to start the game.
@@ -65,8 +64,17 @@ public class Application {
             }
         }
 
-        // Add player
+        // Setup Terminal
+        ArrayList<Buyable> buyables = new ArrayList<>();
+        buyables.add(new EnergyDrink());
+        buyables.add(new DragonSlayerSword());
+        buyables.add(new ToiletPaperRoll());
+        Terminal terminal = new Terminal(buyables);
+        gameMap.at(16, 6).setGround(terminal);
+        
+        // Add player with balance
         Player player = new Player("Intern", '@', 4);
+        player.addBalance(1000);
         world.addPlayer(player, gameMap.at(15, 6));
 
         // Add large bolt and metal sheet
