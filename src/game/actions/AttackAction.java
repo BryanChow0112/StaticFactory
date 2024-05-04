@@ -66,15 +66,14 @@ public class AttackAction extends Action {
         return result;
     }
 
+    /**
+     * Returns a description of the attack action for the menu.
+     *
+     * @param actor the Actor performing the attack
+     * @return a String describing the attack action
+     */
     @Override
     public String menuDescription(Actor actor) {
-        String baseDesc = "attacks at " + this.direction;
-        String weaponDesc;
-        if (this.weapon == null) {
-            weaponDesc = "with Intrinsic Weapon";
-        } else {
-            weaponDesc = "with " + this.weapon;
-        }
-        return String.format("%s %s %s %s", actor, baseDesc, this.target, weaponDesc);
+        return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
     }
 }
