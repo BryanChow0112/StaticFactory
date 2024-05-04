@@ -29,7 +29,7 @@ public class ToiletPaperRoll extends Scrap implements Buyable {
             if (choice.equals("y") && actor.getBalance() >= DISCOUNTED_COST) {
                 return BuyUtils.buyItem(actor, this, DISCOUNTED_COST);
             } else {
-                return "Purchase canceled.";
+                return "Purchase cancelled.";
             }
         } else {
             return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
