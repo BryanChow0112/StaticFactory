@@ -14,6 +14,7 @@ import game.grounds.*;
 import game.grounds.flora.Sapling;
 import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
+import game.scraps.special.JarOfPickles;
 import game.scraps.special.MetalPipe;
 import game.scraps.regular.MetalSheet;
 import game.scraps.special.PotOfGold;
@@ -95,6 +96,15 @@ public class Application {
 
         Crater craterFour = new Crater(new SuspiciousAstronaut(player));
         gameMap.at(26, 13).setGround(craterFour);
+
+        Item jarOfPicklesTwo = new JarOfPickles();
+        gameMap.at(15,10).addItem(jarOfPicklesTwo);
+
+        Item jarOfPicklesThree = new JarOfPickles();
+        gameMap.at(14,10).addItem(jarOfPicklesThree);
+
+        Item jarOfPicklesFour = new JarOfPickles();
+        gameMap.at(13,10).addItem(jarOfPicklesFour); 
 
         world.run();
     }
