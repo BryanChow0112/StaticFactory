@@ -89,6 +89,9 @@ public class Application {
         Crater craterThree = new Crater(new AlienBug());
         gameMap.at(26, 12).setGround(craterThree);
 
+        Crater craterFour = new Crater(new SuspiciousAstronaut(player));
+        gameMap.at(26, 13).setGround(craterFour);
+
         world.run();
     }
 }

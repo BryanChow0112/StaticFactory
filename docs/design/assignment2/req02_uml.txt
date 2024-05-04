@@ -1,0 +1,95 @@
+@startuml
+skinparam linetype ortho
+package game {
+  class Application
+}
+
+package game.actors {
+  abstract class Enemy
+  class AlienBug #red
+  interface Spawnable
+}
+
+package game.actors {
+  abstract class Enemy
+  class SuspiciousAstronaut #red
+  interface Spawnable
+}
+package game.actions {
+  class AttackAction
+}
+
+package game.behaviours {
+  class CollectScrapBehaviour #red
+  class FollowBehaviour #red  
+  class WanderBehaviour
+  class AttackBehaviour
+}
+
+package game.types {
+  enum Ability
+  enum Status
+}
+
+package game.actors {
+  class Player
+}
+
+package game.utils {
+  class RandomUtils #green
+}
+
+package engine.actors {
+  abstract class Actor
+  class ActionList
+}
+
+package engine.items {
+  abstract class Item
+}
+
+package engine.positions {
+  class Location
+  class Exit
+  abstract class Ground
+}
+
+game.Application ...> game.actors.AlienBug
+game.Application ...> game.actors.SuspiciousAstronaut
+
+game.actors.Enemy --|> engine.actors.Actor
+game.actors.Enemy "0..*" --> "0..*" engine.actors.Behaviour
+
+game.actors.Enemy <|-- game.actors.AlienBug
+game.actors.Spawnable <|.. game.actors.AlienBug
+
+game.actors.Enemy <|-- game.actors.SuspiciousAstronaut
+game.actors.Spawnable <|.. game.actors.SuspiciousAstronaut
+
+game.actors.SuspiciousAstronaut .[#purple].> game.behaviours.WanderBehaviour
+game.actors.SuspiciousAstronaut .[#purple].> game.behaviours.AttackBehaviour
+game.actors.SuspiciousAstronaut .[#purple].> engine.weapons.IntrinsicWeapon
+
+game.actors.AlienBug .[#blue].> game.behaviours.CollectScrapBehaviour
+game.actors.AlienBug .[#blue].> game.behaviours.FollowBehaviour
+game.actors.AlienBug .[#blue].> game.types.Ability
+game.actors.AlienBug .[#blue].> game.utils.RandomUtils
+game.actors.AlienBug .[#blue].> engine.items.Item
+game.actors.AlienBug .[#blue].> engine.positions.Exit
+game.actors.AlienBug .[#blue].> engine.positions.GameMap
+game.actors.AlienBug .[#blue].> engine.positions.Location
+game.actors.AlienBug .[#blue].> engine.actors.ActionList
+game.actors.AlienBug .[#blue].> game.actions.AttackAction
+
+game.behaviours.CollectScrapBehaviour .[#red].|> engine.actors.Behaviour
+game.behaviours.CollectScrapBehaviour .[#red].> engine.items.Item
+game.behaviours.CollectScrapBehaviour .[#red].> engine.positions.Location
+game.behaviours.CollectScrapBehaviour .[#red].> engine.actions.PickUpAction
+
+game.behaviours.FollowBehaviour .[#green].|> engine.actors.Behaviour
+game.behaviours.FollowBehaviour -[#green]-> engine.actors.Actor
+game.behaviours.FollowBehaviour .[#green].> engine.positions.Exit
+game.behaviours.FollowBehaviour .[#green].> engine.positions.GameMap
+game.behaviours.FollowBehaviour .[#green].> engine.positions.Location
+game.behaviours.FollowBehaviour .[#green].> engine.actions.MoveActorAction
+@enduml
