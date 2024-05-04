@@ -80,8 +80,6 @@ public class Application {
         Crater craterThree = new Crater(new HuntsmanSpider());
         gameMap.at(26, 12).setGround(craterThree);
 
-
-
         Player player = new Player("Intern", '@', 4);
         world.addPlayer(player, gameMap.at(15, 6));
 

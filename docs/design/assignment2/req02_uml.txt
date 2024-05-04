@@ -24,8 +24,6 @@ package game.behaviours {
   class FollowBehaviour #red  
   class WanderBehaviour
   class AttackBehaviour
-
-
 }
 
 package game.types {
@@ -45,8 +43,6 @@ package engine.actors {
   abstract class Actor
   class ActionList
 }
-
-
 
 package engine.items {
   abstract class Item
@@ -73,8 +69,6 @@ game.actors.Spawnable <|.. game.actors.SuspiciousAstronaut
 game.actors.SuspiciousAstronaut .[#purple].> game.behaviours.WanderBehaviour
 game.actors.SuspiciousAstronaut .[#purple].> game.behaviours.AttackBehaviour
 game.actors.SuspiciousAstronaut .[#purple].> engine.weapons.IntrinsicWeapon
-
-
 
 game.actors.AlienBug .[#blue].> game.behaviours.CollectScrapBehaviour
 game.actors.AlienBug .[#blue].> game.behaviours.FollowBehaviour

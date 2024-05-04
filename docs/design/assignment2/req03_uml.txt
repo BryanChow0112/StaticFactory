@@ -16,7 +16,6 @@ package game.scraps {
   interface Consumable
 }
 
-
 game.scraps.special.JarOfPickles ..> game.utils.RandomUtils
 game.scraps.special.JarOfPickles ---|> game.scraps.Scrap 
 game.scraps.special.PotOfGold ---|> game.scraps.Scrap
