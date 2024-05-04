@@ -8,11 +8,11 @@ import game.behaviours.WanderBehaviour;
 
 public class SuspiciousAstronaut extends Enemy implements Spawnable {
     Player player;
+
     public SuspiciousAstronaut(Player player) {
         super("Suspicious Astronaut", 'ඞ', 99);
         this.player = player;
-        this.addBehaviour(new AttackBehaviour());
-        this.addBehaviour(new WanderBehaviour());
+        this.addBehaviour(ATTACK_PRIORITY, new AttackBehaviour());
     }
 
     @Override
