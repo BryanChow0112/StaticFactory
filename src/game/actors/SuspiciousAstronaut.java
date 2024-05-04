@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
-import game.behaviours.WanderBehaviour;
 
 public class SuspiciousAstronaut extends Enemy implements Spawnable {
     Player player;

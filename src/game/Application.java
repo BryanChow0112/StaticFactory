@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class Application {
         buyables.add(new ToiletPaperRoll());
         Terminal terminal = new Terminal(buyables);
         gameMap.at(16, 6).setGround(terminal);
-        
+
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
         player.addBalance(1000);
@@ -88,8 +89,19 @@ public class Application {
         Item metalPipe = new MetalPipe();
         gameMap.at(10, 7).addItem(metalPipe);
 
+        // Add pot of gold
         Item potOfGoldOne = new PotOfGold();
-        gameMap.at(15,5).addItem(potOfGoldOne);
+        gameMap.at(15, 5).addItem(potOfGoldOne);
+
+        // Add jar of pickles
+        Item jarOfPicklesTwo = new JarOfPickles();
+        gameMap.at(15, 10).addItem(jarOfPicklesTwo);
+
+        Item jarOfPicklesThree = new JarOfPickles();
+        gameMap.at(14, 10).addItem(jarOfPicklesThree);
+
+        Item jarOfPicklesFour = new JarOfPickles();
+        gameMap.at(13, 10).addItem(jarOfPicklesFour);
 
         // Create craters spawning HuntsmanSpiders
         Crater craterOne = new Crater(new HuntsmanSpider());
@@ -102,17 +114,9 @@ public class Application {
         Crater craterThree = new Crater(new AlienBug());
         gameMap.at(26, 12).setGround(craterThree);
 
+        // Create craters spawning SuspiciousAstronauts
         Crater craterFour = new Crater(new SuspiciousAstronaut(player));
         gameMap.at(26, 13).setGround(craterFour);
-
-        Item jarOfPicklesTwo = new JarOfPickles();
-        gameMap.at(15,10).addItem(jarOfPicklesTwo);
-
-        Item jarOfPicklesThree = new JarOfPickles();
-        gameMap.at(14,10).addItem(jarOfPicklesThree);
-
-        Item jarOfPicklesFour = new JarOfPickles();
-        gameMap.at(13,10).addItem(jarOfPicklesFour); 
 
         world.run();
     }

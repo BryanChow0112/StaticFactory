@@ -27,16 +27,34 @@ public class AlienBug extends Enemy implements Spawnable {
         this.addCapability(Ability.ENTER_SPACESHIP);
     }
 
+    /**
+     * Creates a new instance of the AlienBug enemy.
+     *
+     * @return A new AlienBug object.
+     */
     @Override
     public Actor create() {
         return new AlienBug();
     }
 
+    /**
+     * Returns the spawn chance of the AlienBug.
+     *
+     * @return The spawn chance of the AlienBug from 0 to 1.
+     */
     @Override
     public double getSpawnChance() {
         return 0.1;
     }
 
+
+    /**
+     * Method that can be executed when the AlienBug is unconscious due to the action of another actor
+     *
+     * @param actor the perpetrator
+     * @param map   where the actor fell unconscious
+     * @return a string describing what happened when the actor is unconscious
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         // Get the list of items in the AlienBug's inventory
@@ -50,6 +68,14 @@ public class AlienBug extends Enemy implements Spawnable {
         return super.unconscious(actor, map);
     }
 
+    /**
+     * Returns a new collection of the Actions that the otherActor can do to the AlienBug.
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A collection of Actions.
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
