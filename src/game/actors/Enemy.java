@@ -22,6 +22,8 @@ public abstract class Enemy extends Actor {
 
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
+    public static final int WANDER_PRIORITY = 999;
+
     /**
      * Constructs a new Enemy object.
      *
@@ -31,7 +33,7 @@ public abstract class Enemy extends Actor {
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.addBehaviour(999, new WanderBehaviour());
+        this.addBehaviour(WANDER_PRIORITY, new WanderBehaviour());
         this.addCapability(Status.HOSTILE_TO_PLAYER);
     }
 

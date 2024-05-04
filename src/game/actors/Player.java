@@ -3,6 +3,7 @@ package game.actors;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
@@ -14,9 +15,9 @@ import game.types.Status;
 /**
  * Class representing the Player.
  * Created by:
+ *
  * @author Adrian Kristanto
  * Modified by:
- *
  */
 public class Player extends Actor {
     /**
@@ -42,11 +43,16 @@ public class Player extends Actor {
 
         // return/print the console menu
         Menu menu = new Menu(actions);
+        // Displays the player's name
+        display.println(this.name);
+        // Displays the player's current health and maximum health
+        display.println("HP: " + this.getAttribute(BaseActorAttributes.HEALTH) + "/" + this.getAttributeMaximum(BaseActorAttributes.HEALTH));
         return menu.showMenu(this, display);
     }
 
     /**
      * Creates and returns the intrinsic weapon of the Player (their bare fists)
+     *
      * @return a freshly-instantiated IntrinsicWeapon (their bare fists)
      */
     @Override

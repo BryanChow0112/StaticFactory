@@ -1,0 +1,36 @@
+@startuml
+title Requirement 3
+
+package game.scraps{
+ abstract class Scrap 
+}
+
+game.Application ....> game.scraps.special.JarOfPickles 
+game.Application ....> game.scraps.special.PotOfGold 
+game.Application ....> game.grounds.Puddle
+package game {
+  class Application
+}
+
+package game.scraps {
+  interface Consumable
+}
+
+game.scraps.special.JarOfPickles ..> game.utils.RandomUtils
+game.scraps.special.JarOfPickles ---|> game.scraps.Scrap 
+game.scraps.special.PotOfGold ---|> game.scraps.Scrap
+game.scraps.special.PotOfGold ...|> game.scraps.Consumable 
+game.scraps.special.JarOfPickles ...|> game.scraps.Consumable 
+package game.scraps.special {
+class JarOfPickles #red
+class PotOfGold #red
+}
+
+package game.scraps{
+ abstract class Scrap
+}
+
+package game.grounds{
+class Puddle #green
+}
+@enduml

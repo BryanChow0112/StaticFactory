@@ -9,6 +9,8 @@ import game.behaviours.AttackBehaviour;
  */
 public class HuntsmanSpider extends Enemy implements Spawnable {
 
+    public static final int ATTACK_PRIORITY = 0;
+
     /**
      * Constructs a new HuntsmanSpider object.
      */
@@ -16,7 +18,7 @@ public class HuntsmanSpider extends Enemy implements Spawnable {
         super("Huntsman Spider", '8', 1);
         // Add the AttackBehaviour with priority 0 to ensure the HuntsmanSpider
         // attacks any nearby players before executing other behaviors
-        this.addBehaviour(0, new AttackBehaviour());
+        this.addBehaviour(ATTACK_PRIORITY, new AttackBehaviour());
     }
 
     /**
