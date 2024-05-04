@@ -16,6 +16,7 @@ import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
 import game.scraps.special.MetalPipe;
 import game.scraps.regular.MetalSheet;
+import game.scraps.special.PotOfGold;
 
 /**
  * The main class to start the game.
@@ -77,6 +78,9 @@ public class Application {
         // Add metal pipe
         Item metalPipe = new MetalPipe();
         gameMap.at(10, 7).addItem(metalPipe);
+
+        Item potOfGoldOne = new PotOfGold();
+        gameMap.at(15,5).addItem(potOfGoldOne);
 
         // Create craters spawning HuntsmanSpiders
         Crater craterOne = new Crater(new HuntsmanSpider());
