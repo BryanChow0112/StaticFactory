@@ -18,7 +18,6 @@ public class PotOfGold extends Scrap implements Consumable {
 
     /**
      * Returns the list of actions that can be performed with this item.
-     *
      * @param owner The actor that owns this item.
      * @return The list of allowable actions for this item.
      */
