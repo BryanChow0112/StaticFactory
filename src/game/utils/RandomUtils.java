@@ -32,6 +32,18 @@ public class RandomUtils {
     }
 
     /**
+     * Returns a random integer between the specified lower and upper bound.
+     *
+     * @param lowerBound the lower bound of the random number
+     * @param upperBound the upper bound of the random number
+     * @return a random integer
+     */
+    public static int getRandomInt(int lowerBound, int upperBound) {
+        int range = upperBound - lowerBound + 1;
+        return RANDOM.nextInt(range) + lowerBound;
+    }
+
+    /**
      * Returns a random exit from the given location.
      *
      * @param location The location for which to get a random exit.
