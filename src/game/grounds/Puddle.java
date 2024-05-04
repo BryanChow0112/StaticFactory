@@ -1,5 +1,6 @@
 package game.grounds;
 
+import java.util.Objects;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
@@ -9,10 +10,10 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.scraps.Consumable;
 
-import java.util.Objects;
+
 
 public class Puddle extends Ground implements Consumable {
-    private final int INCREASE_HP = 1;
+    private final static int INCREASE_HP = 1;
     public Puddle() {
         super('~');
     }
@@ -20,7 +21,7 @@ public class Puddle extends Ground implements Consumable {
     @Override
     public String handleConsume(Actor actor) {
         actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, INCREASE_HP);
-        return null;
+        return actor + " consumes the puddle to increase max health by " + INCREASE_HP + " HP.";
     }
 
     @Override
@@ -37,6 +38,6 @@ public class Puddle extends Ground implements Consumable {
     }
     @Override
     public String toString(){
-        return "the puddle";
+        return "the puddle underneath the player";
     }
 }
