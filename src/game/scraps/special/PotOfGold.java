@@ -9,10 +9,19 @@ import game.scraps.Scrap;
 public class PotOfGold extends Scrap implements Consumable {
     private static final int CREDIT_POINTS = 10;
 
+    /**
+     * Constructs a new PotOfGold object.
+     */
     public PotOfGold() {
         super("Pot of Gold", '$');
     }
 
+    /**
+     * Returns the list of actions that can be performed with this item.
+     *
+     * @param owner The actor that owns this item.
+     * @return The list of allowable actions for this item.
+     */
     @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
@@ -32,7 +41,6 @@ public class PotOfGold extends Scrap implements Consumable {
         actor.removeItemFromInventory(this);
         return actor + " has increased credits by " + CREDIT_POINTS +  " credits.";
     }
-
 
     /**
      * Returns a description of the effect of consuming this item.
