@@ -60,8 +60,4 @@ public class EnergyDrink extends Scrap implements Buyable, Consumable {
         return actor + " gains " + HIT_POINTS + " HP from consuming the " + this;
     }
 
-    @Override
-    public String getConsumableDescription() {
-        return "heal by " + HIT_POINTS + " hit point.";
-    }
 }

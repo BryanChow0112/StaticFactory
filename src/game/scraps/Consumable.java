@@ -17,10 +17,4 @@ public interface Consumable {
      */
     String handleConsume(Actor actor);
 
-    /**
-     * Returns a description of the effect of consuming the item.
-     *
-     * @return A description of the consumable effect.
-     */
-    String getConsumableDescription();
 }

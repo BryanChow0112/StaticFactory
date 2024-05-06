@@ -18,6 +18,7 @@ public class PotOfGold extends Scrap implements Consumable {
 
     /**
      * Returns the list of actions that can be performed with this item.
+     *
      * @param owner The actor that owns this item.
      * @return The list of allowable actions for this item.
      */
@@ -38,18 +39,7 @@ public class PotOfGold extends Scrap implements Consumable {
     public String handleConsume(Actor actor) {
         actor.addBalance(CREDIT_POINTS);
         actor.removeItemFromInventory(this);
-        return actor + " has increased credits by " + CREDIT_POINTS +  " credits.";
+        return actor + " has increased credits by " + CREDIT_POINTS + " credits.";
     }
-
-    /**
-     * Returns a description of the effect of consuming this item.
-     *
-     * @return A description of the consumption effect.
-     */
-    @Override
-    public String getConsumableDescription() {
-        return CREDIT_POINTS + " credits.";
-    }
-
 
 }

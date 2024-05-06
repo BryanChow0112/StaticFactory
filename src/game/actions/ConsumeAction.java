@@ -28,6 +28,6 @@ public class ConsumeAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consumes " + consumable + " to " + consumable.getConsumableDescription();
+        return actor + " consumes " + consumable;
     }
 }

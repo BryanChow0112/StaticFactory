@@ -46,13 +46,4 @@ public class LargeFruit extends Scrap implements Consumable {
         return actor + " is healed by " + HIT_POINTS + " hit points.";
     }
 
-    /**
-     * Returns a description of the effect of consuming this item.
-     *
-     * @return A description of the consumption effect.
-     */
-    @Override
-    public String getConsumableDescription() {
-        return "heal " + HIT_POINTS + " hit points.";
-    }
 }
