@@ -13,7 +13,7 @@ public class PotOfGold extends Scrap implements Consumable {
      * Constructs a new PotOfGold object.
      */
     public PotOfGold() {
-        super("Pot of Gold", '$');
+        super("Pot of Gold", '$', true);
     }
 
     /**

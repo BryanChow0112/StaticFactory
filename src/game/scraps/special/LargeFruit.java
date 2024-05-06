@@ -17,7 +17,7 @@ public class LargeFruit extends Scrap implements Consumable {
      * Constructs a new LargeFruit object.
      */
     public LargeFruit() {
-        super("Large Fruit", 'O');
+        super("Large Fruit", 'O', true);
     }
 
     /**

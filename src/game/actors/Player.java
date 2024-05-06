@@ -47,6 +47,7 @@ public class Player extends Actor {
         display.println(this.name);
         // Displays the player's current health and maximum health
         display.println("HP: " + this.getAttribute(BaseActorAttributes.HEALTH) + "/" + this.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        display.println("Balance: " + this.getBalance());
         return menu.showMenu(this, display);
     }
 

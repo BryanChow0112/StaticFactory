@@ -14,7 +14,7 @@ public class JarOfPickles extends Scrap implements Consumable {
      * Constructs a new LargeFruit object.
      */
     public JarOfPickles() {
-        super("Jar of Pickles", 'n');
+        super("Jar of Pickles", 'n', true);
     }
 
     /**

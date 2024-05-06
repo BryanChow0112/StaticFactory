@@ -18,7 +18,7 @@ public class EnergyDrink extends Scrap implements Buyable, Consumable {
     private static final double DOUBLE_COST_CHANCE = 0.2;
 
     public EnergyDrink() {
-        super("Energy Drink", '*');
+        super("Energy Drink", '*', true);
     }
 
     @Override

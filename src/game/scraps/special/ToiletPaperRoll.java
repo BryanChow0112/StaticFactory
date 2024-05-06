@@ -14,7 +14,7 @@ public class ToiletPaperRoll extends Scrap implements Buyable {
     private static final int DISCOUNTED_COST = 1;
 
     public ToiletPaperRoll() {
-        super("Toilet Paper Roll", 's');
+        super("Toilet Paper Roll", 's', true);
     }
 
     @Override
