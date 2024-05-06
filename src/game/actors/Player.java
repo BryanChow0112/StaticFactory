@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.DeathAction;
 import game.displays.FancyMessage;
 import game.types.Ability;
 import game.types.Status;
@@ -37,6 +38,12 @@ public class Player extends Actor {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        // If player dies
+        if (!this.isConscious()) {
+            return new DeathAction(this);
+        }
+
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
@@ -47,6 +54,7 @@ public class Player extends Actor {
         display.println(this.name);
         // Displays the player's current health and maximum health
         display.println("HP: " + this.getAttribute(BaseActorAttributes.HEALTH) + "/" + this.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        // Displays the player's current balance
         display.println("Balance: " + this.getBalance());
         return menu.showMenu(this, display);
     }
