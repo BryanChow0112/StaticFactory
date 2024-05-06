@@ -25,10 +25,6 @@ public class Puddle extends Ground implements Consumable {
     }
 
     @Override
-    public String getConsumableDescription() {
-        return "increase max health by " + INCREASE_HP + " HP" + ".";
-    }
-    @Override
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actionList = new ActionList();
         if (Objects.equals(direction, "")){
