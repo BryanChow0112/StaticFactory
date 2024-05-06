@@ -1,43 +1,47 @@
 package game.grounds.flora;
 
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.Spawner;
 import game.scraps.special.SmallFruit;
-import game.types.Status;
 
 /**
- * Represents a Sapling, a type of Ground that grows into a Tree over time.
- * The Sapling has a chance to spawn a SmallFruit item each turn.
+ * Represents a Sapling, a type of PlantBase that grows into a Tree over time.
+ * The Sapling has a 30% chance to spawn a SmallFruit item each turn.
  */
-public class Sapling extends Ground {
+public class Sapling extends PlantBase {
+
+    /**
+     * The current age of the sapling.
+     */
     private int age = 0;
+
+    /**
+     * The next stage of the plant after the sapling matures.
+     */
+    private final PlantBase nextStage;
 
     /**
      * Constructs a new Sapling object.
      */
     public Sapling() {
         super('t');
-        addCapability(Status.ALIVE);
+        this.spawn = new SmallFruit();
+        this.spawnChance = 0.3;
+        this.nextStage = new Tree();
     }
 
     /**
      * Performs the actions for the Sapling's turn.
-     * This includes spawning a SmallFruit item with a certain probability
-     * and aging the Sapling towards becoming a Tree.
+     * If the sapling's age reaches 5, it will grow to its mature stage (Tree).
      *
      * @param location The location of the Sapling.
      */
     @Override
     public void tick(Location location) {
         super.tick(location);
-        Spawner.spawnItem(location, new SmallFruit(), 0.3);
-        ageGround(location);
-    }
-
-    private void ageGround(Location location) {
         age++;
-        if (age == 5)
-            location.setGround(new Tree());
+        if (age >= 5) {
+            // Replace the current sapling with the next stage
+            location.setGround(nextStage);
+        }
     }
 }
