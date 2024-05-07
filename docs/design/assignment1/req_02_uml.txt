@@ -1,0 +1,67 @@
+@startuml
+
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 50
+
+title Group 1 - Requirement 2
+
+package engine.positions {
+  class Location
+  class Exit
+  abstract class Ground
+}
+
+package engine.items {
+  abstract class Item
+}
+
+game.scraps.special.LargeFruit -up-|> engine.items.Item
+game.scraps.special.SmallFruit -up-|> engine.items.Item
+package game.scraps.special {
+  class LargeFruit
+  class SmallFruit
+}
+
+game.grounds.Spawner .> engine.positions.Location
+game.grounds.Spawner .> engine.positions.Exit
+game.grounds.Spawner .> engine.items.Item
+game.grounds.Spawner ..> game.utils.RandomUtils
+package game.grounds {
+  class Spawner
+}
+
+game.utils.RandomUtils .> engine.positions.Location
+game.utils.RandomUtils .> engine.positions.Exit
+package game.utils {
+  class RandomUtils
+}
+
+game.grounds.flora.Sapling .> game.grounds.flora.Tree
+game.grounds.flora.Sapling ..[#blue].> game.types.Status
+game.grounds.flora.Sapling .[#green].> game.scraps.special.SmallFruit
+game.grounds.flora.Sapling .[#purple].> game.grounds.Spawner
+game.grounds.flora.Sapling .[#red]> engine.positions.Location
+game.grounds.flora.Tree ..[#blue].> game.types.Status
+game.grounds.flora.Tree .[#purple].> game.grounds.Spawner
+game.grounds.flora.Tree .[#green].> game.scraps.special.LargeFruit
+game.grounds.flora.Tree .[#red]> engine.positions.Location
+game.grounds.flora.Sapling -[#orange]-|> engine.positions.Ground
+game.grounds.flora.Tree -[#orange]-|> engine.positions.Ground
+package game.grounds.flora {
+  class Sapling
+  class Tree
+}
+
+
+package game.types {
+  class Status
+}
+
+game.Application ..> game.grounds.flora.Sapling
+game.Application ..> game.grounds.flora.Tree
+package game {
+  class Application
+}
+
+@enduml

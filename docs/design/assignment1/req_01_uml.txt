@@ -1,0 +1,32 @@
+@startuml
+
+title Group 1 - Requirement 1
+skinparam linetype ortho
+
+package engine.items {
+  abstract class Item
+}
+
+game.actors.Player ..> game.types.Ability
+package game.actors {
+  class Player
+}
+
+game.scraps.regular.LargeBolt --|> engine.items.Item
+game.scraps.regular.MetalSheet --|> engine.items.Item
+package game.scraps.regular {
+  class LargeBolt
+  class MetalSheet
+}
+
+package game.types {
+  class Ability
+}
+
+game.Application ..> game.scraps.regular.LargeBolt
+game.Application ..> game.scraps.regular.MetalSheet
+package game {
+  class Application
+}
+
+@enduml
