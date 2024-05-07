@@ -17,8 +17,14 @@ import java.util.List;
 
 public class AlienBug extends Enemy implements Spawnable {
 
+    /**
+     * A constant that represents the priority of the collect scrap behaviour.
+     */
     public static final int COLLECT_SCRAP_PRIORITY = 0;
 
+    /**
+     * A constant that represents the priority of the follow behaviour.
+     */
     public static final int FOLLOW_PRIORITY = 1;
 
     /**
