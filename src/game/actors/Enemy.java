@@ -20,31 +20,8 @@ import java.util.TreeMap;
  */
 public abstract class Enemy extends Actor {
 
-    /**
-     * A map of behaviours that the enemy will execute in order based on priority.
-     * The key is the priority (lower numbers have higher priority)
-     * and the value is the corresponding Behaviour object.
-     */
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
-    /**
-     * A constant that represents the priority of the attack behaviour.
-     */
-    public static final int ATTACK_PRIORITY = 0;
-
-    /**
-     * A constant that represents the priority of the collect scrap behaviour.
-     */
-    public static final int COLLECT_SCRAP_PRIORITY = 0;
-
-    /**
-     * A constant that represents the priority of the follow behaviour.
-     */
-    public static final int FOLLOW_PRIORITY = 1;
-
-    /**
-     * A constant that represents the priority of the wander behaviour.
-     */
     public static final int WANDER_PRIORITY = 999;
 
     /**

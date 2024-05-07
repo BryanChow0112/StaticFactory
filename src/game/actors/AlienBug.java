@@ -17,6 +17,10 @@ import java.util.List;
 
 public class AlienBug extends Enemy implements Spawnable {
 
+    public static final int COLLECT_SCRAP_PRIORITY = 0;
+
+    public static final int FOLLOW_PRIORITY = 1;
+
     /**
      * Constructs a new AlienBug object.
      */

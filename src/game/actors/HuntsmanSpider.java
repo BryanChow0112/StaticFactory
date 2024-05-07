@@ -9,6 +9,8 @@ import game.behaviours.AttackBehaviour;
  */
 public class HuntsmanSpider extends Enemy implements Spawnable {
 
+    public static final int ATTACK_PRIORITY = 0;
+
     /**
      * Constructs a new HuntsmanSpider object.
      */
