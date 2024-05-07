@@ -1,11 +1,11 @@
 package game.scraps.regular;
 
-import game.scraps.Scrap;
+import edu.monash.fit2099.engine.items.Item;
 
 /**
  * A concrete implementation of the Scrap class representing a metal sheet item.
  */
-public class MetalSheet extends Scrap {
+public class MetalSheet extends Item {
 
     /**
      * Constructs a new MetalSheet object.

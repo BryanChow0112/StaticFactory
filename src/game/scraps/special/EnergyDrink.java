@@ -1,10 +1,9 @@
 package game.scraps.special;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
-import game.scraps.Scrap;
 import game.types.Buyable;
 import game.scraps.Consumable;
 import game.utils.BuyUtils;
@@ -12,7 +11,7 @@ import game.utils.RandomUtils;
 
 import java.util.Scanner;
 
-public class EnergyDrink extends Scrap implements Buyable, Consumable {
+public class EnergyDrink extends Item implements Buyable, Consumable {
     private static final int WORTH_IN_CREDITS = 10;
     private static final int HIT_POINTS = 1;
     private static final double DOUBLE_COST_CHANCE = 0.2;

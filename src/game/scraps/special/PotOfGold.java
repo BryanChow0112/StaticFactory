@@ -2,11 +2,11 @@ package game.scraps.special;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
 import game.scraps.Consumable;
-import game.scraps.Scrap;
 
-public class PotOfGold extends Scrap implements Consumable {
+public class PotOfGold extends Item implements Consumable {
     private static final int CREDIT_POINTS = 10;
 
     /**

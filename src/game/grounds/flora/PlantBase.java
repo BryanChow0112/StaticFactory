@@ -1,9 +1,9 @@
 package game.grounds.flora;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.Spawner;
-import game.scraps.Scrap;
 
 /**
  * An abstract class representing a plant in the game environment.
@@ -14,7 +14,7 @@ public abstract class PlantBase extends Ground {
     /**
      * The scrap (fruit) that the plant can produce.
      */
-    protected Scrap spawn;
+    protected Item spawn;
 
     /**
      * The probability of the spawn being produced by plant.

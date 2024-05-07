@@ -2,15 +2,15 @@ package game.scraps.special;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
 import game.scraps.Consumable;
-import game.scraps.Scrap;
 
 /**
  * Represents a Small Fruit item that can be consumed to heal the actor.
  * The Small Fruit is a type of Scrap item that implements the Consumable interface.
  */
-public class SmallFruit extends Scrap implements Consumable {
+public class SmallFruit extends Item implements Consumable {
     private static final int HIT_POINTS = 1;
 
     /**

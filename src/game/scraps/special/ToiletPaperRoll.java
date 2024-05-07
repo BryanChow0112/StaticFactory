@@ -1,14 +1,14 @@
 package game.scraps.special;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.scraps.Scrap;
+import edu.monash.fit2099.engine.items.Item;
 import game.types.Buyable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
 
 import java.util.Scanner;
 
-public class ToiletPaperRoll extends Scrap implements Buyable {
+public class ToiletPaperRoll extends Item implements Buyable {
     private static final int WORTH_IN_CREDITS = 5;
     private static final double DISCOUNT_CHANCE = 0.75;
     private static final int DISCOUNTED_COST = 1;

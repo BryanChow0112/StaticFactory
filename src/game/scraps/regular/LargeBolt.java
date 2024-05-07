@@ -1,11 +1,11 @@
 package game.scraps.regular;
 
-import game.scraps.Scrap;
+import edu.monash.fit2099.engine.items.Item;
 
 /**
  * A concrete implementation of the Scrap class representing a large bolt item.
  */
-public class LargeBolt extends Scrap {
+public class LargeBolt extends Item {
 
     /**
      * Constructs a new LargeBolt object.
