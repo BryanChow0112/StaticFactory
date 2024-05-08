@@ -1,0 +1,76 @@
+@startuml
+
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
+title Group 1 - Requirement 4
+
+package engine.weapons {
+  class IntrinsicWeapon
+  abstract class WeaponItem
+}
+
+package engine.actions {
+  abstract class Action
+  class ActionList
+}
+
+package engine.actors {
+  abstract class Actor
+}
+
+game.actions.ConsumeAction "0..*" --> "1" game.scraps.Consumable
+game.actions.ConsumeAction --|> engine.actions.Action
+package game.actions {
+  class AttackAction
+  class ConsumeAction
+}
+
+game.actors.Player ..> game.types.Status
+game.actors.Player ..> engine.weapons.IntrinsicWeapon
+package game.actors {
+  class Player
+}
+
+
+package game.types {
+  class Ability
+  class Status
+}
+
+game.scraps.Consumable ..> engine.actors.Actor
+game.scraps.Consumable ..> game.actions.ConsumeAction
+package game.scraps {
+  interface Consumable
+}
+
+game.scraps.special.MetalPipe --|> engine.weapons.WeaponItem
+game.scraps.special.MetalPipe ...> engine.actions.ActionList
+game.scraps.special.MetalPipe ..> game.actions.AttackAction
+game.scraps.special.LargeFruit ..|> game.scraps.Consumable
+game.scraps.special.SmallFruit ..|> game.scraps.Consumable
+package game.scraps.special {
+  class MetalPipe
+  class LargeFruit
+  class SmallFruit
+}
+
+game.Application ..> game.scraps.special.MetalPipe
+package game {
+  class Application
+}
+
+@enduml

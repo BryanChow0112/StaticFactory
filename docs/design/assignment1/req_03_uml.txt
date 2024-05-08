@@ -1,0 +1,111 @@
+@startuml
+
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
+title Group 1 - Requirement 3
+
+package engine.items {
+  abstract class Item
+}
+
+package engine.actions {
+  abstract class Action
+  class ActionList
+  class DoNothingAction
+}
+
+package engine.weapons {
+    class IntrinsicWeapon
+}
+
+package engine.actors {
+  abstract class Actor
+  interface Behaviour
+}
+
+package engine.positions {
+  class Location
+  class Exit
+  abstract class Ground
+}
+
+package game.actions {
+  class AttackAction
+}
+
+game.actors.Player .> game.displays.FancyMessage
+game.actors.Enemy --|> engine.actors.Actor
+game.actors.Enemy "0..*" -[#red]-> "0..*" engine.actors.Behaviour
+game.actors.Enemy ..> game.types.Status
+game.actors.Enemy .[#red].> engine.actions.Action
+game.actors.Enemy .up.> engine.actions.DoNothingAction
+game.actors.Enemy .[#red].> engine.actions.ActionList
+game.actors.Enemy .[#red].> game.actions.AttackAction
+game.actors.Enemy <|-- game.actors.HuntsmanSpider
+game.actors.Spawnable <|... game.actors.HuntsmanSpider
+game.actors.HuntsmanSpider ..> game.behaviours.AttackBehaviour
+game.actors.HuntsmanSpider ..> engine.weapons.IntrinsicWeapon
+package game.actors {
+  class Player
+  abstract class Enemy
+  class HuntsmanSpider
+  interface Spawnable
+}
+
+game.behaviours.AttackBehaviour ..|> engine.actors.Behaviour
+game.behaviours.AttackBehaviour ..> engine.positions.Exit
+game.behaviours.AttackBehaviour .> game.types.Status
+game.behaviours.AttackBehaviour ..> game.actions.AttackAction
+package game.behaviours {
+  class AttackBehaviour
+}
+
+package game.displays {
+  class FancyMessage
+}
+
+game.grounds.Spawner .[#blue].> engine.positions.Location
+game.grounds.Spawner .[#blue].> engine.actors.Actor
+game.grounds.Spawner .[#blue].> engine.positions.Exit
+game.grounds.Spawner .[#blue].> engine.items.Item
+game.utils.RandomUtils <.[#blue]. game.grounds.Spawner
+game.grounds.Crater --|> engine.positions.Ground
+game.grounds.Crater "0..*" -> "1" game.actors.Spawnable
+game.grounds.Floor ..> game.types.Ability
+package game.grounds {
+  class Spawner
+  class Crater
+  class Floor
+}
+
+game.utils.RandomUtils ..> engine.positions.Location
+game.utils.RandomUtils ..> engine.positions.Exit
+package game.utils {
+  class RandomUtils
+}
+
+package game.types {
+  class Status
+}
+
+game.Application .down.> game.grounds.Crater
+game.Application .down.> game.actors.HuntsmanSpider
+package game {
+  class Application
+}
+
+@enduml

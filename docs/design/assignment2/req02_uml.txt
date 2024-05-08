@@ -1,5 +1,21 @@
 @startuml
+
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
 skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
 package game {
   class Application
 }
