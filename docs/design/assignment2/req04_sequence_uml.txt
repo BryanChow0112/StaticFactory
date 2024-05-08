@@ -1,0 +1,34 @@
+@startuml
+participant Application
+participant EnergyDrink
+participant ComputerTerminal
+participant Player
+participant Buyable
+participant BuyUtils
+participant BuyAction
+
+Application -> Application: new Application()
+Application -> EnergyDrink: new EnergyDrink()
+EnergyDrink --> Buyable: implements
+Application -> ComputerTerminal: new ComputerTerminal(List<Buyable>)
+note right of ComputerTerminal: List contains only EnergyDrink
+
+Player -> Player: Moves to Terminal
+Player -> ComputerTerminal: Buy EnergyDrink
+ComputerTerminal -> EnergyDrink: buy(Player)
+EnergyDrink -> BuyUtils: buyItem(Player, EnergyDrink, cost)
+BuyUtils -> Player: deductCredits(cost)
+BuyUtils -> Player: addItemToInventory(EnergyDrink)
+BuyUtils -> EnergyDrink: return
+
+EnergyDrink -> Player: Returns EnergyDrink
+Player -> EnergyDrink: allowableActions(Player)
+EnergyDrink -> BuyAction: new BuyAction(EnergyDrink)
+EnergyDrink -> Player: Returns ActionList with BuyAction
+Player -> BuyAction: perform()
+BuyAction -> EnergyDrink: handleConsume(Player)
+EnergyDrink -> Player: Removes EnergyDrink from inventory
+EnergyDrink -> Player: Heals Player by 1 hitpoint
+note right of Player: Gains 1 hitpoint
+
+@enduml
