@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
-import game.scraps.Consumable;
+import game.types.Consumable;
 
 
 

@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
-import game.scraps.Consumable;
+import game.types.Consumable;
 import game.utils.RandomUtils;
 
 public class JarOfPickles extends Item implements Consumable {

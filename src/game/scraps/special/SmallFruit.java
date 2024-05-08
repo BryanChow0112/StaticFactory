@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
-import game.scraps.Consumable;
+import game.types.Consumable;
 
 /**
  * Represents a Small Fruit item that can be consumed to heal the actor.

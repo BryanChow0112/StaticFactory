@@ -32,7 +32,7 @@ package engine.actors {
   abstract class Actor
 }
 
-game.actions.ConsumeAction "0..*" --> "1" game.scraps.Consumable
+game.actions.ConsumeAction "0..*" --> "1" game.types.Consumable
 game.actions.ConsumeAction --|> engine.actions.Action
 package game.actions {
   class AttackAction
@@ -51,8 +51,8 @@ package game.types {
   class Status
 }
 
-game.scraps.Consumable ..> engine.actors.Actor
-game.scraps.Consumable ..> game.actions.ConsumeAction
+game.types.Consumable ..> engine.actors.Actor
+game.types.Consumable ..> game.actions.ConsumeAction
 package game.scraps {
   interface Consumable
 }
@@ -60,8 +60,8 @@ package game.scraps {
 game.scraps.special.MetalPipe --|> engine.weapons.WeaponItem
 game.scraps.special.MetalPipe ...> engine.actions.ActionList
 game.scraps.special.MetalPipe ..> game.actions.AttackAction
-game.scraps.special.LargeFruit ..|> game.scraps.Consumable
-game.scraps.special.SmallFruit ..|> game.scraps.Consumable
+game.scraps.special.LargeFruit ..|> game.types.Consumable
+game.scraps.special.SmallFruit ..|> game.types.Consumable
 package game.scraps.special {
   class MetalPipe
   class LargeFruit

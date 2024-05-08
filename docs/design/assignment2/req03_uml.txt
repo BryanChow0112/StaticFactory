@@ -36,8 +36,8 @@ package game.scraps {
 game.scraps.special.JarOfPickles ..> game.utils.RandomUtils
 game.scraps.special.JarOfPickles ---|> engine.items.Item
 game.scraps.special.PotOfGold ---|> engine.items.Item
-game.scraps.special.PotOfGold ...|> game.scraps.Consumable 
-game.scraps.special.JarOfPickles ...|> game.scraps.Consumable 
+game.scraps.special.PotOfGold ...|> game.types.Consumable
+game.scraps.special.JarOfPickles ...|> game.types.Consumable
 package game.scraps.special {
 class JarOfPickles #red
 class PotOfGold #red

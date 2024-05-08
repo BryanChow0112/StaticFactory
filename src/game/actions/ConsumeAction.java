@@ -3,7 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.scraps.Consumable;
+import game.types.Consumable;
 
 /**
  * Class representing an action that consumes a Consumable item.
