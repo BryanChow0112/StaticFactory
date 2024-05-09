@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * This ground object allows actors to purchase Buyable items.
  */
 public class Terminal extends Ground {
-    private ArrayList<Buyable> buyables;
+    private final ArrayList<Buyable> buyables;
 
     /**
      * Constructs a new Terminal object with a list of buyable items.
