@@ -60,7 +60,7 @@ public class AttackAction extends Action {
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
         if (!target.isConscious()) {
-            result += new DeathAction(actor).execute(target, map);
+            result += "\n" + target.unconscious(actor, map);
         }
 
         return result;

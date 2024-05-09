@@ -9,7 +9,7 @@ public class DeathAction extends Action {
     /**
      * The actor that killed the target
      */
-    private Actor attacker;
+    private final Actor attacker;
 
     /**
      * Constructor of DeathAction.
@@ -22,10 +22,8 @@ public class DeathAction extends Action {
 
     @Override
     public String execute(Actor target, GameMap map) {
-        String result = "";
-        result += "\n" + target.unconscious(attacker, map);
-
-        return result;
+        target.unconscious(attacker, map);
+        return target + " died.";
     }
 
     /**
