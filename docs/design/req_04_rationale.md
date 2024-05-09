@@ -1,1 +1,0 @@
-# Placeholder rationale file

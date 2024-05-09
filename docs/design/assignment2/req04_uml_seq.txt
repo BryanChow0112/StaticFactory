@@ -1,0 +1,86 @@
+@startuml
+actor World
+participant ":Application"
+participant "e:EnergyDrink"
+participant "t:Terminal"
+participant "m:Menu"
+participant "p:Player"
+participant "action:BuyAction"
+participant BuyUtils
+participant RandomUtils
+
+' Application creates the required classes
+activate ":Application"
+":Application" -> World: <<creates>>
+activate World
+
+":Application" -> "e:EnergyDrink": <<creates>>
+":Application" -> "t:Terminal": <<creates>>
+
+'Check what the terminal can do
+World -> "t:Terminal": allowableActions()
+activate "t:Terminal"
+"t:Terminal" -> World: actions
+deactivate "t:Terminal"
+
+' Player plays a turn and buys an energy drink
+World -> "p:Player": playTurn()
+activate "p:Player"
+
+alt lastAction has nextAction
+  "p:Player" -> World: nextAction
+else lastAction has no nextAction
+  "p:Player" -> "m:Menu": showMenu()
+  activate "m:Menu"
+  "m:Menu" -> "action:BuyAction": menuDescription(p)
+  activate "action:BuyAction"
+  "action:BuyAction" -> "e:EnergyDrink": getCost()
+  activate "e:EnergyDrink"
+  "e:EnergyDrink" -> "action:BuyAction": cost
+  deactivate "e:EnergyDrink"
+  "action:BuyAction" -> "m:Menu": description
+  deactivate "action:BuyAction"
+  "m:Menu" -> "p:Player": buyAction
+  deactivate "m:Menu"
+  "p:Player" -> World: buyAction
+  World -> "action:BuyAction": execute(p, :GameMap)
+  activate "action:BuyAction"
+  "action:BuyAction" -> "e:EnergyDrink": buy(p)
+  deactivate "action:BuyAction"
+  activate "e:EnergyDrink"
+  "e:EnergyDrink" -> RandomUtils: getRandomDouble()
+  activate RandomUtils
+  RandomUtils -> "e:EnergyDrink": randVal
+  deactivate "e:EnergyDrink"
+  deactivate RandomUtils
+  alt player has to pay double the cost
+    "e:EnergyDrink" -> BuyUtils: buyItem(p, e, doubleCost)
+    BuyUtils -> "p:Player": getBalance()
+    "p:Player" -> BuyUtils: balance
+    alt player has sufficient balance
+      BuyUtils -> "p:Player": deductBalance(doubleCost)
+      BuyUtils -> "p:Player": addItemToInventory(e)
+      BuyUtils -> "e:EnergyDrink": message
+    else player has insufficient balance
+      BuyUtils -> "e:EnergyDrink": message
+    end
+  else
+    "e:EnergyDrink" -> BuyUtils: buyItem(p, e, normalCost)
+    BuyUtils -> "p:Player": getBalance()
+    "p:Player" -> BuyUtils: balance
+    alt player has sufficient balance
+      BuyUtils -> "p:Player": deductBalance(normalCost)
+      BuyUtils -> "p:Player": addItemToInventory(e)
+      BuyUtils -> "e:EnergyDrink": message
+    else player has insufficient balance
+      BuyUtils -> "e:EnergyDrink": message
+    end
+  end
+  "e:EnergyDrink" -> "action:BuyAction": message
+  "action:BuyAction" -> World: message
+end
+
+deactivate "p:Player"
+deactivate World
+deactivate ":Application"
+@enduml

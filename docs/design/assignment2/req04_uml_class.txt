@@ -1,0 +1,91 @@
+@startuml
+
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+skinparam packagedistance 30
+skinparam classaxisdistance 60
+
+title A2 Group 1 - Requirement 4
+
+package engine.positions {
+  abstract class Ground
+}
+
+package engine.actors {
+  abstract class Actor
+}
+
+package engine.items {
+  abstract class Item
+  abstract class WeaponItem
+}
+
+' DragonSlayerSword relationships
+engine.items.WeaponItem <|-[#green]- game.scraps.special.DragonSlayerSword
+game.types.Buyable <|.[#red]. game.scraps.special.DragonSlayerSword
+game.scraps.special.DragonSlayerSword .[#deeppink].> game.utils.RandomUtils
+game.scraps.special.DragonSlayerSword ..> game.utils.BuyUtils
+
+' EnergyDrink relationships
+engine.items.Item <|-[#green]- game.scraps.special.EnergyDrink
+game.types.Buyable <|.[#red]. game.scraps.special.EnergyDrink
+game.types.Consumable <|.[#purple]. game.scraps.special.EnergyDrink
+game.scraps.special.EnergyDrink .[#deeppink].> game.utils.RandomUtils
+game.scraps.special.EnergyDrink ..> game.utils.BuyUtils
+
+' ToiletPaperRoll relationships
+engine.items.Item <|-[#green]- game.scraps.special.ToiletPaperRoll
+game.types.Buyable <|.[#red]. game.scraps.special.ToiletPaperRoll
+game.scraps.special.ToiletPaperRoll .[#deeppink].> game.utils.RandomUtils
+game.scraps.special.ToiletPaperRoll ..> game.utils.BuyUtils
+package game.scraps.special {
+  class DragonSlayerSword #red
+  class EnergyDrink #red
+  class ToiletPaperRoll #red
+}
+
+engine.positions.Ground <|-- game.grounds.Terminal
+game.grounds.Terminal ..> game.types.Buyable
+game.grounds.Terminal .> game.actions.BuyAction
+package game.grounds {
+  class Terminal #red
+}
+
+engine.actors.Actor <.. game.types.Buyable
+engine.actors.Actor <.. game.types.Consumable
+package game.types {
+  interface Buyable #red
+  interface Consumable
+}
+
+game.actions.BuyAction --> game.types.Buyable
+package game.actions {
+  class BuyAction #red
+}
+
+package game.utils {
+  class RandomUtils
+}
+
+game.Application .[#blue].> game.types.Buyable
+game.Application .[#blue].> game.scraps.special.DragonSlayerSword
+game.Application .[#blue].> game.scraps.special.EnergyDrink
+game.Application .[#blue].> game.scraps.special.ToiletPaperRoll
+package game {
+  class Application
+}
+
+@enduml

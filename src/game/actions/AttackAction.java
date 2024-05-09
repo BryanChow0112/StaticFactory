@@ -26,7 +26,7 @@ public class AttackAction extends Action {
     /**
      * Constructor.
      *
-     * @param target the Actor to attack
+     * @param target    the Actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
      */
     public AttackAction(Actor target, String direction, Weapon weapon) {
@@ -38,7 +38,7 @@ public class AttackAction extends Action {
     /**
      * Constructor with intrinsic weapon as default
      *
-     * @param target the actor to attack
+     * @param target    the actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
      */
     public AttackAction(Actor target, String direction) {

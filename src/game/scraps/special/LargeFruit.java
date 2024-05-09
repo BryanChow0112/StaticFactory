@@ -2,22 +2,22 @@ package game.scraps.special;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
-import game.scraps.Consumable;
-import game.scraps.Scrap;
+import game.types.Consumable;
 
 /**
  * Represents a Large Fruit item that can be consumed to heal the actor.
  * The Large Fruit is a type of Scrap item that implements the Consumable interface.
  */
-public class LargeFruit extends Scrap implements Consumable {
+public class LargeFruit extends Item implements Consumable {
     private static final int HIT_POINTS = 2;
 
     /**
      * Constructs a new LargeFruit object.
      */
     public LargeFruit() {
-        super("Large Fruit", 'O');
+        super("Large Fruit", 'O', true);
     }
 
     /**
@@ -46,13 +46,4 @@ public class LargeFruit extends Scrap implements Consumable {
         return actor + " is healed by " + HIT_POINTS + " hit points.";
     }
 
-    /**
-     * Returns a description of the effect of consuming this item.
-     *
-     * @return A description of the consumption effect.
-     */
-    @Override
-    public String getConsumableDescription() {
-        return "heal " + HIT_POINTS + " hit points.";
-    }
 }

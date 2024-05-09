@@ -1,0 +1,87 @@
+@startuml
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 50
+skinparam ranksep 100
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
+title Requirement 3
+skinparam linetype ortho
+
+
+package engine.positions {
+  abstract class Ground <<abstract>>
+}
+
+
+package engine.actions {
+  abstract class Action <<abstract>>
+  class ActionList
+}
+
+package engine.actors {
+   class Actor <<abstract>>
+}
+
+game.actions.ConsumeAction "0..*" --> "1" game.scraps.Consumable
+game.actions.ConsumeAction --|> engine.actions.Action
+package game.actions {
+  class AttackAction
+  class ConsumeAction
+}
+game.actors.Player ..> game.types.Ability
+game.actors.Player ..> game.types.Status 
+
+package game.actors {
+  class Player
+}
+
+game.grounds.Puddle --|> engine.positions.Ground
+game.grounds.Puddle ..|> game.scraps.Consumable
+
+
+package game.types {
+  class Ability <<enum>>
+  class Status <<enum>>
+}
+
+game.scraps.Consumable ..> engine.actors.Actor
+game.scraps.Consumable ..> game.actions.ConsumeAction
+package game.scraps {
+  interface Consumable <<interface>>
+}
+
+
+game.scraps.special.PotOfGold ...|> game.scraps.Consumable 
+game.scraps.special.JarOfPickles ...|> game.scraps.Consumable 
+game.scraps.special.JarOfPickles ....> game.utils.RandomUtils
+package game.scraps.special {
+
+
+  class JarOfPickles #red
+  class PotOfGold #red
+}
+
+package game.grounds{
+class Puddle #green
+}
+
+game.Application ..> game.scraps.special.JarOfPickles 
+game.Application ..> game.scraps.special.PotOfGold 
+game.Application ..> game.grounds.Puddle
+
+game.Application ..> game.actors.Player
+package game {
+  class Application
+}
+@enduml

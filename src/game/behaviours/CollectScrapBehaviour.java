@@ -11,7 +11,20 @@ import game.utils.RandomUtils;
 
 import java.util.List;
 
+/**
+ * A behavior that allows an actor to collect scraps from the ground.
+ * The actor will pick up a random item from the items present at its current location.
+ */
 public class CollectScrapBehaviour implements Behaviour {
+
+    /**
+     * Returns an PickUpAction that allows the actor to pick up a random item from
+     * the items present at its current location.
+     *
+     * @param actor The actor executing the behavior.
+     * @param map   The game map containing the Actor.
+     * @return A PickUpAction for a random item, or null if no items are present.
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         // Get the current location of the actor
