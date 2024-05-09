@@ -1,5 +1,4 @@
 @startuml
-
 hide circle
 hide empty fields
 hide empty methods
@@ -10,10 +9,10 @@ skinparam PackageBackgroundColor #DDDDDD
 skinparam linetype ortho
 skinparam classfontSize 20
 skinparam arrowfontSize 20
-skinparam nodesep 200
-skinparam ranksep 200
+skinparam nodesep 70
+skinparam ranksep 150
 skinparam ClassStereotypeFontSize 20
-skinparam padding 10
+skinparam padding 5
 skinparam linetype ortho
 
 package game {
@@ -21,34 +20,26 @@ package game {
 }
 
 package game.actors {
-  abstract class Enemy
+  abstract class Enemy <<abstract>>
   class AlienBug #red
-  interface Spawnable
+  class SuspiciousAstronaut #red
+  interface Spawnable <<interface>>
 }
 
-package game.actors {
-  abstract class Enemy
-  class SuspiciousAstronaut #red
-  interface Spawnable
-}
 package game.actions {
   class AttackAction
 }
 
 package game.behaviours {
   class CollectScrapBehaviour #red
-  class FollowBehaviour #red  
+  class FollowBehaviour #red
   class WanderBehaviour
   class AttackBehaviour
 }
 
 package game.types {
-  enum Ability
-  enum Status
-}
-
-package game.actors {
-  class Player
+  enum Ability <<enumeration>>
+  enum Status  <<enumeration>>
 }
 
 package game.utils {
@@ -56,20 +47,21 @@ package game.utils {
 }
 
 package engine.actors {
-  abstract class Actor
+  abstract class Actor <<abstract>>
   class ActionList
+  interface Behaviour <<interface>>
 }
 
 package engine.items {
-  abstract class Item
+  abstract class Item  <<abstract>>
 }
 
 package engine.positions {
   class Location
   class Exit
-  abstract class Ground
 }
 
+game.Application .down.> game.grounds.Crater
 game.Application ...> game.actors.AlienBug
 game.Application ...> game.actors.SuspiciousAstronaut
 
@@ -81,6 +73,7 @@ game.actors.Spawnable <|.. game.actors.AlienBug
 
 game.actors.Enemy <|-- game.actors.SuspiciousAstronaut
 game.actors.Spawnable <|.. game.actors.SuspiciousAstronaut
+game.grounds.Crater "0..*" -> "1" game.actors.Spawnable
 
 game.actors.SuspiciousAstronaut .[#purple].> game.behaviours.WanderBehaviour
 game.actors.SuspiciousAstronaut .[#purple].> game.behaviours.AttackBehaviour

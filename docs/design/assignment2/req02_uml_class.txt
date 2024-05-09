@@ -1,0 +1,91 @@
+@startuml
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 80
+skinparam ranksep 120
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
+package game {
+  class Application
+}
+
+package game.actors {
+  abstract class Enemy  <<abstract>>
+  class AlienBug #red
+  interface Spawnable  <<interface>>
+}
+
+package game.actions {
+  class AttackAction
+}
+
+package game.behaviours {
+  class CollectScrapBehaviour #red
+  class FollowBehaviour #red
+}
+
+package game.types {
+  enum Ability  <<enumeration>>
+  enum Status   <<enumeration>>
+}
+
+package game.utils {
+  class RandomUtils #green
+}
+
+package engine.actors {
+  abstract class Actor  <<abstract>>
+  class ActionList
+  interface Behaviour <<interface>>
+}
+
+package engine.items {
+  abstract class Item  <<abstract>>
+}
+
+package engine.positions {
+  class Location
+  class Exit
+}
+
+game.Application ...> game.actors.AlienBug
+
+game.actors.Enemy --|> engine.actors.Actor
+game.actors.Enemy "0..*" --> "0..*" engine.actors.Behaviour
+
+game.actors.Enemy <|-- game.actors.AlienBug
+game.actors.Spawnable <|.. game.actors.AlienBug
+
+game.actors.AlienBug .[#blue].> game.behaviours.CollectScrapBehaviour
+game.actors.AlienBug .[#blue].> game.behaviours.FollowBehaviour
+game.actors.AlienBug .[#blue].> game.types.Ability
+game.actors.AlienBug .[#blue].> game.utils.RandomUtils
+game.actors.AlienBug .[#blue].> engine.items.Item
+game.actors.AlienBug .[#blue].> engine.positions.Exit
+game.actors.AlienBug .[#blue].> engine.positions.GameMap
+game.actors.AlienBug .[#blue].> engine.positions.Location
+game.actors.AlienBug .[#blue].> engine.actors.ActionList
+game.actors.AlienBug .[#blue].> game.actions.AttackAction
+
+game.behaviours.CollectScrapBehaviour .[#red].|> engine.actors.Behaviour
+game.behaviours.CollectScrapBehaviour .[#red].> engine.items.Item
+game.behaviours.CollectScrapBehaviour .[#red].> engine.positions.Location
+game.behaviours.CollectScrapBehaviour .[#red].> engine.actions.PickUpAction
+
+game.behaviours.FollowBehaviour .[#green].|> engine.actors.Behaviour
+game.behaviours.FollowBehaviour -[#green]-> engine.actors.Actor
+game.behaviours.FollowBehaviour .[#green].> engine.positions.Exit
+game.behaviours.FollowBehaviour .[#green].> engine.positions.GameMap
+game.behaviours.FollowBehaviour .[#green].> engine.positions.Location
+game.behaviours.FollowBehaviour .[#green].> engine.actions.MoveActorAction
+@enduml
