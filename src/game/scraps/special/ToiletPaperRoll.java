@@ -6,8 +6,6 @@ import game.types.Buyable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
 
-import java.util.Scanner;
-
 /**
  * A toilet paper roll item that can be purchased by an actor.
  * There is a chance of receiving a discount when attempting to buy this item.
@@ -35,17 +33,9 @@ public class ToiletPaperRoll extends Item implements Buyable {
     @Override
     public String buy(Actor actor) {
         double randDouble = RandomUtils.getRandomDouble();
-        Scanner scanner = new Scanner(System.in);
 
         if (randDouble < DISCOUNT_CHANCE) {
-            System.out.println("The computer terminal is offering you a " + this + " for " + DISCOUNTED_COST + " credits. Do you want to purchase it? (y/n)");
-            String choice = scanner.nextLine().toLowerCase();
-
-            if (choice.equals("y") && actor.getBalance() >= DISCOUNTED_COST) {
-                return BuyUtils.buyItem(actor, this, DISCOUNTED_COST);
-            } else {
-                return "Purchase cancelled.";
-            }
+            return BuyUtils.buyItem(actor, this, DISCOUNTED_COST);
         } else {
             return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
         }

@@ -9,8 +9,6 @@ import game.types.Consumable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
 
-import java.util.Scanner;
-
 /**
  * An energy drink item that can be purchased and consumed by an actor.
  * Consuming the energy drink restores a small amount of hit points.
@@ -37,19 +35,11 @@ public class EnergyDrink extends Item implements Buyable, Consumable {
      */
     @Override
     public String buy(Actor actor) {
-        double randDouble = RandomUtils.getRandomDouble();
-        Scanner scanner = new Scanner(System.in);
+        double randVal = RandomUtils.getRandomDouble();
 
-        if (randDouble < DOUBLE_COST_CHANCE) {
+        if (randVal < DOUBLE_COST_CHANCE) {
             int doubleCost = WORTH_IN_CREDITS * 2;
-            System.out.println("The computer terminal is asking you to pay " + doubleCost + " credits for " + this + ". Do you want to continue? (y/n)");
-            String choice = scanner.nextLine().toLowerCase();
-
-            if (choice.equals("y") && actor.getBalance() >= doubleCost) {
-                return BuyUtils.buyItem(actor, this, doubleCost);
-            } else {
-                return "Purchase cancelled.";
-            }
+            return BuyUtils.buyItem(actor, this, doubleCost);
         } else {
             return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
         }
