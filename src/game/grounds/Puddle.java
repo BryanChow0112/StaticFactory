@@ -11,19 +11,40 @@ import game.actions.ConsumeAction;
 import game.types.Consumable;
 
 
-
+/**
+ * Class that represents puddle ground on the map
+ */
 public class Puddle extends Ground implements Consumable {
+    /**
+     * Attribute that holds the amount of HP that is increased from puddle
+     */
     private final static int INCREASE_HP = 1;
+
+    /**
+     * Constructs a new puddle object
+     */
     public Puddle() {
         super('~');
     }
 
+    /**
+     * Method that handles the consume action
+     * @param actor The actor consuming the item.
+     * @return string to be displayed for successful consume
+     */
     @Override
     public String handleConsume(Actor actor) {
         actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, INCREASE_HP);
         return actor + " consumes the puddle to increase max health by " + INCREASE_HP + " HP.";
     }
 
+    /**
+     * Method that get all the allowable actions
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return list of actions that are allowed
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actionList = new ActionList();
@@ -32,6 +53,11 @@ public class Puddle extends Ground implements Consumable {
         }
         return actionList;
     }
+
+    /**
+     * toString method once it is consumed
+     * @return string
+     */
     @Override
     public String toString(){
         return "the puddle underneath the player";
