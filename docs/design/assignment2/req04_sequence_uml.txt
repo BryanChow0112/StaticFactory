@@ -13,8 +13,15 @@ participant RandomUtils
 activate ":Application"
 ":Application" -> World: <<creates>>
 activate World
+
 ":Application" -> "e:EnergyDrink": <<creates>>
 ":Application" -> "t:Terminal": <<creates>>
+
+'Check what the terminal can do
+World -> "t:Terminal": allowableActions()
+activate "t:Terminal"
+"t:Terminal" -> World: actions
+deactivate "t:Terminal"
 
 ' Player plays a turn and buys an energy drink
 World -> "p:Player": playTurn()
