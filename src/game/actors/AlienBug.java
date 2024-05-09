@@ -15,6 +15,11 @@ import game.utils.RandomUtils;
 
 import java.util.List;
 
+/**
+ * Represents an Alien Bug enemy in the game.
+ * The Alien Bug can collect scraps from the ground, follow the Intern, and enter the Intern's spaceship.
+ * When defeated, the Alien Bug drops all the scraps it has collected.
+ */
 public class AlienBug extends Enemy implements Spawnable {
 
     /**
