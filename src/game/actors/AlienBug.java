@@ -38,7 +38,6 @@ public class AlienBug extends Enemy implements Spawnable {
     public AlienBug() {
         super("Feature-" + RandomUtils.getRandomInt(100, 999), 'a', 2);
         this.addBehaviour(COLLECT_SCRAP_PRIORITY, new CollectScrapBehaviour());
-        this.addCapability(Ability.PICK_UP_SCRAP);
         this.addCapability(Ability.ENTER_SPACESHIP);
     }
 

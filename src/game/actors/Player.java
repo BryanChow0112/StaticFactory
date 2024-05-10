@@ -31,8 +31,6 @@ public class Player extends Actor {
     public Player(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_ENEMY);
-        this.addCapability(Ability.PICK_UP_SCRAP);
-        this.addCapability(Ability.DROP_SCRAP);
         this.addCapability(Ability.ENTER_SPACESHIP);
     }
 
