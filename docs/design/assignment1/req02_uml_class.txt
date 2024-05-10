@@ -1,5 +1,4 @@
 @startuml
-
 hide circle
 hide empty fields
 hide empty methods
@@ -49,25 +48,26 @@ package game.utils {
   class RandomUtils
 }
 
+package game.grounds.flora {
+  abstract class PlantBase <<abstract>>
+}
+game.grounds.flora.PlantBase -up-|> engine.positions.Ground
+game.grounds.flora.PlantBase <|-- game.grounds.flora.Sapling
+game.grounds.flora.PlantBase <|-- game.grounds.flora.Tree
+game.grounds.flora.PlantBase ..> game.grounds.Spawner
+game.grounds.flora.PlantBase .> engine.positions.Location
+game.grounds.flora.PlantBase -> engine.items.Item
+
 game.grounds.flora.Sapling .> game.grounds.flora.Tree
-game.grounds.flora.Sapling ..[#blue].> game.types.Status
 game.grounds.flora.Sapling .[#green].> game.scraps.special.SmallFruit
-game.grounds.flora.Sapling .[#purple].> game.grounds.Spawner
-game.grounds.flora.Sapling .[#red]> engine.positions.Location
-game.grounds.flora.Tree ..[#blue].> game.types.Status
-game.grounds.flora.Tree .[#purple].> game.grounds.Spawner
+
 game.grounds.flora.Tree .[#green].> game.scraps.special.LargeFruit
-game.grounds.flora.Tree .[#red]> engine.positions.Location
-game.grounds.flora.Sapling -[#orange]-|> engine.positions.Ground
-game.grounds.flora.Tree -[#orange]-|> engine.positions.Ground
+
+
+
 package game.grounds.flora {
   class Sapling
   class Tree
-}
-
-
-package game.types {
-  class Status
 }
 
 game.Application ..> game.grounds.flora.Sapling
@@ -75,5 +75,4 @@ game.Application ..> game.grounds.flora.Tree
 package game {
   class Application
 }
-
 @enduml
