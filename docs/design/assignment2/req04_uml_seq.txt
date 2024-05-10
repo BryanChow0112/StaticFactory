@@ -1,4 +1,7 @@
 @startuml
+
+title CL_Lab34Team1 - Requirement 4
+
 actor World
 participant ":Application"
 participant "e:EnergyDrink"

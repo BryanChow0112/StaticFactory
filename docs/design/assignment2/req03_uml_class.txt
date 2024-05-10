@@ -15,7 +15,7 @@ skinparam ClassStereotypeFontSize 20
 skinparam padding 10
 skinparam linetype ortho
 
-title Requirement 3
+title CL_Lab34Team1 - Requirement 3
 skinparam linetype ortho
 
 

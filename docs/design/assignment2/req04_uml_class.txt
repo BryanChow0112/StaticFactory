@@ -18,19 +18,19 @@ skinparam linetype ortho
 skinparam packagedistance 30
 skinparam classaxisdistance 60
 
-title A2 Group 1 - Requirement 4
+title CL_Lab34Team1 - Requirement 4
 
 package engine.positions {
-  abstract class Ground
+  abstract class Ground <<abstract>>
 }
 
 package engine.actors {
-  abstract class Actor
+  abstract class Actor <<abstract>>
 }
 
 package engine.items {
-  abstract class Item
-  abstract class WeaponItem
+  abstract class Item <<abstract>>
+  abstract class WeaponItem <<abstract>>
 }
 
 ' DragonSlayerSword relationships
@@ -67,8 +67,8 @@ package game.grounds {
 engine.actors.Actor <.. game.types.Buyable
 engine.actors.Actor <.. game.types.Consumable
 package game.types {
-  interface Buyable #red
-  interface Consumable
+  interface Buyable <<interface>> #red
+  interface Consumable <<interface>>
 }
 
 game.actions.BuyAction --> game.types.Buyable
