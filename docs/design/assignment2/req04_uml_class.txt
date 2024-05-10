@@ -71,7 +71,7 @@ package game.types {
   interface Consumable <<interface>>
 }
 
-game.actions.BuyAction --> game.types.Buyable
+game.actions.BuyAction "0..1" --> "1" game.types.Buyable: enables purchasing of
 package game.actions {
   class BuyAction #red
 }
