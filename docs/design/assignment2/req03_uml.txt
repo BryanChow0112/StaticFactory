@@ -33,7 +33,7 @@ package engine.actors {
    class Actor <<abstract>>
 }
 
-game.actions.ConsumeAction "0..*" --> "1" game.scraps.Consumable
+game.actions.ConsumeAction "0..1" --> "1" game.scraps.Consumable
 game.actions.ConsumeAction --|> engine.actions.Action
 package game.actions {
   class AttackAction
