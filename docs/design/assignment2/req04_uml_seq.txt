@@ -2,12 +2,12 @@
 
 title CL_Lab34Team1 - Requirement 4
 
-actor World
+participant World
 participant ":Application"
 participant "e:EnergyDrink"
 participant "t:Terminal"
 participant "m:Menu"
-participant "p:Player"
+actor "p:Player"
 participant "action:BuyAction"
 participant BuyUtils
 participant RandomUtils
@@ -58,6 +58,7 @@ else lastAction has no nextAction
   deactivate RandomUtils
   alt player has to pay double the cost
     "e:EnergyDrink" -> BuyUtils: buyItem(p, e, doubleCost)
+    activate BuyUtils
     BuyUtils -> "p:Player": getBalance()
     "p:Player" -> BuyUtils: balance
     alt player has sufficient balance
@@ -77,10 +78,13 @@ else lastAction has no nextAction
       BuyUtils -> "e:EnergyDrink": message
     else player has insufficient balance
       BuyUtils -> "e:EnergyDrink": message
+      deactivate BuyUtils
+      activate "action:BuyAction"
     end
   end
   "e:EnergyDrink" -> "action:BuyAction": message
   "action:BuyAction" -> World: message
+  deactivate "action:BuyAction"
 end
 
 deactivate "p:Player"
