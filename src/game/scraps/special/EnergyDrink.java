@@ -37,7 +37,7 @@ public class EnergyDrink extends Item implements Buyable, Consumable {
     public String buy(Actor actor) {
         double randVal = RandomUtils.getRandomDouble();
 
-        if (randVal < DOUBLE_COST_CHANCE) {
+        if (randVal <= DOUBLE_COST_CHANCE) {
             int doubleCost = WORTH_IN_CREDITS * 2;
             return BuyUtils.buyItem(actor, this, doubleCost);
         } else {

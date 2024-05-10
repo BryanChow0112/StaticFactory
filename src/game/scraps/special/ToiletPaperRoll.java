@@ -34,7 +34,7 @@ public class ToiletPaperRoll extends Item implements Buyable {
     public String buy(Actor actor) {
         double randDouble = RandomUtils.getRandomDouble();
 
-        if (randDouble < DISCOUNT_CHANCE) {
+        if (randDouble <= DISCOUNT_CHANCE) {
             return BuyUtils.buyItem(actor, this, DISCOUNTED_COST);
         } else {
             return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);

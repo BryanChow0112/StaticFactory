@@ -52,7 +52,7 @@ public class DragonSlayerSword extends WeaponItem implements Buyable {
     @Override
     public String buy(Actor actor) {
         double randDouble = RandomUtils.getRandomDouble();
-        if (randDouble < 0.5) {
+        if (randDouble <= 0.5) {
             actor.deductBalance(WORTH_IN_CREDITS);
             return "An error occurred while purchasing, your credits were deducted anyway...";
         } else {
