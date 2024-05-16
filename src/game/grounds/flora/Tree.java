@@ -13,6 +13,6 @@ public class Tree extends PlantBase {
     public Tree() {
         super('T');
         this.spawn = new LargeFruit();
-        this.spawnChance = 0.2;
+        this.spawnChance = 20;
     }
 }

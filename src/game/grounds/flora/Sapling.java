@@ -25,7 +25,7 @@ public class Sapling extends PlantBase {
     public Sapling() {
         super('t');
         this.spawn = new SmallFruit();
-        this.spawnChance = 0.3;
+        this.spawnChance = 30;
         this.nextStage = new Tree();
     }
 

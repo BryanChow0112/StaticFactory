@@ -17,7 +17,7 @@ import game.utils.RandomUtils;
 public class EnergyDrink extends Item implements Buyable, Consumable {
     private static final int WORTH_IN_CREDITS = 10;
     private static final int HIT_POINTS = 1;
-    private static final double DOUBLE_COST_CHANCE = 0.2;
+    private static final int DOUBLE_COST_CHANCE = 20;
 
     /**
      * Constructs a new EnergyDrink instance.
@@ -35,9 +35,7 @@ public class EnergyDrink extends Item implements Buyable, Consumable {
      */
     @Override
     public String buy(Actor actor) {
-        double randVal = RandomUtils.getRandomDouble();
-
-        if (randVal <= DOUBLE_COST_CHANCE) {
+        if (RandomUtils.getRandomInt(100) <= DOUBLE_COST_CHANCE) {
             int doubleCost = WORTH_IN_CREDITS * 2;
             return BuyUtils.buyItem(actor, this, doubleCost);
         } else {

@@ -20,7 +20,7 @@ public abstract class PlantBase extends Ground {
     /**
      * The probability of the spawn being produced by plant.
      */
-    protected double spawnChance;
+    protected int spawnChance;
 
     /**
      * Constructs a new PlantBase object with the specified display character.
@@ -43,10 +43,10 @@ public abstract class PlantBase extends Ground {
      *
      * @param location    the location where the spawning attempt is made
      * @param newItem     an item instance
-     * @param spawnChance the probability of spawning (between 0.0 and 1.0)
+     * @param spawnChance the probability of spawning
      */
-    public static void produceFruit(Location location, Item newItem, double spawnChance) {
-        if (RandomUtils.getRandomDouble() <= spawnChance) {
+    public static void produceFruit(Location location, Item newItem, int spawnChance) {
+        if (RandomUtils.getRandomInt(100) <= spawnChance) {
             Exit randomExit = RandomUtils.getRandomExit(location);
             Location exitLocation = randomExit.getDestination();
             exitLocation.addItem(newItem);
