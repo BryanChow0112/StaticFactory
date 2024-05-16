@@ -1,9 +1,10 @@
 package game.grounds.flora;
 
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.Spawner;
+import game.utils.RandomUtils;
 
 /**
  * An abstract class representing a plant in the game environment.
@@ -34,6 +35,21 @@ public abstract class PlantBase extends Ground {
     public void tick(Location location) {
         super.tick(location);
         // produce fruits
-        Spawner.spawnItem(location, this.spawn, this.spawnChance);
+        produceFruit(location, this.spawn, this.spawnChance);
+    }
+
+    /**
+     * Tries to spawn a new item at a random exit location of the given location.
+     *
+     * @param location    the location where the spawning attempt is made
+     * @param newItem     an item instance
+     * @param spawnChance the probability of spawning (between 0.0 and 1.0)
+     */
+    public static void produceFruit(Location location, Item newItem, double spawnChance) {
+        if (RandomUtils.getRandomDouble() <= spawnChance) {
+            Exit randomExit = RandomUtils.getRandomExit(location);
+            Location exitLocation = randomExit.getDestination();
+            exitLocation.addItem(newItem);
+        }
     }
 }
