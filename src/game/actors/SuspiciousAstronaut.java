@@ -15,26 +15,24 @@ public class SuspiciousAstronaut extends Enemy {
      */
     public static final int ATTACK_PRIORITY = 0;
 
+    public static final int ATTACK_DAMAGE = Integer.MAX_VALUE;
+
     /**
      * Constructs new SuspiciousAstronaut object
-     * @param player player on the map
      */
-
-    public SuspiciousAstronaut(Player player) {
+    public SuspiciousAstronaut() {
         super("Suspicious Astronaut", 'ඞ', 99);
-        this.player = player;
         this.addBehaviour(ATTACK_PRIORITY, new AttackBehaviour());
     }
 
     /**
      * Method to get SuspiciousAstronauts intrinsic weapon
+     *
      * @return SuspiciousAstronaut intrinsic weapon
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-
-        int damage = player.getAttributeMaximum(BaseActorAttributes.HEALTH);
-        return new IntrinsicWeapon(damage, "bonks", 100);
+        return new IntrinsicWeapon(ATTACK_DAMAGE, "bonks", 100);
     }
 
 }
