@@ -8,11 +8,7 @@ import game.behaviours.AttackBehaviour;
 /**
  * Class that represents SuspiciousAstronaut enemy
  */
-public class SuspiciousAstronaut extends Enemy implements Spawnable {
-    /**
-     * An attribute that represents a player on the map
-     */
-    Player player;
+public class SuspiciousAstronaut extends Enemy {
 
     /**
      * A constant that represents the priority of the attack behaviour.
@@ -39,24 +35,6 @@ public class SuspiciousAstronaut extends Enemy implements Spawnable {
 
         int damage = player.getAttributeMaximum(BaseActorAttributes.HEALTH);
         return new IntrinsicWeapon(damage, "bonks", 100);
-    }
-
-    /**
-     * Method to create new SuspiciousAstronautObject
-     * @return new SuspciousAstronaut object
-     */
-    @Override
-    public Actor create() {
-        return new SuspiciousAstronaut(player);
-    }
-
-    /**
-     * Gets the chance of SuspiciousAstronaut object spawning
-     * @return float chance of spawning
-     */
-    @Override
-    public double getSpawnChance() {
-        return 0.05;
     }
 
 }
