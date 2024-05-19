@@ -45,9 +45,9 @@ package game.grounds.flora {
 
 }
 game.grounds.flora.PlantBase -up-|> engine.positions.Ground
-game.grounds.flora.Sprout ...|> game.grounds.flora.Growable
-game.grounds.flora.Sapling ...|> game.grounds.flora.Growable
-game.grounds.flora.YoungInheritree...|> game.grounds.flora.Growable
+game.grounds.flora.Sprout ...|> game.types.Growable
+game.grounds.flora.Sapling ...|> game.types.Growable
+game.grounds.flora.YoungInheritree...|> game.types.Growable
 game.grounds.flora.PlantBase <|-- game.grounds.flora.NonFruitfulTree
 game.grounds.flora.PlantBase <|-- game.grounds.flora.FruitfulTree
 game.grounds.flora.NonFruitfulTree <|- game.grounds.flora.Sprout

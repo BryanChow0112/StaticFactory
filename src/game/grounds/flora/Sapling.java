@@ -3,11 +3,12 @@ package game.grounds.flora;
 import edu.monash.fit2099.engine.positions.Location;
 import game.scraps.special.Fruit;
 import game.scraps.special.SmallFruit;
+import game.types.Growable;
 
-public class SaplingFruitful extends FruitfulTree implements Growable{
+public class Sapling extends FruitfulTree implements Growable {
 
     private int age;
-    public SaplingFruitful() {
+    public Sapling() {
         super('t');
     }
 
@@ -28,7 +29,7 @@ public class SaplingFruitful extends FruitfulTree implements Growable{
 
     @Override
     public PlantBase nextStage() {
-        return new YoungInheritreeNonFruitful();
+        return new YoungInheritree();
     }
 
     @Override

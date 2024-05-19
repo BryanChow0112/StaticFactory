@@ -36,7 +36,7 @@ public class Application {
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
-                new Wall(), new Floor(), new Puddle(), new SproutNonFruitful()) {
+                new Wall(), new Floor(), new Puddle(), new Sprout()) {
         };
 
         List<String> map = Arrays.asList(

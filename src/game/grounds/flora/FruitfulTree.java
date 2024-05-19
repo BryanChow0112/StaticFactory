@@ -6,7 +6,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.scraps.special.Fruit;
 import game.utils.RandomUtils;
 
-
+/**
+ * Abstract class for stages of the tree that can produce fruit
+ */
 public abstract class FruitfulTree extends PlantBase {
 
     private int age;

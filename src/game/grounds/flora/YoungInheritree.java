@@ -1,8 +1,9 @@
 package game.grounds.flora;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.types.Growable;
 
-public class YoungInheritreeNonFruitful extends NonFruitfulTree implements Growable{
+public class YoungInheritree extends NonFruitfulTree implements Growable {
 
     private int age;
     /**
@@ -10,7 +11,7 @@ public class YoungInheritreeNonFruitful extends NonFruitfulTree implements Growa
      *
      * @param displayChar character to display for this type of terrain
      */
-    public YoungInheritreeNonFruitful() {
+    public YoungInheritree() {
         super('y');
     }
 
@@ -22,7 +23,7 @@ public class YoungInheritreeNonFruitful extends NonFruitfulTree implements Growa
 
     @Override
     public PlantBase nextStage() {
-        return new MatureInheritreeFruitful();
+        return new MatureInheritree();
     }
 
     @Override

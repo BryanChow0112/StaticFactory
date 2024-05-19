@@ -4,10 +4,10 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.scraps.special.Fruit;
 import game.scraps.special.LargeFruit;
 
-public class MatureInheritreeFruitful extends FruitfulTree {
+public class MatureInheritree extends FruitfulTree {
 
 
-    public MatureInheritreeFruitful() {
+    public MatureInheritree() {
         super('T');
     }
 
