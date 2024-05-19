@@ -1,13 +1,11 @@
 package game.grounds.flora;
 
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.scraps.special.Fruit;
 import game.scraps.special.SmallFruit;
 import game.utils.RandomUtils;
 
-public class SaplingNew extends PlantBase implements DropFruit, Growable{
+public class SaplingNew extends PlantBase implements FruitFul, Growable{
     /**
      * The current age of the sapling.
      */

@@ -5,7 +5,7 @@ import game.scraps.special.Fruit;
 import game.scraps.special.LargeFruit;
 import game.utils.RandomUtils;
 
-public class MatureInheritree extends PlantBase implements DropFruit {
+public class MatureInheritree extends PlantBase implements FruitFul {
     /**
      * Constructs a new PlantBase object with the specified display character.
      *
