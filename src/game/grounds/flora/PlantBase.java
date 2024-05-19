@@ -12,15 +12,6 @@ import game.utils.RandomUtils;
  */
 public abstract class PlantBase extends Ground {
 
-    /**
-     * The scrap (fruit) that the plant can produce.
-     */
-    protected Item spawn;
-
-    /**
-     * The probability of the spawn being produced by plant.
-     */
-    protected int spawnChance;
 
     /**
      * Constructs a new PlantBase object with the specified display character.
@@ -34,7 +25,7 @@ public abstract class PlantBase extends Ground {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        // produce fruits
+
     }
 
 
