@@ -1,0 +1,42 @@
+@startuml
+participant "SproutNonFruitful : Growable" as Sprout
+participant "SaplingFruitful : Growable" as Sapling
+participant "YoungInheritreeNonFruitful : Growable" as YoungInheritree
+participant "MatureInheritreeFruitful" as MatureInheritree
+participant "SmallFruit : Consumable" as SmallFruit
+participant "LargeFruit : Consumable" as LargeFruit
+
+Sprout -> Sprout: grow(Location location)
+activate Sprout
+Sprout -> Sprout: isMature()
+Sprout --> Sprout: return age >= growAge()
+Sprout -> Sprout: nextStage()
+create Sapling
+Sprout -> Sapling: new()
+Sprout -> Location: setGround(Sapling)
+deactivate Sprout
+activate Sapling
+Sapling -> Sapling: grow(Location location)
+Sapling -> Sapling: isMature()
+Sapling --> Sapling: return age >= growAge()
+Sapling -> Sapling: nextStage()
+create YoungInheritree
+Sapling -> YoungInheritree: new()
+Sapling -> Location: setGround(YoungInheritree)
+deactivate Sapling
+activate YoungInheritree
+YoungInheritree -> YoungInheritree: grow(Location location)
+YoungInheritree -> YoungInheritree: isMature()
+YoungInheritree --> YoungInheritree: return age >= growAge()
+YoungInheritree -> YoungInheritree: nextStage()
+create MatureInheritree
+YoungInheritree -> MatureInheritree: new()
+YoungInheritree -> Location: setGround(MatureInheritree)
+deactivate YoungInheritree
+activate MatureInheritree
+MatureInheritree -> MatureInheritree: produceFruit(Location location)
+create LargeFruit
+MatureInheritree -> LargeFruit: new()
+MatureInheritree -> Location: addItem(LargeFruit)
+deactivate MatureInheritree
+@enduml
