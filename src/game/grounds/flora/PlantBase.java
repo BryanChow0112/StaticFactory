@@ -37,18 +37,5 @@ public abstract class PlantBase extends Ground {
         // produce fruits
     }
 
-    /**
-     * Tries to spawn a new item at a random exit location of the given location.
-     *
-     * @param location    the location where the spawning attempt is made
-     * @param newItem     an item instance
-     * @param spawnChance the probability of spawning
-     */
-    public static void produceFruit(Location location, Item newItem, int spawnChance) {
-        if (RandomUtils.getRandomInt(100) <= spawnChance) {
-            Exit randomExit = RandomUtils.getRandomExit(location);
-            Location exitLocation = randomExit.getDestination();
-            exitLocation.addItem(newItem);
-        }
-    }
+
 }
