@@ -12,6 +12,7 @@ import game.utils.RandomUtils;
  */
 public abstract class PlantBase extends Ground {
 
+    /**
 
     /**
      * Constructs a new PlantBase object with the specified display character.

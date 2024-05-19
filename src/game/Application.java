@@ -12,9 +12,7 @@ import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
 import game.displays.FancyMessage;
 import game.grounds.*;
-import game.grounds.flora.Sapling;
-import game.grounds.flora.Sprout;
-import game.grounds.flora.Tree;
+import game.grounds.flora.*;
 import game.scraps.regular.LargeBolt;
 import game.scraps.special.*;
 import game.scraps.regular.MetalSheet;
@@ -38,23 +36,24 @@ public class Application {
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
-                new Wall(), new Floor(), new Puddle(), new Sprout(), new Sapling());
+                new Wall(), new Floor(), new Puddle(), new SproutNonFruitful()) {
+        };
 
         List<String> map = Arrays.asList(
                 "...~~~~.........~~~...........",
-                "...~~~~.................,.....",
-                "...~~~........................",
+                "...~~~~.......................",
+                "...~~~.........,..............",
                 "..............................",
                 ".............#####............",
-                "...,.........#___#...........~",
-                ".............#___#..,.......~~",
-                "....,........##_##....,....~~~",
-                ".................~~...,,...~~~",
-                "....,...........~~~~.......~~~",
-                ".............~~~~~~~...,....~~",
-                "..,...~.....~~~~~~~~....,....~",
+                ".............#___#...........~",
+                ".............#___#..........~~",
+                ".............##_##.........~~~",
+                ".................~~........~~~",
+                "................~~~~.......~~~",
+                ".............~~~~~~~........~~",
+                "......~.....~~~~~~~~.........~",
                 ".....~~~...~~~~~~~~~..........",
-                "..,..~~~~~~~~~~~~~~~~..,.....~",
+                ".....~~~~~~~~~~~~~~~~........~",
                 ".....~~~~~~~~~~~~~~~~~~~....~~");
 
         GameMap gameMap = new GameMap(groundFactory, map);
