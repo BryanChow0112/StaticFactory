@@ -35,7 +35,6 @@ public abstract class PlantBase extends Ground {
     public void tick(Location location) {
         super.tick(location);
         // produce fruits
-        produceFruit(location, this.spawn, this.spawnChance);
     }
 
     /**

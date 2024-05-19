@@ -10,7 +10,7 @@ import game.types.Consumable;
  * Represents a Small Fruit item that can be consumed to heal the actor.
  * The Small Fruit is a type of Scrap item that implements the Consumable interface.
  */
-public class SmallFruit extends Item implements Consumable {
+public class SmallFruit extends Fruit implements Consumable {
     private static final int HIT_POINTS = 1;
 
     /**

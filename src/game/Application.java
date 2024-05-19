@@ -13,6 +13,7 @@ import game.actors.*;
 import game.displays.FancyMessage;
 import game.grounds.*;
 import game.grounds.flora.Sapling;
+import game.grounds.flora.Sprout;
 import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
 import game.scraps.special.*;
@@ -37,23 +38,23 @@ public class Application {
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
-                new Wall(), new Floor(), new Puddle(), new Tree(), new Sapling());
+                new Wall(), new Floor(), new Puddle(), new Sprout(), new Sapling());
 
         List<String> map = Arrays.asList(
                 "...~~~~.........~~~...........",
-                "...~~~~.................t.....",
+                "...~~~~.................,.....",
                 "...~~~........................",
                 "..............................",
                 ".............#####............",
-                "...T.........#___#...........~",
-                ".............#___#..t.......~~",
-                ".............##_##.........~~~",
-                ".................~~........~~~",
-                "................~~~~.......~~~",
-                ".............~~~~~~~........~~",
-                "......~.....~~~~~~~~.........~",
+                "...,.........#___#...........~",
+                ".............#___#..,.......~~",
+                "....,........##_##....,....~~~",
+                ".................~~...,,...~~~",
+                "....,...........~~~~.......~~~",
+                ".............~~~~~~~...,....~~",
+                "..,...~.....~~~~~~~~....,....~",
                 ".....~~~...~~~~~~~~~..........",
-                "..t..~~~~~~~~~~~~~~~~........~",
+                "..,..~~~~~~~~~~~~~~~~..,.....~",
                 ".....~~~~~~~~~~~~~~~~~~~....~~");
 
         GameMap gameMap = new GameMap(groundFactory, map);
@@ -77,7 +78,8 @@ public class Application {
         gameMap.at(16, 6).setGround(terminal);
 
         // Add player with balance
-        Player player = new Player("Intern", '@', 4);
+        Player player = new Player("Intern", '@', 42
+        );
         player.addBalance(1000);
         world.addPlayer(player, gameMap.at(15, 6));
 

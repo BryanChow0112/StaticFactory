@@ -10,7 +10,7 @@ import game.types.Consumable;
  * Represents a Large Fruit item that can be consumed to heal the actor.
  * The Large Fruit is a type of Scrap item that implements the Consumable interface.
  */
-public class LargeFruit extends Item implements Consumable {
+public class LargeFruit extends Fruit implements Consumable {
     private static final int HIT_POINTS = 2;
 
     /**
