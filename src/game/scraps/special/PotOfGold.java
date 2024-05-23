@@ -41,5 +41,4 @@ public class PotOfGold extends Item implements Consumable {
         actor.removeItemFromInventory(this);
         return actor + " has increased credits by " + CREDIT_POINTS + " credits.";
     }
-
 }

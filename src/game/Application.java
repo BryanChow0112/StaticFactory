@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
@@ -56,6 +58,39 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
+        List<String> spaceshipCarPark = Arrays.asList(
+                ".......",
+                ".#####.",
+                ".#___#.",
+                ".#___#.",
+                ".##_##.",
+                ".......",
+                ".......",
+                ".......",
+                ".......",
+                ".......");
+        GameMap carPark = new GameMap(groundFactory, spaceshipCarPark);
+        world.addGameMap(carPark);
+
+        List<String> newMoon = Arrays.asList(
+                "..........................~~~~",
+                "..........................~~~~",
+                "..........................~~~~",
+                "~..........................~..",
+                "~~...........#####............",
+                "~~~..........#___#............",
+                "~~~..........#___#............",
+                "~~~..........##_##............",
+                "~~~..................~~.......",
+                "~~~~................~~~~......",
+                "~~~~...............~~~~~......",
+                "..~................~~~~.......",
+                "....................~~........",
+                ".............~~...............",
+                "............~~~~..............");
+        GameMap moon = new GameMap(groundFactory, newMoon);
+        world.addGameMap(moon);
+
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
@@ -70,12 +105,18 @@ public class Application {
         buyables.add(new EnergyDrink());
         buyables.add(new DragonSlayerSword());
         buyables.add(new ToiletPaperRoll());
-        Terminal terminal = new Terminal(buyables);
+
+        ArrayList<Action> travelAction = new ArrayList<>();
+        travelAction.add(new MoveActorAction(moon.at(4,3),"to the moon!"));
+        travelAction.add( new MoveActorAction(carPark.at(4,3),"to the car park!"));
+
+        Terminal terminal = new Terminal(buyables,travelAction);
         gameMap.at(16, 6).setGround(terminal);
 
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
         player.addBalance(1000);
+
         world.addPlayer(player, gameMap.at(15, 6));
 
         // Add large bolt and metal sheet
