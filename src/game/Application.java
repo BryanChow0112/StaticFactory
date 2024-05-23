@@ -109,6 +109,8 @@ public class Application {
         buyables.add(new EnergyDrink());
         buyables.add(new DragonSlayerSword());
         buyables.add(new ToiletPaperRoll());
+        buyables.add(new THESEUS());
+
 
         ArrayList<Action> travelAction = new ArrayList<>();
 
