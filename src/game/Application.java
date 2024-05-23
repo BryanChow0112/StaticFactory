@@ -19,6 +19,9 @@ import game.grounds.flora.Tree;
 import game.scraps.regular.LargeBolt;
 import game.scraps.special.*;
 import game.scraps.regular.MetalSheet;
+import game.spawners.AlienBugSpawner;
+import game.spawners.HuntsmanSpiderSpawner;
+import game.spawners.SuspiciousAstronautSpawner;
 import game.types.Buyable;
 
 /**
@@ -145,18 +148,18 @@ public class Application {
         gameMap.at(13, 10).addItem(jarOfPicklesFour);
 
         // Create craters spawning HuntsmanSpiders
-        Crater craterOne = new Crater(new HuntsmanSpider());
+        Crater craterOne = new Crater(new HuntsmanSpiderSpawner());
         gameMap.at(26, 4).setGround(craterOne);
 
         // Create craters spawning AlienBugs
-        Crater craterTwo = new Crater(new AlienBug());
+        Crater craterTwo = new Crater(new AlienBugSpawner());
         gameMap.at(6, 5).setGround(craterTwo);
 
-        Crater craterThree = new Crater(new AlienBug());
+        Crater craterThree = new Crater(new AlienBugSpawner());
         gameMap.at(26, 12).setGround(craterThree);
 
         // Create craters spawning SuspiciousAstronauts
-        Crater craterFour = new Crater(new SuspiciousAstronaut(player));
+        Crater craterFour = new Crater(new SuspiciousAstronautSpawner());
         gameMap.at(26, 13).setGround(craterFour);
 
         world.run();

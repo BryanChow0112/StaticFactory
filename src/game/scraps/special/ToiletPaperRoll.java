@@ -13,7 +13,7 @@ import game.utils.RandomUtils;
  */
 public class ToiletPaperRoll extends Item implements Buyable {
     private static final int WORTH_IN_CREDITS = 5;
-    private static final double DISCOUNT_CHANCE = 0.75;
+    private static final int DISCOUNT_CHANCE = 75;
     private static final int DISCOUNTED_COST = 1;
 
     /**
@@ -32,9 +32,7 @@ public class ToiletPaperRoll extends Item implements Buyable {
      */
     @Override
     public String buy(Actor actor) {
-        double randDouble = RandomUtils.getRandomDouble();
-
-        if (randDouble <= DISCOUNT_CHANCE) {
+        if (RandomUtils.getRandomInt(100) <= DISCOUNT_CHANCE) {
             return BuyUtils.buyItem(actor, this, DISCOUNTED_COST);
         } else {
             return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);

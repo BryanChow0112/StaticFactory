@@ -39,7 +39,7 @@ public class JarOfPickles extends Item implements Consumable {
     @Override
     public String handleConsume(Actor actor) {
 
-        if (RandomUtils.getRandomDouble() <= 0.5) {
+        if (RandomUtils.getRandomInt(100) <= 50) {
             // if less than 50% chance, it decreases player hp by 1
             actor.heal(HIT_POINTS * -1);
             actor.removeItemFromInventory(this);
