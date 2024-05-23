@@ -21,7 +21,6 @@ public class Terminal extends Ground {
     private final ArrayList<Buyable> buyables;
     private final ArrayList<Action> travelAction;
 
-
     /**
      * Constructs a new Terminal object with a list of buyable items.
      *

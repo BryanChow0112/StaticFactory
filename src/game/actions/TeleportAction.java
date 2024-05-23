@@ -1,31 +1,27 @@
 package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.Player;
-import game.types.Consumable;
+import edu.monash.fit2099.engine.positions.Location;
 
 public class TeleportAction extends Action {
-
-    private final Consumable teleporter;
-
     private final String direction;
+    private final Location destination;
 
-    public TeleportAction(Consumable teleporter, String direction) {
-        this.teleporter = teleporter;
+    public TeleportAction(String direction, Location destination) {
         this.direction = direction;
+        this.destination = destination;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return this.teleporter.handleConsume(actor);
+        map.moveActor(actor, destination);
+        return menuDescription(actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " moves " + this.direction;
+        return actor + " teleports " + direction;
     }
 }

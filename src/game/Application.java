@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actions.TeleportAction;
 import game.actors.*;
 import game.displays.FancyMessage;
 import game.grounds.*;
@@ -33,7 +34,7 @@ import game.types.Buyable;
  * @author Lachlan MacPhee
  */
 public class Application {
-
+    // add
     public static void main(String[] args) {
 
         World world = new World(new Display());
@@ -110,11 +111,20 @@ public class Application {
         buyables.add(new ToiletPaperRoll());
 
         ArrayList<Action> travelAction = new ArrayList<>();
-        travelAction.add(new MoveActorAction(moon.at(4,3),"to the moon!"));
-        travelAction.add( new MoveActorAction(carPark.at(4,3),"to the car park!"));
 
-        Terminal terminal = new Terminal(buyables,travelAction);
-        gameMap.at(16, 6).setGround(terminal);
+        travelAction.add(new TeleportAction("to the moon!",moon.at(4,4)));
+        travelAction.add(new TeleportAction("to the car park!",carPark.at(3,3)));
+        travelAction.add(new TeleportAction("to polynomia",gameMap.at(15,5)));
+
+        // placing terminals at different gameMaps
+        Terminal terminalOne = new Terminal(buyables,travelAction);
+        gameMap.at(15, 5).setGround(terminalOne);
+
+        Terminal terminalTwo = new Terminal(buyables,travelAction);
+        carPark.at(4, 2).setGround(terminalTwo);
+
+        Terminal terminalThree = new Terminal(buyables,travelAction);
+        moon.at(15, 5).setGround(terminalThree);
 
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
@@ -132,10 +142,6 @@ public class Application {
         // Add metal pipe
         Item metalPipe = new MetalPipe();
         gameMap.at(10, 7).addItem(metalPipe);
-
-        // Add pot of gold
-        Item potOfGoldOne = new PotOfGold();
-        gameMap.at(15, 5).addItem(potOfGoldOne);
 
         // Add jar of pickles
         Item jarOfPicklesTwo = new JarOfPickles();
