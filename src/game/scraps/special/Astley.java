@@ -18,13 +18,6 @@ public class Astley extends Item implements Buyable, Monologuer {
 
     private static final List<String> monologueOptions = new ArrayList<>();
 
-    // Initialise the monologue options list
-    static {
-        monologueOptions.add("The factory will never gonna give you up, valuable intern!");
-        monologueOptions.add("We promise we never gonna let you down with a range of staff benefits.");
-        monologueOptions.add("We never gonna run around and desert you, dear intern!");
-    }
-
     /**
      * Constructs a new Astley object.
      */
@@ -41,6 +34,26 @@ public class Astley extends Item implements Buyable, Monologuer {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
+        this.generateMonologue(actor);
+    }
+
+    @Override
+    public String buy(Actor actor) {
+        return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
+    }
+
+    @Override
+    public int getCost() {
+        return WORTH_IN_CREDITS;
+    }
+
+    @Override
+    public String generateMonologue(Actor actor) {
+
+        // available from the start
+        monologueOptions.add("The factory will never gonna give you up, valuable intern!");
+        monologueOptions.add("We promise we never gonna let you down with a range of staff benefits.");
+        monologueOptions.add("We never gonna run around and desert you, dear intern!");
 
         // if the intern has more than 10 items in their inventory
         if (actor.getItemInventory().size() > 10) {
@@ -55,20 +68,7 @@ public class Astley extends Item implements Buyable, Monologuer {
             monologueOptions.add("Don't worry, we never gonna tell a lie and hurt you, unlike those hostile creatures.");
         }
 
-    }
-
-    @Override
-    public String buy(Actor actor) {
-        return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
-    }
-
-    @Override
-    public int getCost() {
-        return WORTH_IN_CREDITS;
-    }
-
-    @Override
-    public String generateMonologue() {
+        // Randomly select monologue from monologueOptions
         return monologueOptions.get(RandomUtils.getRandomInt(monologueOptions.size()));
     }
 

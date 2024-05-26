@@ -1,5 +1,7 @@
 package game.types;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 public interface Monologuer {
-    String generateMonologue();
+    String generateMonologue(Actor actor);
 }

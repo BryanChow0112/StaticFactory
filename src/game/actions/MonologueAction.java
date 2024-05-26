@@ -20,7 +20,7 @@ public class MonologueAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return monologuer + ": " + monologuer.generateMonologue();
+        return monologuer + ": " + monologuer.generateMonologue(actor);
     }
 
     @Override
