@@ -1,9 +1,11 @@
 package game.scraps.special;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.MonologueAction;
 import game.types.Buyable;
 import game.types.Monologuer;
 import game.utils.BuyUtils;
@@ -17,6 +19,9 @@ public class Astley extends Item implements Buyable, Monologuer {
     private static final int WORTH_IN_CREDITS = 50;
 
     private static final List<String> monologueOptions = new ArrayList<>();
+
+    private int counter = 0;
+    private boolean subscription = true;
 
     /**
      * Constructs a new Astley object.
@@ -34,7 +39,39 @@ public class Astley extends Item implements Buyable, Monologuer {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
+        counter += 1;
+        // need to pay subscription fee every 5 ticks
+        if (counter % 5 == 0) {
+            int balance = actor.getBalance();
+            // Check if actor has sufficient balance to pay
+            if (balance >= 1) {
+                actor.deductBalance(1);
+                subscription = true;
+                System.out.println("Subscription payment received! ヽ(^o^)ノ");
+
+            } else {  // actor unable to pay
+                // Disable subscription
+                subscription = false;
+                System.out.println("Subscription payment not received. (ಠ_ಠ)");
+            }
+        }
+
         this.generateMonologue(actor);
+    }
+
+    /**
+     * List of allowable actions that the item can perform to the current actor
+     *
+     * @param owner the actor that owns the item
+     * @return an unmodifiable list of Actions
+     */
+    @Override
+    public ActionList allowableActions(Actor owner) {
+        ActionList actionList = new ActionList();
+        if (subscription) {
+            actionList.add(new MonologueAction(this));
+        }
+        return actionList;
     }
 
     @Override

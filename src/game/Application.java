@@ -73,12 +73,14 @@ public class Application {
         buyables.add(new EnergyDrink());
         buyables.add(new DragonSlayerSword());
         buyables.add(new ToiletPaperRoll());
+        buyables.add(new Astley());
+
         Terminal terminal = new Terminal(buyables);
         gameMap.at(16, 6).setGround(terminal);
 
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
-        player.addBalance(1000);
+        player.addBalance(51);
         world.addPlayer(player, gameMap.at(15, 6));
 
         // Add large bolt and metal sheet
