@@ -3,12 +3,13 @@ package game.scraps.special;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.types.Buyable;
+import game.types.Monologuer;
 import game.utils.BuyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Astley extends Item implements Buyable {
+public class Astley extends Item implements Buyable, Monologuer {
 
     private static final int WORTH_IN_CREDITS = 50;
 
@@ -29,5 +30,10 @@ public class Astley extends Item implements Buyable {
     @Override
     public int getCost() {
         return WORTH_IN_CREDITS;
+    }
+
+    @Override
+    public String generateMonologue() {
+        return "";
     }
 }
