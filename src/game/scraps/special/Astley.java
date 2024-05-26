@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.MonologueAction;
+import game.types.Ability;
 import game.types.Buyable;
 import game.types.Monologuer;
 import game.utils.BuyUtils;
@@ -42,17 +43,20 @@ public class Astley extends Item implements Buyable, Monologuer {
         counter += 1;
         // need to pay subscription fee every 5 ticks
         if (counter % 5 == 0) {
-            int balance = actor.getBalance();
-            // Check if actor has sufficient balance to pay
-            if (balance >= 1) {
-                actor.deductBalance(1);
-                subscription = true;
-                System.out.println("Subscription payment received! ヽ(^o^)ノ");
+            // Check if actor has the capability to pay subscription fees
+            if (actor.hasCapability(Ability.CAN_PAY_SUBSCRIPTION)) {
+                int balance = actor.getBalance();
+                // Check if actor has sufficient balance to pay
+                if (balance >= 1) {
+                    actor.deductBalance(1);
+                    subscription = true;
+                    System.out.println("Subscription payment received! ヽ(^o^)ノ");
 
-            } else {  // actor unable to pay
-                // Disable subscription
-                subscription = false;
-                System.out.println("Subscription payment not received. (ಠ_ಠ)");
+                } else {  // actor unable to pay
+                    // Disable subscription
+                    subscription = false;
+                    System.out.println("Subscription payment not received. (ಠ_ಠ)");
+                }
             }
         }
 
