@@ -4,14 +4,16 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.World;
 import game.actions.BuyAction;
 import game.types.Buyable;
 import game.types.Status;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A class representing a Terminal ground object in a game.
@@ -19,14 +21,14 @@ import java.util.ArrayList;
  */
 public class Terminal extends Ground {
     private final ArrayList<Buyable> buyables;
-    private final ArrayList<Action> travelAction;
+    private final HashMap<GameMap,Action> travelAction;
 
     /**
      * Constructs a new Terminal object with a list of buyable items.
      *
      * @param buyables The list of buyable items available for purchase.
      */
-    public Terminal(ArrayList<Buyable> buyables, ArrayList<Action> travelAction) {
+    public Terminal(ArrayList<Buyable> buyables, HashMap<GameMap,Action> travelAction) {
         super('=');
         this.buyables = buyables;
         this.travelAction = travelAction;
@@ -49,8 +51,10 @@ public class Terminal extends Ground {
         }
 
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            for (Action travelAction : this.travelAction) {
-                    actionList.add(travelAction);
+            for (HashMap.Entry<GameMap, Action> entry : travelAction.entrySet()) {
+                if (!entry.getKey().contains(actor)) {
+                    actionList.add(entry.getValue());
+                }
             }
         }
         return actionList;

@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class TeleportAction extends Action implements Destination {
+public class TeleportAction extends Action {
     private final String direction;
     private final Location destination;
 
@@ -14,10 +14,6 @@ public class TeleportAction extends Action implements Destination {
         this.destination = destination;
     }
 
-    @Override
-    public Location getDestinaton() {
-        return destination;
-    }
 
     @Override
     public String execute(Actor actor, GameMap map) {

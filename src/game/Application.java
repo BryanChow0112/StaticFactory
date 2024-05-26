@@ -1,8 +1,6 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
@@ -72,8 +70,8 @@ public class Application {
                 ".......",
                 ".......",
                 ".......");
-        GameMap carPark = new GameMap(groundFactory, staticFactory);
-        world.addGameMap(carPark);
+        GameMap staticFactoryOne = new GameMap(groundFactory, staticFactory);
+        world.addGameMap(staticFactoryOne);
 
         List<String> newMoon = Arrays.asList(
                 "..........................~~~~",
@@ -91,8 +89,8 @@ public class Application {
                 "....................~~........",
                 ".............~~...............",
                 "............~~~~..............");
-        GameMap moon = new GameMap(groundFactory, newMoon);
-        world.addGameMap(moon);
+        GameMap newMoonOne = new GameMap(groundFactory, newMoon);
+        world.addGameMap(newMoonOne);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -110,21 +108,21 @@ public class Application {
         buyables.add(new ToiletPaperRoll());
         buyables.add(new THESEUS());
 
-        ArrayList<Action> travelAction = new ArrayList<>();
+        HashMap<GameMap,Action> travelAction = new HashMap<>();
 
-        travelAction.add(new TeleportAction("Connascence",moon.at(15,6)));
-        travelAction.add(new TeleportAction("Static Factory",carPark.at(3,3)));
-        travelAction.add(new TeleportAction("Polymorphia",gameMap.at(15,5)));
+        travelAction.put(newMoonOne,new TeleportAction("Connascence",newMoonOne.at(15,6)));
+        travelAction.put(staticFactoryOne,new TeleportAction("Static Factory",staticFactoryOne.at(3,3)));
+        travelAction.put(gameMap,new TeleportAction("Polymorphia",gameMap.at(15,6)));
 
         // placing terminals at different gameMaps
         Terminal terminalOne = new Terminal(buyables,travelAction);
         gameMap.at(15, 5).setGround(terminalOne);
 
         Terminal terminalTwo = new Terminal(buyables,travelAction);
-        carPark.at(3, 2).setGround(terminalTwo);
+        staticFactoryOne.at(3, 2).setGround(terminalTwo);
 
         Terminal terminalThree = new Terminal(buyables,travelAction);
-        moon.at(15, 5).setGround(terminalThree);
+        newMoonOne.at(15, 5).setGround(terminalThree);
 
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
