@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
@@ -62,7 +61,7 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
-        List<String> spaceshipCarPark = Arrays.asList(
+        List<String> staticFactory = Arrays.asList(
                 ".......",
                 ".#####.",
                 ".#___#.",
@@ -73,7 +72,7 @@ public class Application {
                 ".......",
                 ".......",
                 ".......");
-        GameMap carPark = new GameMap(groundFactory, spaceshipCarPark);
+        GameMap carPark = new GameMap(groundFactory, staticFactory);
         world.addGameMap(carPark);
 
         List<String> newMoon = Arrays.asList(
@@ -111,19 +110,18 @@ public class Application {
         buyables.add(new ToiletPaperRoll());
         buyables.add(new THESEUS());
 
-
         ArrayList<Action> travelAction = new ArrayList<>();
 
-        travelAction.add(new TeleportAction("to the moon!",moon.at(4,4)));
-        travelAction.add(new TeleportAction("to the car park!",carPark.at(3,3)));
-        travelAction.add(new TeleportAction("to polynomia",gameMap.at(15,5)));
+        travelAction.add(new TeleportAction("Connascence",moon.at(15,6)));
+        travelAction.add(new TeleportAction("Static Factory",carPark.at(3,3)));
+        travelAction.add(new TeleportAction("Polymorphia",gameMap.at(15,5)));
 
         // placing terminals at different gameMaps
         Terminal terminalOne = new Terminal(buyables,travelAction);
         gameMap.at(15, 5).setGround(terminalOne);
 
         Terminal terminalTwo = new Terminal(buyables,travelAction);
-        carPark.at(4, 2).setGround(terminalTwo);
+        carPark.at(3, 2).setGround(terminalTwo);
 
         Terminal terminalThree = new Terminal(buyables,travelAction);
         moon.at(15, 5).setGround(terminalThree);

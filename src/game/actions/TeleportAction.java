@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class TeleportAction extends Action {
+public class TeleportAction extends Action implements Destination {
     private final String direction;
     private final Location destination;
 
@@ -15,13 +15,18 @@ public class TeleportAction extends Action {
     }
 
     @Override
+    public Location getDestinaton() {
+        return destination;
+    }
+
+    @Override
     public String execute(Actor actor, GameMap map) {
         map.moveActor(actor, destination);
-        return menuDescription(actor);
+        return actor + " arrives at " + destination.toString() + " in " + direction;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " teleports " + direction;
+        return actor + " travels to " + direction;
     }
 }

@@ -47,9 +47,10 @@ public class Terminal extends Ground {
         for (Buyable buyable : this.buyables) {
             actionList.add(new BuyAction(buyable));
         }
+
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             for (Action travelAction : this.travelAction) {
-                actionList.add(travelAction);
+                    actionList.add(travelAction);
             }
         }
         return actionList;
