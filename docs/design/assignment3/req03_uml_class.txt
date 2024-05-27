@@ -1,0 +1,75 @@
+@startuml
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 80
+skinparam ranksep 120
+skinparam ClassStereotypeFontSize 20
+skinparam padding 5
+skinparam linetype ortho
+
+title CL_Lab34Team1 - Requirement 3
+
+package game {
+  class Application
+}
+
+package engine.items {
+  abstract class Item  <<abstract>>
+}
+
+package engine.actions {
+  abstract class Action  <<abstract>>
+}
+
+package game.types {
+  interface Monologuer <<interface>> #red
+  enum Ability  <<enumeration>> #green
+  interface Buyable <<interface>>
+}
+
+package game.utils {
+  class RandomUtils
+  class BuyUtils
+}
+
+package game.grounds {
+  class Terminal
+}
+
+package game.scraps.special {
+  class Astley #red
+}
+
+package game.actions {
+  class MonologueAction #red
+  class BuyAction
+}
+
+game.Application ..> game.grounds.Terminal
+game.Application ..> game.scraps.special.Astley
+
+game.grounds.Terminal "1" --> "0..1" game.types.Buyable
+
+engine.items.Item <|-[#green]- game.scraps.special.Astley
+game.types.Buyable <|.[#blue]. game.scraps.special.Astley
+game.types.Monologuer <|.[#blue]. game.scraps.special.Astley
+game.scraps.special.Astley .[#deeppink].> game.utils.RandomUtils
+game.scraps.special.Astley .[#deeppink].> game.utils.BuyUtils
+game.scraps.special.Astley .[#blue].> game.actions.MonologueAction
+game.scraps.special.Astley ..> engine.actors.Actor
+game.types.Ability <.. game.scraps.special.Astley
+
+engine.actions.Action <|--- game.actions.MonologueAction
+game.actions.MonologueAction "1" -[#blue]-> "1" game.types.Monologuer
+
+engine.actions.Action <|--- game.actions.BuyAction
+game.actions.BuyAction "1" --> "1" game.types.Buyable
+@enduml
