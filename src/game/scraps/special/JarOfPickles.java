@@ -3,12 +3,17 @@ package game.scraps.special;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
+import game.actions.SellAction;
+import game.types.Ability;
 import game.types.Consumable;
+import game.types.Sellable;
 import game.utils.RandomUtils;
 
-public class JarOfPickles extends Item implements Consumable {
+public class JarOfPickles extends Item implements Consumable, Sellable {
     private static final int HIT_POINTS = 1;
+    private static final int CREDITS_TO_SELL = 25;
 
     /**
      * Constructs a new LargeFruit object.
@@ -27,6 +32,15 @@ public class JarOfPickles extends Item implements Consumable {
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
         actionList.add(new ConsumeAction(this));
+        return actionList;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList = new ActionList();
+        if (otherActor.hasCapability(Ability.PURCHASE_ITEMS)) {
+            actionList.add(new SellAction(otherActor, this));
+        }
         return actionList;
     }
 
@@ -52,4 +66,16 @@ public class JarOfPickles extends Item implements Consumable {
         }
     }
 
+    @Override
+    public String sell(Actor actorSelling, Actor actorToSellTo) {
+        //  If the intern attempts to sell this item, there is a 50% chance
+        //  that the factory will pay double the price,
+        //  paying the intern 50 credits instead.
+        return null;
+    }
+
+    @Override
+    public int getSellCost() {
+        return CREDITS_TO_SELL;
+    }
 }

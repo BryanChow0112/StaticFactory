@@ -5,13 +5,17 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.actions.SellAction;
+import game.types.Ability;
+import game.types.Sellable;
 import game.types.Status;
 
 /**
  * A metal pipe that can be used as a weapon.
  * It deals 1 damage with a 20% hit probability when used to attack hostile creatures.
  */
-public class MetalPipe extends WeaponItem {
+public class MetalPipe extends WeaponItem implements Sellable {
+    private static final int CREDITS_TO_SELL = 35;
 
     /**
      * Constructor for MetalPipe class.
@@ -36,6 +40,19 @@ public class MetalPipe extends WeaponItem {
             // Allow attacking for other actor (Enemy) using MetalPipe as weapon
             actions.add(new AttackAction(otherActor, locationString, this));
         }
+        if (otherActor.hasCapability(Ability.PURCHASE_ITEMS)) {
+            actions.add(new SellAction(otherActor,this));
+        }
         return actions;
+    }
+
+    @Override
+    public String sell(Actor actorSelling, Actor actorToSellTo) {
+        return null;
+    }
+
+    @Override
+    public int getSellCost() {
+        return CREDITS_TO_SELL;
     }
 }

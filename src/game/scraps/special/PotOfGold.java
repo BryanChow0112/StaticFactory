@@ -3,11 +3,16 @@ package game.scraps.special;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
+import game.actions.SellAction;
+import game.types.Ability;
 import game.types.Consumable;
+import game.types.Sellable;
 
-public class PotOfGold extends Item implements Consumable {
-    private static final int CREDIT_POINTS = 10;
+public class PotOfGold extends Item implements Consumable, Sellable {
+    private static final int CREDITS_TO_BUY = 10;
+    private static final int CREDITS_TO_SELL = 500;
 
     /**
      * Constructs a new PotOfGold object.
@@ -29,6 +34,15 @@ public class PotOfGold extends Item implements Consumable {
         return actionList;
     }
 
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList = new ActionList();
+        if (otherActor.hasCapability(Ability.PURCHASE_ITEMS)) {
+            actionList.add(new SellAction(otherActor, this));
+        }
+        return actionList;
+    }
+
     /**
      * Handles the consumption of this item by the actor.
      *
@@ -37,9 +51,21 @@ public class PotOfGold extends Item implements Consumable {
      */
     @Override
     public String handleConsume(Actor actor) {
-        actor.addBalance(CREDIT_POINTS);
+        actor.addBalance(CREDITS_TO_BUY);
         actor.removeItemFromInventory(this);
-        return actor + " has increased credits by " + CREDIT_POINTS + " credits.";
+        return actor + " has increased credits by " + CREDITS_TO_BUY + " credits.";
     }
 
+    @Override
+    public String sell(Actor actorSelling, Actor actorToSellTo) {
+        // If the intern attempts to sell this item, there is a 25% chance
+        // that the factory will take the item directly from the intern
+        // without paying anything.
+        return null;
+    }
+
+    @Override
+    public int getSellCost() {
+        return CREDITS_TO_SELL;
+    }
 }

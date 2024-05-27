@@ -15,7 +15,7 @@ import game.utils.RandomUtils;
  * This item implements the Buyable and Consumable interfaces.
  */
 public class EnergyDrink extends Item implements Buyable, Consumable {
-    private static final int WORTH_IN_CREDITS = 10;
+    private static final int CREDITS_TO_BUY = 10;
     private static final int HIT_POINTS = 1;
     private static final int DOUBLE_COST_CHANCE = 20;
 
@@ -36,10 +36,10 @@ public class EnergyDrink extends Item implements Buyable, Consumable {
     @Override
     public String buy(Actor actor) {
         if (RandomUtils.getRandomInt(100) <= DOUBLE_COST_CHANCE) {
-            int doubleCost = WORTH_IN_CREDITS * 2;
+            int doubleCost = CREDITS_TO_BUY * 2;
             return BuyUtils.buyItem(actor, this, doubleCost);
         } else {
-            return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
+            return BuyUtils.buyItem(actor, this, CREDITS_TO_BUY);
         }
     }
 
@@ -62,8 +62,8 @@ public class EnergyDrink extends Item implements Buyable, Consumable {
      * @return The cost of this energy drink in credits.
      */
     @Override
-    public int getCost() {
-        return WORTH_IN_CREDITS;
+    public int getBuyCost() {
+        return CREDITS_TO_BUY;
     }
 
     /**
