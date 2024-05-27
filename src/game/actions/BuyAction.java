@@ -9,7 +9,7 @@ import game.types.Buyable;
  * An Action that allows an Actor to buy a Buyable item.
  */
 public class BuyAction extends Action {
-    private Buyable buyable;
+    private final Buyable buyable;
 
     /**
      * Constructs a new BuyAction instance.
@@ -40,6 +40,6 @@ public class BuyAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + buyable + " for " + buyable.getCost() + " credits.";
+        return actor + " buys " + buyable + " for " + buyable.getBuyCost() + " credits.";
     }
 }
