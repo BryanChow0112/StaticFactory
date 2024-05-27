@@ -80,8 +80,12 @@ public class Application {
 
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
-        player.addBalance(51);
-        world.addPlayer(player, gameMap.at(15, 6));
+        player.addBalance(1000);
+        player.addItemToInventory(new MetalSheet());
+        player.addItemToInventory(new MetalPipe());
+        player.addItemToInventory(new LargeFruit());
+        player.addItemToInventory(new PotOfGold());
+        world.addPlayer(player, gameMap.at(6, 9));
 
         // Add large bolt and metal sheet
         Item largeBolt = new LargeBolt();
@@ -122,6 +126,9 @@ public class Application {
         // Create craters spawning SuspiciousAstronauts
         Crater craterFour = new Crater(new SuspiciousAstronautSpawner());
         gameMap.at(26, 13).setGround(craterFour);
+
+        Humanoid humanoid = new Humanoid();
+        gameMap.at(5,9).addActor(humanoid);
 
         world.run();
     }
