@@ -14,6 +14,7 @@ import game.utils.RandomUtils;
 public class JarOfPickles extends Item implements Consumable, Sellable {
     private static final int HIT_POINTS = 1;
     private static final int CREDITS_TO_SELL = 25;
+    private static final int MARKED_UP_CREDITS_TO_SELL = 50;
 
     /**
      * Constructs a new LargeFruit object.
@@ -71,7 +72,14 @@ public class JarOfPickles extends Item implements Consumable, Sellable {
         //  If the intern attempts to sell this item, there is a 50% chance
         //  that the factory will pay double the price,
         //  paying the intern 50 credits instead.
-        return null;
+        int finalCost = CREDITS_TO_SELL;
+        if (RandomUtils.getRandomInt(100) <= 50) {
+            finalCost = MARKED_UP_CREDITS_TO_SELL;
+        }
+        actorSelling.removeItemFromInventory(this);
+        actorToSellTo.addItemToInventory(this);
+        actorSelling.addBalance(finalCost);
+        return this + " was sold to " + actorToSellTo + " for " + finalCost + " credits.";
     }
 
     @Override

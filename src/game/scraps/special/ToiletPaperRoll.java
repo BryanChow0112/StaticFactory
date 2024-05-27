@@ -2,6 +2,7 @@ package game.scraps.special;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.SellAction;
@@ -60,12 +61,19 @@ public class ToiletPaperRoll extends Item implements Buyable, Sellable {
         // If the intern attempts to sell the toilet paper roll,
         // there is a 50% chance that the intern will be killed
         // instantly by the humanoid figure.
-        return null;
+        if (RandomUtils.getRandomInt(100) <= 50) {
+            actorSelling.hurt(actorSelling.getAttribute(BaseActorAttributes.HEALTH));
+            return "While " + this + " was being sold " + actorToSellTo + " decided to kill " + actorSelling;
+        }
+        actorSelling.removeItemFromInventory(this);
+        actorToSellTo.addItemToInventory(this);
+        actorSelling.addBalance(CREDITS_TO_SELL);
+        return this + " was sold to " + actorToSellTo + " for " + CREDITS_TO_SELL + " credits.";
     }
 
     @Override
     public int getSellCost() {
-        return 0;
+        return CREDITS_TO_SELL;
     }
 
     @Override

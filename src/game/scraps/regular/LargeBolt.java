@@ -24,7 +24,11 @@ public class LargeBolt extends Item implements Sellable {
 
     @Override
     public String sell(Actor actorSelling, Actor actorToSellTo) {
-        return null;
+        // Large bolts can be sold for 25 credits each.
+        actorSelling.removeItemFromInventory(this);
+        actorToSellTo.addItemToInventory(this);
+        actorSelling.addBalance(CREDITS_TO_SELL);
+        return this + " was sold to " + actorToSellTo + " for " + CREDITS_TO_SELL + " credits.";
     }
 
     @Override

@@ -81,10 +81,8 @@ public class Application {
         // Add player with balance
         Player player = new Player("Intern", '@', 4);
         player.addBalance(1000);
-        player.addItemToInventory(new MetalSheet());
-        player.addItemToInventory(new MetalPipe());
-        player.addItemToInventory(new LargeFruit());
         player.addItemToInventory(new PotOfGold());
+        player.addItemToInventory(new ToiletPaperRoll());
         world.addPlayer(player, gameMap.at(6, 9));
 
         // Add large bolt and metal sheet

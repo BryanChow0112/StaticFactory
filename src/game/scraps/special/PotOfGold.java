@@ -9,6 +9,7 @@ import game.actions.SellAction;
 import game.types.Ability;
 import game.types.Consumable;
 import game.types.Sellable;
+import game.utils.RandomUtils;
 
 public class PotOfGold extends Item implements Consumable, Sellable {
     private static final int CREDITS_TO_BUY = 10;
@@ -61,7 +62,13 @@ public class PotOfGold extends Item implements Consumable, Sellable {
         // If the intern attempts to sell this item, there is a 25% chance
         // that the factory will take the item directly from the intern
         // without paying anything.
-        return null;
+        int finalCost = CREDITS_TO_SELL;
+        actorSelling.removeItemFromInventory(this);
+        actorToSellTo.addItemToInventory(this);
+        if (RandomUtils.getRandomInt(100) <= 75) {
+            actorSelling.addBalance(finalCost);
+        }
+        return this + " was sold to " + actorToSellTo + " for " + finalCost + " credits.";
     }
 
     @Override

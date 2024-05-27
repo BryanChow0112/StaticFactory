@@ -53,7 +53,10 @@ public class LargeFruit extends Item implements Consumable, Sellable {
 
     @Override
     public String sell(Actor actorSelling, Actor actorToSellTo) {
-        return null;
+        actorSelling.removeItemFromInventory(this);
+        actorToSellTo.addItemToInventory(this);
+        actorSelling.addBalance(CREDITS_TO_SELL);
+        return this + " was sold to " + actorToSellTo + " for " + CREDITS_TO_SELL + " credits.";
     }
 
     @Override
