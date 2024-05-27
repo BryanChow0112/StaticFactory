@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Astley extends Item implements Buyable, Monologuer {
 
-    private static final int WORTH_IN_CREDITS = 50;
+    private static final int CREDITS_TO_BUY = 50;
 
     // Counter to keep track of ticks for subscription fee payments
     private int counter = 0;
@@ -87,7 +87,7 @@ public class Astley extends Item implements Buyable, Monologuer {
      */
     @Override
     public String buy(Actor actor) {
-        return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
+        return BuyUtils.buyItem(actor, this, CREDITS_TO_BUY);
     }
 
     /**
@@ -96,8 +96,8 @@ public class Astley extends Item implements Buyable, Monologuer {
      * @return The cost of this Astley AI device in credits.
      */
     @Override
-    public int getCost() {
-        return WORTH_IN_CREDITS;
+    public int getBuyCost() {
+        return CREDITS_TO_BUY;
     }
 
     /**
