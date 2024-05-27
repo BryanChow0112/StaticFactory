@@ -18,9 +18,6 @@ import java.util.List;
 public class Astley extends Item implements Buyable, Monologuer {
 
     private static final int WORTH_IN_CREDITS = 50;
-
-    private static final List<String> monologueOptions = new ArrayList<>();
-
     private int counter = 0;
     private boolean subscription = true;
 
@@ -90,6 +87,9 @@ public class Astley extends Item implements Buyable, Monologuer {
 
     @Override
     public String generateMonologue(Actor actor) {
+
+        // Initialise list of monologue options
+        List<String> monologueOptions = new ArrayList<>();
 
         // available from the start
         monologueOptions.add("The factory will never gonna give you up, valuable intern!");
