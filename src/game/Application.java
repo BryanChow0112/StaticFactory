@@ -108,8 +108,8 @@ public class Application {
         buyables.add(new ToiletPaperRoll());
         buyables.add(new THESEUS());
 
+        // added travel actions to a hashmap
         HashMap<GameMap,Action> travelAction = new HashMap<>();
-
         travelAction.put(newMoonOne,new TeleportAction("Connascence",newMoonOne.at(15,6)));
         travelAction.put(staticFactoryOne,new TeleportAction("Static Factory",staticFactoryOne.at(3,3)));
         travelAction.put(gameMap,new TeleportAction("Polymorphia",gameMap.at(15,6)));
