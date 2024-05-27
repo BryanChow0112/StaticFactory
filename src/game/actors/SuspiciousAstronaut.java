@@ -1,7 +1,5 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 
@@ -15,6 +13,9 @@ public class SuspiciousAstronaut extends Enemy {
      */
     public static final int ATTACK_PRIORITY = 0;
 
+    /**
+     * A constant that represents the attack damage of the SuspiciousAstronaut.
+     */
     public static final int ATTACK_DAMAGE = Integer.MAX_VALUE;
 
     /**

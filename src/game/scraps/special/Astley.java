@@ -18,7 +18,11 @@ import java.util.List;
 public class Astley extends Item implements Buyable, Monologuer {
 
     private static final int WORTH_IN_CREDITS = 50;
+
+    // Counter to keep track of ticks for subscription fee payments
     private int counter = 0;
+
+    // Flag to indicate if the subscription is active
     private boolean subscription = true;
 
     /**
@@ -75,16 +79,33 @@ public class Astley extends Item implements Buyable, Monologuer {
         return actionList;
     }
 
+    /**
+     * Attempts to buy this Astley AI device for the given actor.
+     *
+     * @param actor The actor attempting to buy the Astley AI device.
+     * @return A message indicating the result of the purchase attempt.
+     */
     @Override
     public String buy(Actor actor) {
         return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
     }
 
+    /**
+     * Returns the cost of this Astley AI device in credits.
+     *
+     * @return The cost of this Astley AI device in credits.
+     */
     @Override
     public int getCost() {
         return WORTH_IN_CREDITS;
     }
 
+    /**
+     * Generates a monologue based on the given actor's state.
+     *
+     * @param actor The actor listening to the monologue.
+     * @return A string representing the generated monologue.
+     */
     @Override
     public String generateMonologue(Actor actor) {
 

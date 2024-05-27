@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.types.Buyable;
 
 /**
- * An action that allows an actor to buy a buyable item.
+ * An Action that allows an Actor to buy a Buyable item.
  */
 public class BuyAction extends Action {
     private Buyable buyable;

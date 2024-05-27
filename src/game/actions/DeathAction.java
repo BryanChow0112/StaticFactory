@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+/**
+ * An Action that is executed when an Actor is killed.
+ */
 public class DeathAction extends Action {
 
     /**

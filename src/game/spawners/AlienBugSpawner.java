@@ -12,7 +12,7 @@ public class AlienBugSpawner implements Spawner {
     private static final int SPAWN_RATE = 10;
 
     /**
-     * Spawns a Alien Bug at the specified location with a 10% chance if the location has no actor on it.
+     * Spawns an Alien Bug at the specified location with a 10% chance if the location has no actor on it.
      *
      * @param location the location where the Alien Bug is spawned
      */
