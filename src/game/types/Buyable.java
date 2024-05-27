@@ -20,5 +20,5 @@ public interface Buyable {
      *
      * @return The cost of this object in credits.
      */
-    int getCost();
+    int getBuyCost();
 }
