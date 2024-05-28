@@ -61,7 +61,6 @@ public class Astley extends Item implements Buyable, Monologuer {
             }
         }
 
-        this.generateMonologue(actor);
     }
 
     /**
