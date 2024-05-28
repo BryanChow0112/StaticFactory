@@ -15,6 +15,10 @@ import game.utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the Astley AI device, which can be purchased by the Intern.
+ * The Intern can also listen to its monologue.
+ */
 public class Astley extends Item implements Buyable, Monologuer {
 
     private static final int CREDITS_TO_BUY = 50;
