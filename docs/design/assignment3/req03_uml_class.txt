@@ -29,6 +29,10 @@ package engine.actions {
   abstract class Action  <<abstract>>
 }
 
+package engine.actors {
+  abstract class Actor <<abstract>>
+}
+
 package game.types {
   interface Monologuer <<interface>> #red
   enum Ability  <<enumeration>> #green
