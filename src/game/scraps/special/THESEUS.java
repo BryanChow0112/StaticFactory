@@ -51,7 +51,7 @@ public class THESEUS extends Item implements Buyable {
      * @return The cost of this item in credits.
      */
     @Override
-    public int getCost() {
+    public int getBuyCost() {
         return WORTH_IN_CREDITS;
     }
 }
