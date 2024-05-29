@@ -109,20 +109,29 @@ public class Application {
         buyables.add(new Astley());
         buyables.add(new THESEUS());
 
-        // added travel actions to a hashmap
-        HashMap<GameMap,Action> travelAction = new HashMap<>();
-        travelAction.put(newMoonOne,new TeleportAction("Connascence",newMoonOne.at(15,6)));
-        travelAction.put(staticFactoryOne,new TeleportAction("Static Factory",staticFactoryOne.at(3,3)));
-        travelAction.put(gameMap,new TeleportAction("Polymorphia",gameMap.at(15,6)));
+        // added travel actions to a different terminal in Polymorphia
+        ArrayList<Action> travelActionPolymorphia = new ArrayList<>();
+        travelActionPolymorphia.add(new TeleportAction("Refactorio",newMoonOne.at(15,6)));
+        travelActionPolymorphia.add(new TeleportAction("Static Factory",staticFactoryOne.at(3,3)));
 
         // placing terminals at different gameMaps
-        Terminal terminalOne = new Terminal(buyables,travelAction);
+        Terminal terminalOne = new Terminal(buyables,travelActionPolymorphia);
         gameMap.at(15, 5).setGround(terminalOne);
 
-        Terminal terminalTwo = new Terminal(buyables,travelAction);
+        // added travel actions to a different terminal in Static Factory
+        ArrayList<Action> travelActionStaticFactory = new ArrayList<>();
+        travelActionStaticFactory.add(new TeleportAction("Refactorio",newMoonOne.at(15,6)));
+        travelActionStaticFactory.add(new TeleportAction("Polymorphia",gameMap.at(15,6)));
+
+        Terminal terminalTwo = new Terminal(buyables,travelActionStaticFactory);
         staticFactoryOne.at(3, 2).setGround(terminalTwo);
 
-        Terminal terminalThree = new Terminal(buyables,travelAction);
+        // added travel actions to a different terminal in Refactorio
+        ArrayList<Action> travelActionNewMoonOne = new ArrayList<>();
+        travelActionNewMoonOne.add(new TeleportAction("Static Factory",staticFactoryOne.at(3,3)));
+        travelActionNewMoonOne.add(new TeleportAction("Polymorphia",gameMap.at(15,6)));
+
+        Terminal terminalThree = new Terminal(buyables,travelActionNewMoonOne);
         newMoonOne.at(15, 5).setGround(terminalThree);
 
         // Add player with balance

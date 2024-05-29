@@ -29,8 +29,12 @@ public class TeleportAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        map.moveActor(actor, destination);
-        return actor + " arrives at " + destination.toString() + " in " + direction;
+        if (destination.containsAnActor()) {
+            return "Teleport fails";
+        } else {
+            map.moveActor(actor, destination);
+            return actor + " arrives at " + destination + " in " + direction;
+        }
     }
 
     /**

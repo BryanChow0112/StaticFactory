@@ -2,18 +2,13 @@ package game.grounds;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.positions.World;
 import game.actions.BuyAction;
 import game.types.Buyable;
 import game.types.Status;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * A class representing a Terminal ground object in a game.
@@ -21,14 +16,15 @@ import java.util.HashMap;
  */
 public class Terminal extends Ground {
     private final ArrayList<Buyable> buyables;
-    private final HashMap<GameMap,Action> travelAction;
+    private final ArrayList<Action> travelAction;
 
     /**
      * Constructs a new Terminal object with a list of buyable items.
      *
      * @param buyables The list of buyable items available for purchase.
+     * @param travelAction The list of travelActions available to travel to.
      */
-    public Terminal(ArrayList<Buyable> buyables, HashMap<GameMap,Action> travelAction) {
+    public Terminal(ArrayList<Buyable> buyables, ArrayList<Action> travelAction) {
         super('=');
         this.buyables = buyables;
         this.travelAction = travelAction;
@@ -49,12 +45,9 @@ public class Terminal extends Ground {
         for (Buyable buyable : this.buyables) {
             actionList.add(new BuyAction(buyable));
         }
-
-        if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            for (HashMap.Entry<GameMap, Action> entry : travelAction.entrySet()) {
-                if (!entry.getKey().contains(actor)) {
-                    actionList.add(entry.getValue());
-                }
+        if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) && !location.containsAnActor()) {
+            for (Action travelAction : this.travelAction) {
+                actionList.add(travelAction);
             }
         }
         return actionList;
