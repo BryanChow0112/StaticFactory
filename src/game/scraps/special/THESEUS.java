@@ -54,5 +54,4 @@ public class THESEUS extends Item implements Buyable {
     public int getCost() {
         return WORTH_IN_CREDITS;
     }
-
 }
