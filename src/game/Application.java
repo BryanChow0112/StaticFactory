@@ -1,14 +1,14 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actions.TeleportAction;
 import game.actors.*;
 import game.displays.FancyMessage;
 import game.grounds.*;
@@ -30,7 +30,7 @@ import game.types.Buyable;
  * @author Lachlan MacPhee
  */
 public class Application {
-
+    // add
     public static void main(String[] args) {
 
         World world = new World(new Display());
@@ -59,6 +59,39 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
+        List<String> staticFactory = Arrays.asList(
+                ".......",
+                ".#####.",
+                ".#___#.",
+                ".#___#.",
+                ".##_##.",
+                ".......",
+                ".......",
+                ".......",
+                ".......",
+                ".......");
+        GameMap staticFactoryOne = new GameMap(groundFactory, staticFactory);
+        world.addGameMap(staticFactoryOne);
+
+        List<String> newMoon = Arrays.asList(
+                "..........................~~~~",
+                "..........................~~~~",
+                "..........................~~~~",
+                "~..........................~..",
+                "~~...........#####............",
+                "~~~..........#___#............",
+                "~~~..........#___#............",
+                "~~~..........##_##............",
+                "~~~..................~~.......",
+                "~~~~................~~~~......",
+                "~~~~...............~~~~~......",
+                "..~................~~~~.......",
+                "....................~~........",
+                ".............~~...............",
+                "............~~~~..............");
+        GameMap newMoonOne = new GameMap(groundFactory, newMoon);
+        world.addGameMap(newMoonOne);
+
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
@@ -74,9 +107,23 @@ public class Application {
         buyables.add(new DragonSlayerSword());
         buyables.add(new ToiletPaperRoll());
         buyables.add(new Astley());
+        buyables.add(new THESEUS());
 
-        Terminal terminal = new Terminal(buyables);
-        gameMap.at(16, 6).setGround(terminal);
+        // added travel actions to a hashmap
+        HashMap<GameMap,Action> travelAction = new HashMap<>();
+        travelAction.put(newMoonOne,new TeleportAction("Connascence",newMoonOne.at(15,6)));
+        travelAction.put(staticFactoryOne,new TeleportAction("Static Factory",staticFactoryOne.at(3,3)));
+        travelAction.put(gameMap,new TeleportAction("Polymorphia",gameMap.at(15,6)));
+
+        // placing terminals at different gameMaps
+        Terminal terminalOne = new Terminal(buyables,travelAction);
+        gameMap.at(15, 5).setGround(terminalOne);
+
+        Terminal terminalTwo = new Terminal(buyables,travelAction);
+        staticFactoryOne.at(3, 2).setGround(terminalTwo);
+
+        Terminal terminalThree = new Terminal(buyables,travelAction);
+        newMoonOne.at(15, 5).setGround(terminalThree);
 
         // Add player with balance
         Player player = new Player("Intern", '@', 42
@@ -96,10 +143,6 @@ public class Application {
         // Add metal pipe
         Item metalPipe = new MetalPipe();
         gameMap.at(10, 7).addItem(metalPipe);
-
-        // Add pot of gold
-        Item potOfGoldOne = new PotOfGold();
-        gameMap.at(15, 5).addItem(potOfGoldOne);
 
         // Add jar of pickles
         Item jarOfPicklesTwo = new JarOfPickles();
