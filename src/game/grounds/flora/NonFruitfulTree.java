@@ -1,30 +1,23 @@
 package game.grounds.flora;
 
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.utils.RandomUtils;
 
 /**
- * An abstract class representing a plant in the game environment.
- * Plants have the ability to grow and produce fruits.
+ * Represents abstract class that is for stages of the tree that cannot produce fruit
  */
-public abstract class PlantBase extends Ground {
-
-    /**
-
+public abstract class NonFruitfulTree extends PlantBase {
     /**
      * Constructs a new PlantBase object with the specified display character.
      *
      * @param displayChar character to display for this type of terrain
      */
-    public PlantBase(char displayChar) {
+
+    public NonFruitfulTree(char displayChar) {
         super(displayChar);
     }
 
     /**
-     * experience time
+     * Method for the tree to experience time
      * @param location The location of the Ground
      */
     @Override
@@ -32,6 +25,4 @@ public abstract class PlantBase extends Ground {
         super.tick(location);
 
     }
-
-
 }

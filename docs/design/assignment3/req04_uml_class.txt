@@ -1,0 +1,87 @@
+@startuml
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
+title Group 1 - A3 Requirement 4
+
+package engine.positions {
+  class Location
+  class Exit
+  class Ground <<abstract>>
+}
+
+package engine.items {
+  abstract class Item
+}
+
+game.scraps.special.LargeFruit -up-|> engine.items.Item
+game.scraps.special.SmallFruit -up-|> engine.items.Item
+package game.scraps.special {
+  class LargeFruit
+  class SmallFruit
+}
+
+
+
+
+package game.grounds.flora {
+  abstract class PlantBase <<abstract>>
+  abstract class FruitfulTree <<abstract>> #green
+  abstract class NonFruitfulTree <<abstract>> #green
+  class Growable <<interface>> #green
+
+}
+game.grounds.flora.PlantBase -up-|> engine.positions.Ground
+game.grounds.flora.Sprout ...|> game.types.Growable
+game.grounds.flora.Sapling ...|> game.types.Growable
+game.grounds.flora.YoungInheritree...|> game.types.Growable
+game.grounds.flora.PlantBase <|-- game.grounds.flora.NonFruitfulTree
+game.grounds.flora.PlantBase <|-- game.grounds.flora.FruitfulTree
+game.grounds.flora.NonFruitfulTree <|- game.grounds.flora.Sprout
+game.grounds.flora.NonFruitfulTree <|-- game.grounds.flora.YoungInheritree
+game.grounds.flora.FruitfulTree <|-- game.grounds.flora.Sapling
+game.grounds.flora.FruitfulTree <|-- game.grounds.flora.MatureTree
+game.grounds.flora.PlantBase .> engine.positions.Location
+
+
+
+game.grounds.flora.Sapling .[#green].> game.scraps.special.SmallFruit
+
+game.grounds.flora.MatureTree .[#green].> game.scraps.special.LargeFruit
+
+
+
+package game.grounds.flora {
+  class Sapling #green
+  class MatureTree #green
+  class Sprout #green
+  class YoungInheritree #green
+
+
+}
+
+game.Application ..> game.grounds.flora.Sprout
+package game {
+  class Application
+}
+
+game.grounds.flora.FruitfulTree....> game.utils.RandomUtils
+game.utils.RandomUtils ....> engine.positions.Location
+game.utils.RandomUtils ....> engine.positions.Exit
+package game.utils {
+  class RandomUtils
+}
+@enduml
