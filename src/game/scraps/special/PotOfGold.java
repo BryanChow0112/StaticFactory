@@ -3,6 +3,7 @@ package game.scraps.special;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actions.SellAction;
@@ -10,6 +11,7 @@ import game.types.Ability;
 import game.types.Consumable;
 import game.types.Sellable;
 import game.utils.RandomUtils;
+import game.utils.SellUtils;
 
 public class PotOfGold extends Item implements Consumable, Sellable {
     private static final int CREDITS_TO_BUY = 10;
@@ -58,17 +60,14 @@ public class PotOfGold extends Item implements Consumable, Sellable {
     }
 
     @Override
-    public String sell(Actor actorSelling, Actor actorToSellTo) {
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
         // If the intern attempts to sell this item, there is a 25% chance
         // that the factory will take the item directly from the intern
         // without paying anything.
-        int finalCost = CREDITS_TO_SELL;
-        actorSelling.removeItemFromInventory(this);
-        actorToSellTo.addItemToInventory(this);
-        if (RandomUtils.getRandomInt(100) <= 75) {
-            actorSelling.addBalance(finalCost);
+        if (RandomUtils.getRandomInt(100) <= 25) {
+            return SellUtils.sellItem(actorSelling, actorToSellTo, this, 0);
         }
-        return this + " was sold to " + actorToSellTo + " for " + finalCost + " credits.";
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
     }
 
     @Override

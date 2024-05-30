@@ -31,7 +31,7 @@ public class SellAction extends Action {
      */
     @Override
     public String execute(Actor actorSelling, GameMap map) {
-        return sellable.sell(actorSelling, actorToSellTo);
+        return sellable.sell(actorSelling, actorToSellTo, map);
     }
 
     /**

@@ -4,13 +4,16 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.DeathAction;
 import game.actions.SellAction;
 import game.types.Ability;
 import game.types.Buyable;
 import game.types.Sellable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
+import game.utils.SellUtils;
 
 /**
  * A toilet paper roll item that can be purchased by an actor.
@@ -57,18 +60,16 @@ public class ToiletPaperRoll extends Item implements Buyable, Sellable {
     }
 
     @Override
-    public String sell(Actor actorSelling, Actor actorToSellTo) {
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
         // If the intern attempts to sell the toilet paper roll,
         // there is a 50% chance that the intern will be killed
         // instantly by the humanoid figure.
         if (RandomUtils.getRandomInt(100) <= 50) {
-            actorSelling.hurt(actorSelling.getAttribute(BaseActorAttributes.HEALTH));
+            DeathAction action = new DeathAction(actorToSellTo);
+            action.execute(actorSelling, map);
             return "While " + this + " was being sold " + actorToSellTo + " decided to kill " + actorSelling;
         }
-        actorSelling.removeItemFromInventory(this);
-        actorToSellTo.addItemToInventory(this);
-        actorSelling.addBalance(CREDITS_TO_SELL);
-        return this + " was sold to " + actorToSellTo + " for " + CREDITS_TO_SELL + " credits.";
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
     }
 
     @Override

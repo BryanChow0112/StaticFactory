@@ -3,10 +3,12 @@ package game.scraps.regular;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.SellAction;
 import game.types.Ability;
 import game.types.Sellable;
+import game.utils.SellUtils;
 
 /**
  * A concrete implementation of the Item class representing a large bolt item.
@@ -23,12 +25,8 @@ public class LargeBolt extends Item implements Sellable {
     }
 
     @Override
-    public String sell(Actor actorSelling, Actor actorToSellTo) {
-        // Large bolts can be sold for 25 credits each.
-        actorSelling.removeItemFromInventory(this);
-        actorToSellTo.addItemToInventory(this);
-        actorSelling.addBalance(CREDITS_TO_SELL);
-        return this + " was sold to " + actorToSellTo + " for " + CREDITS_TO_SELL + " credits.";
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
     }
 
     @Override

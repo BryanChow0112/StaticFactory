@@ -3,6 +3,7 @@ package game.scraps.special;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actions.SellAction;
@@ -10,6 +11,7 @@ import game.types.Ability;
 import game.types.Consumable;
 import game.types.Sellable;
 import game.utils.RandomUtils;
+import game.utils.SellUtils;
 
 public class JarOfPickles extends Item implements Consumable, Sellable {
     private static final int HIT_POINTS = 1;
@@ -68,18 +70,14 @@ public class JarOfPickles extends Item implements Consumable, Sellable {
     }
 
     @Override
-    public String sell(Actor actorSelling, Actor actorToSellTo) {
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
         //  If the intern attempts to sell this item, there is a 50% chance
         //  that the factory will pay double the price,
         //  paying the intern 50 credits instead.
-        int finalCost = CREDITS_TO_SELL;
         if (RandomUtils.getRandomInt(100) <= 50) {
-            finalCost = MARKED_UP_CREDITS_TO_SELL;
+            return SellUtils.sellItem(actorSelling, actorToSellTo, this, MARKED_UP_CREDITS_TO_SELL);
         }
-        actorSelling.removeItemFromInventory(this);
-        actorToSellTo.addItemToInventory(this);
-        actorSelling.addBalance(finalCost);
-        return this + " was sold to " + actorToSellTo + " for " + finalCost + " credits.";
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
     }
 
     @Override

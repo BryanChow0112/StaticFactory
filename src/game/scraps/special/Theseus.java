@@ -8,13 +8,13 @@ import game.types.Buyable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
 
-public class THESEUS extends Item implements Buyable {
+public class Theseus extends Item implements Buyable {
     private static final int WORTH_IN_CREDITS = 100;
 
     /**
      * Constructs a new THESEUS instance.
      */
-    public THESEUS() {
+    public Theseus() {
         super("THESEUS", '^', true);
     }
 

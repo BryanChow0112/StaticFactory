@@ -3,12 +3,14 @@ package game.scraps.special;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actions.SellAction;
 import game.types.Ability;
 import game.types.Consumable;
 import game.types.Sellable;
+import game.utils.SellUtils;
 
 /**
  * Represents a Large Fruit item that can be consumed to heal the actor.
@@ -52,11 +54,8 @@ public class LargeFruit extends Item implements Consumable, Sellable {
     }
 
     @Override
-    public String sell(Actor actorSelling, Actor actorToSellTo) {
-        actorSelling.removeItemFromInventory(this);
-        actorToSellTo.addItemToInventory(this);
-        actorSelling.addBalance(CREDITS_TO_SELL);
-        return this + " was sold to " + actorToSellTo + " for " + CREDITS_TO_SELL + " credits.";
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
     }
 
     @Override

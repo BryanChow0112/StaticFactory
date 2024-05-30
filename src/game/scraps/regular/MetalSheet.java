@@ -3,11 +3,13 @@ package game.scraps.regular;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.SellAction;
 import game.types.Ability;
 import game.types.Sellable;
 import game.utils.RandomUtils;
+import game.utils.SellUtils;
 
 /**
  * A concrete implementation of the Item class representing a metal sheet item.
@@ -25,17 +27,13 @@ public class MetalSheet extends Item implements Sellable {
     }
 
     @Override
-    public String sell(Actor actorSelling, Actor actorToSellTo) {
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
         // When the intern attempts to sell a metal sheet, there is a 60% chance
         // that the factory will ask for a discount, only paying the intern 10 credits.
-        int finalCost = CREDITS_TO_SELL;
         if (RandomUtils.getRandomInt(100) <= 60) {
-            finalCost = DISCOUNTED_CREDITS_TO_SELL;
+            return SellUtils.sellItem(actorSelling, actorToSellTo, this, DISCOUNTED_CREDITS_TO_SELL);
         }
-        actorSelling.removeItemFromInventory(this);
-        actorToSellTo.addItemToInventory(this);
-        actorSelling.addBalance(finalCost);
-        return this + " was sold to " + actorToSellTo + " for " + finalCost + " credits.";
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
     }
 
     @Override

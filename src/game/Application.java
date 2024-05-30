@@ -116,7 +116,7 @@ public class Application {
         buyables.add(new DragonSlayerSword());
         buyables.add(new ToiletPaperRoll());
         buyables.add(new Astley());
-        buyables.add(new THESEUS());
+        buyables.add(new Theseus());
 
         // Add travel actions for terminal in Polymorphia
         ArrayList<Action> travelActionPolymorphia = new ArrayList<>();

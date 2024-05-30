@@ -44,23 +44,23 @@ package engine.actions {
 
 
 engine.actors.Actor <... game.types.Buyable 
-game.scraps.special.THESEUS ..|> game.types.Buyable
+game.scraps.special.Theseus ..|> game.types.Buyable
 package game.types {
   interface Buyable <<interface>>
 }
 
-game.scraps.special.THESEUS ...> engine.items.Item
+game.scraps.special.Theseus ...> engine.items.Item
 package engine.items {
   abstract class Item <<abstract>>
 }
 
-game.scraps.special.THESEUS ..> engine.actions.ActionList
-game.scraps.special.THESEUS ..> game.actions.TeleportAction
+game.scraps.special.Theseus ..> engine.actions.ActionList
+game.scraps.special.Theseus ..> game.actions.TeleportAction
 package game.scraps.special {
   class THESEUS #red
 }
 
-game.Application ..> game.scraps.special.THESEUS
+game.Application ..> game.scraps.special.Theseus
 package game {
   class Application
 }
