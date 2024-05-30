@@ -1,7 +1,7 @@
 package game.grounds.flora;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.scraps.special.Fruit;
 import game.scraps.special.LargeFruit;
 
 /**
@@ -30,7 +30,7 @@ public class MatureInheritree extends FruitfulTree {
      * @return new large fruit
      */
     @Override
-    public Fruit getFruit() {
+    public Item getFruit() {
         return new LargeFruit();
     }
 

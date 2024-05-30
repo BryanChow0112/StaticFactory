@@ -1,7 +1,7 @@
 package game.grounds.flora;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.scraps.special.Fruit;
 import game.scraps.special.SmallFruit;
 import game.types.Growable;
 
@@ -36,7 +36,7 @@ public class Sapling extends FruitfulTree implements Growable {
      * @return small fruit
      */
     @Override
-    public Fruit getFruit() {
+    public Item getFruit() {
         return new SmallFruit();
     }
 

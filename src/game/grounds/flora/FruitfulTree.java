@@ -1,9 +1,9 @@
 package game.grounds.flora;
 
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.scraps.special.Fruit;
 import game.utils.RandomUtils;
 
 /**
@@ -45,7 +45,7 @@ public abstract class FruitfulTree extends PlantBase {
      * Method to get the fruit that can be spawned by the tree
      * @return new fruit that can be spawns
      */
-    public abstract Fruit getFruit();
+    public abstract Item getFruit();
 
     /**
      * The chance that the fruit will spawn on each tick
