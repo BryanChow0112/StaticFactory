@@ -24,45 +24,67 @@ package engine.actions {
   class ActionList
 }
 
-game.actions.TeleportAction --|> engine.actions.Action
+game.actions.TeleportAction --|> engine.actions.Action #red
 package game.actions {
   class TeleportAction #red
 }
 
-engine.positions.Ground <|--- game.grounds.Terminal 
-game.grounds.Terminal ..> game.types.Buyable
-game.grounds.Terminal .> game.actions.BuyAction
-game.grounds.Terminal ..> game.actions.TeleportAction
+engine.positions.Ground <|-- game.grounds.Terminal #blue
+game.grounds.Terminal "1" -> "1" game.types.Buyable #blue
+game.grounds.Terminal "1" -> "1" game.actions.BuyAction #blue
+game.grounds.Terminal "1" --> "0..1" game.actions.TeleportAction #blue
 package game.grounds {
   class Terminal #green
 }
 
-game.actions.TeleportAction ..> engine.actions.MoveActorAction
+game.actions.TeleportAction ..> engine.actions.MoveActorAction #red
 package engine.actions {
   class MoveActorAction
 }
 
 
-engine.actors.Actor <... game.types.Buyable 
-game.scraps.special.Theseus ..|> game.types.Buyable
+engine.actors.Actor <... game.types.Buyable
+game.scraps.special.Theseus ..|> game.types.Buyable #purple
 package game.types {
   interface Buyable <<interface>>
 }
 
-game.scraps.special.Theseus ...> engine.items.Item
+game.scraps.special.Theseus ...> engine.items.Item #purple
 package engine.items {
   abstract class Item <<abstract>>
 }
 
-game.scraps.special.Theseus ..> engine.actions.ActionList
-game.scraps.special.Theseus ..> game.actions.TeleportAction
+game.scraps.special.Theseus ..> engine.actions.ActionList #purple
+game.scraps.special.Theseus ..> game.actions.TeleportAction #purple
 package game.scraps.special {
-  class THESEUS #red
+  class Theseus #red
 }
 
 game.Application ..> game.scraps.special.Theseus
 package game {
   class Application
+}
+
+game.scraps.special.Theseus ..> game.types.BuyUtils #orange
+package game.types {
+  class BuyUtils
+}
+
+package engine.actors {
+  abstract class Actor <<abstract>>
+}
+
+game.actions.TeleportAction "1" --> "0..1" engine.positions.Location #blue
+package engine.positions{
+  class Location
+}
+
+package engine.positions{
+  abstract class Ground <<abstract>>
+}
+
+package engine.actions{
+  abstract class Action <<abstract>>
 }
 
 @enduml
