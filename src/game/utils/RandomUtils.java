@@ -13,15 +13,6 @@ public class RandomUtils {
     private static final Random RANDOM = new Random();
 
     /**
-     * Returns a random double value between 0.0 (inclusive) and 1.0 (exclusive).
-     *
-     * @return A random double value.
-     */
-    public static double getRandomDouble() {
-        return RANDOM.nextDouble();
-    }
-
-    /**
      * Returns a random integer value between 0 (inclusive) and the specified bound (exclusive).
      *
      * @param bound The exclusive upper bound for the random number.

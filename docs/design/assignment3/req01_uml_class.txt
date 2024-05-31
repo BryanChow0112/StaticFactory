@@ -1,0 +1,68 @@
+@startuml
+
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+
+title CL_Lab34Team1 - Requirement 1
+
+
+package engine.actions {
+  abstract class Action
+  class ActionList
+}
+
+game.actions.TeleportAction --|> engine.actions.Action
+package game.actions {
+  class TeleportAction #red
+}
+
+engine.positions.Ground <|--- game.grounds.Terminal 
+game.grounds.Terminal ..> game.types.Buyable
+game.grounds.Terminal .> game.actions.BuyAction
+game.grounds.Terminal ..> game.actions.TeleportAction
+package game.grounds {
+  class Terminal #green
+}
+
+game.actions.TeleportAction ..> engine.actions.MoveActorAction
+package engine.actions {
+  class MoveActorAction
+}
+
+
+engine.actors.Actor <... game.types.Buyable 
+game.scraps.special.Theseus ..|> game.types.Buyable
+package game.types {
+  interface Buyable <<interface>>
+}
+
+game.scraps.special.Theseus ...> engine.items.Item
+package engine.items {
+  abstract class Item <<abstract>>
+}
+
+game.scraps.special.Theseus ..> engine.actions.ActionList
+game.scraps.special.Theseus ..> game.actions.TeleportAction
+package game.scraps.special {
+  class THESEUS #red
+}
+
+game.Application ..> game.scraps.special.Theseus
+package game {
+  class Application
+}
+
+@enduml

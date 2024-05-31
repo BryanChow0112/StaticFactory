@@ -1,0 +1,89 @@
+@startuml
+participant ":Application"
+participant World
+participant ":GameMap"
+participant "t:Terminal"
+participant "m:Menu"
+participant "th:THESEUS"
+participant "tp:TeleportAction"
+participant "ba:BuyAction"
+participant BuyUtils
+actor "p:Player"
+
+activate ":Application"
+activate World
+
+":Application" -> World: <<creates>>
+note left
+The scenario where 
+a player purchases 
+a THESEUS and uses it
+end note
+
+":Application"-> ":GameMap": <<creates>>
+
+":Application"-> "t:Terminal": <<creates>>
+
+activate "t:Terminal"
+World -> "t:Terminal": allowableActions()
+"t:Terminal" -> World : actions
+deactivate "t:Terminal"
+
+World -> "p:Player" : playerTurn()
+activate "p:Player"
+"p:Player" --> World : nextAction()
+
+"p:Player" -> "m:Menu" : showMenu()
+activate "m:Menu"
+"m:Menu" -> "ba:BuyAction" : menuDescription(p)
+activate "ba:BuyAction"
+
+"ba:BuyAction" --> "th:THESEUS": getCost()
+activate "th:THESEUS"
+"th:THESEUS" -> "ba:BuyAction": cost
+"ba:BuyAction" --> "m:Menu": description
+deactivate "ba:BuyAction"
+
+"m:Menu" -> "p:Player" : buyAction
+deactivate "m:Menu"
+
+World <-- "ba:BuyAction": buyAction()
+activate "ba:BuyAction"
+
+World -> "ba:BuyAction": execute(p,:GameMap)
+"ba:BuyAction" -> "th:THESEUS" : buy(p)
+deactivate "ba:BuyAction"
+
+"th:THESEUS" -> BuyUtils: buyItem(p, e, doubleCost)
+activate BuyUtils
+BuyUtils -> "p:Player": getBalance()
+"p:Player" -> BuyUtils: balance
+BuyUtils -> "p:Player": deductBalance(doubleCost)
+BuyUtils -> "p:Player": addItemToInventory(th)
+BuyUtils --> "th:THESEUS": message
+deactivate BuyUtils
+"p:Player" --> "th:THESEUS": DropAction(th)
+deactivate "p:Player"
+
+"th:THESEUS" -> RandomUtils: getRandomInt()
+activate RandomUtils
+RandomUtils --> "th:THESEUS": xVal
+"th:THESEUS"-> RandomUtils: getRandomInt()
+RandomUtils --> "th:THESEUS": yVal
+deactivate RandomUtils
+
+"th:THESEUS"-> "tp:TeleportAction": new TeleportAction()
+activate "tp:TeleportAction"
+"tp:TeleportAction"--> "th:THESEUS": teleportAction
+World <-- "tp:TeleportAction": TeleportAction()
+World -> "tp:TeleportAction": execute(p,:GameMap)
+
+
+
+deactivate "tp:TeleportAction"
+
+"th:THESEUS" -> World : message
+deactivate "th:THESEUS"
+deactivate ":Application"
+deactivate World
+@enduml

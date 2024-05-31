@@ -2,33 +2,35 @@ package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.Spawnable;
+import game.spawners.Spawner;
 
 /**
- * Represents a Crater, a type of Ground that spawns a single type of enemy.
+ * A class that represents a crater on the game map.
+ * Craters have the ability to spawn hostile creatures using a Spawner.
  */
 public class Crater extends Ground {
 
-    private final Spawnable spawnEnemy;
+    private final Spawner spawner;
 
     /**
      * Constructs a new Crater object.
      *
-     * @param spawnEnemy The Spawnable enemy that can be spawned around the Crater.
+     * @param spawner The Spawner to be used for spawning hostile creatures
      */
-    public Crater(Spawnable spawnEnemy) {
+    public Crater(Spawner spawner) {
         super('u');
-        this.spawnEnemy = spawnEnemy;
+        this.spawner = spawner;
     }
 
     /**
-     * Performs the actions for the Crater's turn.
-     * This includes attempting to spawn the associated enemy around the Crater's location.
+     * Performs the tick action for the Crater.
+     * Calls the Spawner to spawn a hostile creature at the Crater's location.
      *
-     * @param location The location of the Crater.
+     * @param location the location of the Crater
      */
     @Override
     public void tick(Location location) {
-        Spawner.spawnActor(location, spawnEnemy.create(), spawnEnemy.getSpawnChance());
+        super.tick(location);
+        spawner.spawnEnemy(location);
     }
 }

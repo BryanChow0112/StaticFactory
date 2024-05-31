@@ -7,7 +7,7 @@ import game.behaviours.AttackBehaviour;
  * Represents a Huntsman Spider enemy in the game.
  * The Huntsman Spider is a spawnable enemy with attack and wander behaviors.
  */
-public class HuntsmanSpider extends Enemy implements Spawnable {
+public class HuntsmanSpider extends Enemy{
 
     /**
      * A constant that represents the priority of the attack behaviour.
@@ -35,23 +35,4 @@ public class HuntsmanSpider extends Enemy implements Spawnable {
         return new IntrinsicWeapon(damage, "stabs", 25);
     }
 
-    /**
-     * Creates a new instance of the HuntsmanSpider enemy.
-     *
-     * @return A new HuntsmanSpider object.
-     */
-    @Override
-    public Enemy create() {
-        return new HuntsmanSpider();
-    }
-
-    /**
-     * Returns the spawn chance of the Huntsman Spider.
-     *
-     * @return The spawn chance of the Huntsman Spider from 0 to 1.
-     */
-    @Override
-    public double getSpawnChance() {
-        return 0.05;
-    }
 }

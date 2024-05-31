@@ -3,21 +3,21 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.types.Buyable;
+import edu.monash.fit2099.engine.positions.Location;
 
-/**
- * An Action that allows an Actor to buy a Buyable item.
- */
-public class BuyAction extends Action {
-    private final Buyable buyable;
+public class TeleportAction extends Action {
+    private final String direction;
+    private final Location destination;
 
     /**
-     * Constructs a new BuyAction instance.
+     * Constructs a new TeleportAction object.
      *
-     * @param buyable The buyable item that the actor can purchase.
+     * @param direction The direction of the player.
+     * @param destination The location of the player.
      */
-    public BuyAction(Buyable buyable) {
-        this.buyable = buyable;
+    public TeleportAction(String direction, Location destination) {
+        this.direction = direction;
+        this.destination = destination;
     }
 
     /**
@@ -29,7 +29,12 @@ public class BuyAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return buyable.buy(actor);
+        if (destination.containsAnActor()) {
+            return "Teleport fails";
+        } else {
+            map.moveActor(actor, destination);
+            return actor + " arrives at " + destination + " in " + direction;
+        }
     }
 
     /**
@@ -40,6 +45,6 @@ public class BuyAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + buyable + " for " + buyable.getBuyCost() + " credits.";
+        return actor + " travels to " + direction;
     }
 }

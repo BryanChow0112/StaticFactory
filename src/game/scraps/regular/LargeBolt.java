@@ -1,11 +1,20 @@
 package game.scraps.regular;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actions.SellAction;
+import game.types.Ability;
+import game.types.Sellable;
+import game.utils.SellUtils;
 
 /**
- * A concrete implementation of the Scrap class representing a large bolt item.
+ * A concrete implementation of the Item class representing a large bolt item.
  */
-public class LargeBolt extends Item {
+public class LargeBolt extends Item implements Sellable {
+    private static final int CREDITS_TO_SELL = 25;
 
     /**
      * Constructs a new LargeBolt object.
@@ -13,5 +22,24 @@ public class LargeBolt extends Item {
      */
     public LargeBolt() {
         super("Large Bolt", '+', true);
+    }
+
+    @Override
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
+    }
+
+    @Override
+    public int getSellCost() {
+        return CREDITS_TO_SELL;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList = new ActionList();
+        if (otherActor.hasCapability(Ability.PURCHASE_ITEMS)) {
+            actionList.add(new SellAction(otherActor, this));
+        }
+        return actionList;
     }
 }

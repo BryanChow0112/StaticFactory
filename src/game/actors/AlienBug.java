@@ -20,7 +20,7 @@ import java.util.List;
  * The Alien Bug can collect scraps from the ground, follow the Intern, and enter the Intern's spaceship.
  * When defeated, the Alien Bug drops all the scraps it has collected.
  */
-public class AlienBug extends Enemy implements Spawnable {
+public class AlienBug extends Enemy {
 
     /**
      * A constant that represents the priority of the collect scrap behaviour.
@@ -40,27 +40,6 @@ public class AlienBug extends Enemy implements Spawnable {
         this.addBehaviour(COLLECT_SCRAP_PRIORITY, new CollectScrapBehaviour());
         this.addCapability(Ability.ENTER_SPACESHIP);
     }
-
-    /**
-     * Creates a new instance of the AlienBug enemy.
-     *
-     * @return A new AlienBug object.
-     */
-    @Override
-    public Actor create() {
-        return new AlienBug();
-    }
-
-    /**
-     * Returns the spawn chance of the AlienBug.
-     *
-     * @return The spawn chance of the AlienBug from 0 to 1.
-     */
-    @Override
-    public double getSpawnChance() {
-        return 0.1;
-    }
-
 
     /**
      * Method that can be executed when the AlienBug is unconscious due to the action of another actor

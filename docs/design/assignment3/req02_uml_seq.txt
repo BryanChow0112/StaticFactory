@@ -1,0 +1,95 @@
+@startuml
+
+title CL_Lab34Team1 - Requirement 2
+
+participant World
+participant ":Application"
+participant "t:ToiletPaperRoll"
+participant "m:Menu"
+participant "g:GameMap"
+actor "p:Player"
+participant "a:SellAction"
+participant "h:Humanoid"
+participant SellUtils
+participant RandomUtils
+
+note left of World
+The scenario where 
+a player sells a ToiletPaperRoll
+to the Humanoid
+end note
+
+' Application creates the required classes
+activate ":Application"
+":Application" -> World: <<creates>>
+":Application" -> "h:Humanoid": <<creates>>
+":Application" -> "t:ToiletPaperRoll": <<creates>>
+":Application" -> "p:Player": <<creates>>
+activate World
+
+'Check what the ToiletPaperRoll can do
+World -> "t:ToiletPaperRoll": allowableActions()
+activate "t:ToiletPaperRoll"
+' Check surroundings for a player with purchasing ability
+"t:ToiletPaperRoll" -> "h:Humanoid": hasCapability(Ability.PURCHASE_ITEMS)
+activate "h:Humanoid"
+"h:Humanoid" -> "t:ToiletPaperRoll": true
+deactivate "h:Humanoid"
+"t:ToiletPaperRoll" -> "a:SellAction": <<creates>>
+"t:ToiletPaperRoll" -> World: actions
+deactivate "t:ToiletPaperRoll"
+
+' Player plays a turn and sells the ToiletPaperRoll
+World -> "p:Player": playTurn()
+activate "p:Player"
+
+alt lastAction has nextAction
+  "p:Player" -> World: nextAction
+else lastAction has no nextAction
+  "p:Player" -> "m:Menu": showMenu()
+  activate "m:Menu"
+  "m:Menu" -> "a:SellAction": menuDescription(p)
+  activate "a:SellAction"
+  "a:SellAction" -> "t:ToiletPaperRoll": getSellCost()
+  activate "t:ToiletPaperRoll"
+  "t:ToiletPaperRoll" -> "a:SellAction": cost
+  deactivate "t:ToiletPaperRoll"
+  "a:SellAction" -> "m:Menu": description
+  deactivate "a:SellAction"
+  "m:Menu" -> "p:Player": sellAction
+  deactivate "m:Menu"
+  "p:Player" -> World: sellAction
+  World -> "a:SellAction": execute(p, g)
+  activate "a:SellAction"
+  "a:SellAction" -> "t:ToiletPaperRoll": sell(p, h, g)
+  deactivate "a:SellAction"
+  activate "t:ToiletPaperRoll"
+  "t:ToiletPaperRoll" -> RandomUtils: getRandomInt(100)
+  activate RandomUtils
+  RandomUtils -> "t:ToiletPaperRoll": random integer between 0 and 100
+  deactivate "t:ToiletPaperRoll"
+  deactivate RandomUtils
+  alt player is killed before sale happens as the random integer was <= 50
+    "t:ToiletPaperRoll" -> "d:DeathAction": <<creates>>
+    activate "d:DeathAction"
+    "t:ToiletPaperRoll" -> "d:DeathAction": execute(p, g)
+    "d:DeathAction" -> "t:ToiletPaperRoll": actorSelling (p) has been killed
+    deactivate "d:DeathAction"
+  else sale is made and player remains alive
+    "t:ToiletPaperRoll" -> SellUtils: sellItem(p, h, t, 1)
+    activate SellUtils
+    SellUtils -> "p:Player": removeItemFromInventory(t)
+    SellUtils -> "h:Humanoid": addItemToInventory(t)
+    SellUtils -> "p:Player": addBalance(1)
+    SellUtils -> "t:ToiletPaperRoll": message
+    deactivate SellUtils
+  end
+  "t:ToiletPaperRoll" -> "a:SellAction": message
+  "a:SellAction" -> World: message
+  deactivate "a:SellAction"
+end
+
+deactivate "p:Player"
+deactivate World
+deactivate ":Application"
+@enduml

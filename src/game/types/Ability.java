@@ -6,4 +6,6 @@ package game.types;
  */
 public enum Ability {
     ENTER_SPACESHIP,
+    CAN_PAY_SUBSCRIPTION,
+    PURCHASE_ITEMS
 }

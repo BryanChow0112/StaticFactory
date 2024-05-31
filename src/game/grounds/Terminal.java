@@ -1,12 +1,13 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.BuyAction;
 import game.types.Buyable;
-
+import game.types.Status;
 import java.util.ArrayList;
 
 /**
@@ -15,15 +16,18 @@ import java.util.ArrayList;
  */
 public class Terminal extends Ground {
     private final ArrayList<Buyable> buyables;
+    private final ArrayList<Action> travelAction;
 
     /**
      * Constructs a new Terminal object with a list of buyable items.
      *
      * @param buyables The list of buyable items available for purchase.
+     * @param travelAction The list of travelActions available to travel to.
      */
-    public Terminal(ArrayList<Buyable> buyables) {
+    public Terminal(ArrayList<Buyable> buyables, ArrayList<Action> travelAction) {
         super('=');
         this.buyables = buyables;
+        this.travelAction = travelAction;
     }
 
     /**
@@ -40,6 +44,11 @@ public class Terminal extends Ground {
         ActionList actionList = new ActionList();
         for (Buyable buyable : this.buyables) {
             actionList.add(new BuyAction(buyable));
+        }
+        if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) && !location.containsAnActor()) {
+            for (Action travelAction : this.travelAction) {
+                actionList.add(travelAction);
+            }
         }
         return actionList;
     }

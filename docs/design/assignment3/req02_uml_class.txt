@@ -1,0 +1,110 @@
+@startuml
+
+hide circle
+hide empty fields
+hide empty methods
+!theme plain
+top to bottom direction
+skinparam ClassStereotypeFontStyle plain
+skinparam PackageBackgroundColor #DDDDDD
+skinparam linetype ortho
+skinparam classfontSize 20
+skinparam arrowfontSize 20
+skinparam nodesep 200
+skinparam ranksep 200
+skinparam ClassStereotypeFontSize 20
+skinparam padding 10
+skinparam linetype ortho
+skinparam packagedistance 30
+skinparam classaxisdistance 60
+
+title CL_Lab34Team1 - Requirement 2
+
+package engine.actions {
+  abstract class Action <<abstract>>
+}
+package engine.actors {
+  abstract class Actor <<abstract>>
+}
+
+engine.actors.Actor <|-- game.actors.Humanoid
+engine.actions.DoNothingAction <.. game.actors.Humanoid
+game.actors.Humanoid ..> game.types.Ability
+package game.actors {
+  class Humanoid #red
+}
+
+' Relationships with Sellable
+game.types.Sellable <|.[#red]. game.scraps.regular.LargeBolt
+game.types.Sellable <|.[#red]. game.scraps.regular.MetalSheet
+
+' Relationships with RandomUtils
+game.scraps.regular.MetalSheet .[#deeppink].> game.utils.RandomUtils
+
+' Relationships with SellUtils
+game.scraps.regular.LargeBolt .[#blue].> game.utils.SellUtils
+game.scraps.regular.MetalSheet .[#blue].> game.utils.SellUtils
+
+package game.scraps.regular {
+  class LargeBolt #green
+  class MetalSheet #green
+}
+
+' Relationships with Sellable
+game.types.Sellable <|.[#red]. game.scraps.special.LargeFruit
+game.types.Sellable <|.[#red]. game.scraps.special.JarOfPickles
+game.types.Sellable <|.[#red]. game.scraps.special.MetalPipe
+game.types.Sellable <|.[#red]. game.scraps.special.PotOfGold
+game.types.Sellable <|.[#red]. game.scraps.special.ToiletPaperRoll
+
+' Relationships with RandomUtils
+game.scraps.special.JarOfPickles .[#deeppink].> game.utils.RandomUtils
+game.scraps.special.PotOfGold .[#deeppink].> game.utils.RandomUtils
+game.scraps.special.ToiletPaperRoll .[#deeppink].> game.utils.RandomUtils
+
+' Relationships with SellUtils
+game.scraps.special.LargeFruit .[#blue].> game.utils.SellUtils
+game.scraps.special.JarOfPickles .[#blue].> game.utils.SellUtils
+game.scraps.special.MetalPipe .[#blue].> game.utils.SellUtils
+game.scraps.special.PotOfGold .[#blue].> game.utils.SellUtils
+game.scraps.special.ToiletPaperRoll .[#blue].> game.utils.SellUtils
+
+package game.scraps.special {
+  class LargeFruit #green
+  class JarOfPickles #green
+  class MetalPipe #green
+  class PotOfGold #green
+  class ToiletPaperRoll #green
+}
+
+engine.actors.Actor <... game.types.Sellable
+engine.positions.GameMap <... game.types.Sellable
+package game.types {
+  interface Sellable <<interface>> #red
+  enum Ability  <<enumeration>>
+}
+
+engine.actions.Action <|-- game.actions.SellAction
+game.actions.SellAction "0..1" --> "1" game.types.Sellable
+engine.actors.Actor "1" <-- "0..*" game.actions.SellAction
+package game.actions {
+  class SellAction #red
+}
+
+package game.utils {
+  class RandomUtils
+  class SellUtils #red
+}
+
+game.Application ..> game.types.Sellable
+game.Application ..> game.actors.Humanoid
+game.Application ..> game.scraps.regular.LargeBolt
+game.Application ..> game.scraps.regular.MetalSheet
+game.Application ..> game.scraps.special.MetalPipe
+game.Application ..> game.scraps.special.JarOfPickles
+game.Application ..> game.scraps.special.ToiletPaperRoll
+package game {
+  class Application
+}
+
+@enduml

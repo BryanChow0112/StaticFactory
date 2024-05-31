@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.utils.RandomUtils;
 
+/**
+ * An Action that allows an Actor to attack another Actor.
+ */
 public class AttackAction extends Action {
 
     /**

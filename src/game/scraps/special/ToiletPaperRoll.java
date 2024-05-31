@@ -1,20 +1,30 @@
 package game.scraps.special;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actions.DeathAction;
+import game.actions.SellAction;
+import game.types.Ability;
 import game.types.Buyable;
+import game.types.Sellable;
 import game.utils.BuyUtils;
 import game.utils.RandomUtils;
+import game.utils.SellUtils;
 
 /**
  * A toilet paper roll item that can be purchased by an actor.
  * There is a chance of receiving a discount when attempting to buy this item.
  * This class implements the Buyable interface.
  */
-public class ToiletPaperRoll extends Item implements Buyable {
-    private static final int WORTH_IN_CREDITS = 5;
-    private static final double DISCOUNT_CHANCE = 0.75;
-    private static final int DISCOUNTED_COST = 1;
+public class ToiletPaperRoll extends Item implements Buyable, Sellable {
+    private static final int CREDITS_TO_BUY = 5;
+    private static final int CREDITS_TO_SELL = 1;
+    private static final int DISCOUNT_CHANCE = 75;
+    private static final int DISCOUNTED_CREDITS_TO_BUY = 1;
 
     /**
      * Constructs a new ToiletPaperRoll instance.
@@ -32,12 +42,10 @@ public class ToiletPaperRoll extends Item implements Buyable {
      */
     @Override
     public String buy(Actor actor) {
-        double randDouble = RandomUtils.getRandomDouble();
-
-        if (randDouble <= DISCOUNT_CHANCE) {
-            return BuyUtils.buyItem(actor, this, DISCOUNTED_COST);
+        if (RandomUtils.getRandomInt(100) <= DISCOUNT_CHANCE) {
+            return BuyUtils.buyItem(actor, this, DISCOUNTED_CREDITS_TO_BUY);
         } else {
-            return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
+            return BuyUtils.buyItem(actor, this, CREDITS_TO_BUY);
         }
     }
 
@@ -47,7 +55,34 @@ public class ToiletPaperRoll extends Item implements Buyable {
      * @return The cost of this toilet paper roll in credits.
      */
     @Override
-    public int getCost() {
-        return WORTH_IN_CREDITS;
+    public int getBuyCost() {
+        return CREDITS_TO_BUY;
+    }
+
+    @Override
+    public String sell(Actor actorSelling, Actor actorToSellTo, GameMap map) {
+        // If the intern attempts to sell the toilet paper roll,
+        // there is a 50% chance that the intern will be killed
+        // instantly by the humanoid figure.
+        if (RandomUtils.getRandomInt(100) <= 50) {
+            DeathAction action = new DeathAction(actorToSellTo);
+            action.execute(actorSelling, map);
+            return "While " + this + " was being sold " + actorToSellTo + " decided to kill " + actorSelling;
+        }
+        return SellUtils.sellItem(actorSelling, actorToSellTo, this, CREDITS_TO_SELL);
+    }
+
+    @Override
+    public int getSellCost() {
+        return CREDITS_TO_SELL;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList = new ActionList();
+        if (otherActor.hasCapability(Ability.PURCHASE_ITEMS)) {
+            actionList.add(new SellAction(otherActor, this));
+        }
+        return actionList;
     }
 }

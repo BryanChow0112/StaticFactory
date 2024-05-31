@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.actions.SellAction;
+import game.types.Ability;
 import game.types.Buyable;
 import game.types.Status;
 import game.utils.BuyUtils;
@@ -15,7 +17,7 @@ import game.utils.RandomUtils;
  * This item also implements the Buyable interface, allowing actors to purchase it.
  */
 public class DragonSlayerSword extends WeaponItem implements Buyable {
-    private static final int WORTH_IN_CREDITS = 100;
+    private static final int CREDITS_TO_BUY = 100;
 
     /**
      * Constructs a new DragonSlayerSword instance.
@@ -51,12 +53,11 @@ public class DragonSlayerSword extends WeaponItem implements Buyable {
      */
     @Override
     public String buy(Actor actor) {
-        double randDouble = RandomUtils.getRandomDouble();
-        if (randDouble <= 0.5) {
-            actor.deductBalance(WORTH_IN_CREDITS);
+        if (RandomUtils.getRandomInt(100) <= 50) {
+            actor.deductBalance(CREDITS_TO_BUY);
             return "An error occurred while purchasing, your credits were deducted anyway...";
         } else {
-            return BuyUtils.buyItem(actor, this, WORTH_IN_CREDITS);
+            return BuyUtils.buyItem(actor, this, CREDITS_TO_BUY);
         }
     }
 
@@ -66,8 +67,8 @@ public class DragonSlayerSword extends WeaponItem implements Buyable {
      * @return The cost of this item in credits.
      */
     @Override
-    public int getCost() {
-        return WORTH_IN_CREDITS;
+    public int getBuyCost() {
+        return CREDITS_TO_BUY;
     }
 
 }

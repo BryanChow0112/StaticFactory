@@ -1,47 +1,90 @@
 package game.grounds.flora;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.scraps.special.SmallFruit;
+import game.types.Growable;
 
 /**
- * Represents a Sapling, a type of PlantBase that grows into a Tree over time.
- * The Sapling has a 30% chance to spawn a SmallFruit item each turn.
+ * Represents the sapling stage of inheritree
  */
-public class Sapling extends PlantBase {
-
+public class Sapling extends FruitfulTree implements Growable {
     /**
-     * The current age of the sapling.
+     * The age of the sapling
      */
-    private int age = 0;
+    private int age;
 
     /**
-     * The next stage of the plant after the sapling matures.
-     */
-    private final PlantBase nextStage;
-
-    /**
-     * Constructs a new Sapling object.
+     * Construct new instance of sapling
      */
     public Sapling() {
         super('t');
-        this.spawn = new SmallFruit();
-        this.spawnChance = 0.3;
-        this.nextStage = new Tree();
     }
 
     /**
-     * Performs the actions for the Sapling's turn.
-     * If the sapling's age reaches 5, it will grow to its mature stage (Tree).
-     *
-     * @param location The location of the Sapling.
+     * Method for the sapling to experience time
+     * @param location The location of the Ground
      */
     @Override
-    public void tick(Location location) {
-        super.tick(location);
+    public void tick(Location location){
+        produceFruit(location);
+        grow(location);
+    }
+
+    /**
+     * Method to get the fruit that can be spawned
+     * @return small fruit
+     */
+    @Override
+    public Item getFruit() {
+        return new SmallFruit();
+    }
+
+    /**
+     * % Chance of the fruit spawning
+     * @return int representing a percentage
+     */
+    @Override
+    public int getSpawnChance() {
+        return 30;
+    }
+
+    /**
+     * get the next stage once it ages enough
+     * @return next stage new YoungInheritree
+     */
+    @Override
+    public PlantBase nextStage() {
+        return new YoungInheritree();
+    }
+
+    /**
+     * Age that the Sapling grows
+     * @return int growAge
+     */
+    @Override
+    public int growAge() {
+        return 6;
+    }
+
+    /**
+     * Method for the sapling to grow each tick
+     * @param location of sapling
+     */
+    @Override
+    public void grow(Location location) {
         age++;
-        if (age >= 5) {
-            // Replace the current sapling with the next stage
-            location.setGround(nextStage);
-        }
+        if (isMature()){
+            location.setGround(nextStage());
+        };
+    }
+
+    /**
+     * Check if the Sapling has matured
+     * @return boolean if matured
+     */
+    @Override
+    public boolean isMature() {
+        return age >= growAge();
     }
 }
