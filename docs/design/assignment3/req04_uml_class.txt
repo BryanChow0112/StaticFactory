@@ -34,16 +34,13 @@ package game.scraps.special {
   class SmallFruit
 }
 
-
-
-
 package game.grounds.flora {
   abstract class PlantBase <<abstract>>
-  abstract class FruitfulTree <<abstract>> #green
-  abstract class NonFruitfulTree <<abstract>> #green
-  class Growable <<interface>> #green
-
+  abstract class FruitfulTree <<abstract>> #red
+  abstract class NonFruitfulTree <<abstract>> #red
+  class Growable <<interface>> #red
 }
+
 game.grounds.flora.PlantBase -up-|> engine.positions.Ground
 game.grounds.flora.Sprout ...|> game.types.Growable
 game.grounds.flora.Sapling ...|> game.types.Growable
@@ -56,21 +53,14 @@ game.grounds.flora.FruitfulTree <|-- game.grounds.flora.Sapling
 game.grounds.flora.FruitfulTree <|-- game.grounds.flora.MatureTree
 game.grounds.flora.PlantBase .> engine.positions.Location
 
-
-
-game.grounds.flora.Sapling .[#green].> game.scraps.special.SmallFruit
-
-game.grounds.flora.MatureTree .[#green].> game.scraps.special.LargeFruit
-
-
+game.grounds.flora.Sapling ..> game.scraps.special.SmallFruit
+game.grounds.flora.MatureTree ..> game.scraps.special.LargeFruit
 
 package game.grounds.flora {
-  class Sapling #green
-  class MatureTree #green
-  class Sprout #green
-  class YoungInheritree #green
-
-
+  class Sapling #red
+  class MatureTree #red
+  class Sprout #red
+  class YoungInheritree #red
 }
 
 game.Application ..> game.grounds.flora.Sprout
