@@ -30,7 +30,7 @@ import game.types.Buyable;
  * @author Lachlan MacPhee
  */
 public class Application {
-    // add
+    
     public static void main(String[] args) {
 
         World world = new World(new Display());
