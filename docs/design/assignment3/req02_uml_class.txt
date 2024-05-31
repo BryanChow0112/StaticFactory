@@ -98,6 +98,11 @@ package game.utils {
 
 game.Application ..> game.types.Sellable
 game.Application ..> game.actors.Humanoid
+game.Application ..> game.scraps.regular.LargeBolt
+game.Application ..> game.scraps.regular.MetalSheet
+game.Application ..> game.scraps.special.MetalPipe
+game.Application ..> game.scraps.special.JarOfPickles
+game.Application ..> game.scraps.special.ToiletPaperRoll
 package game {
   class Application
 }
