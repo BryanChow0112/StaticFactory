@@ -38,7 +38,10 @@ package game.grounds.flora {
   abstract class PlantBase <<abstract>>
   abstract class FruitfulTree <<abstract>> #red
   abstract class NonFruitfulTree <<abstract>> #red
-  class Growable <<interface>> #red
+}
+
+package game.types {
+  interface Growable <<interface>> #red
 }
 
 game.grounds.flora.PlantBase -up-|> engine.positions.Ground
