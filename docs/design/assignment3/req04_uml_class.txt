@@ -24,7 +24,7 @@ package engine.positions {
 }
 
 package engine.items {
-  abstract class Item
+  abstract class Item <<abstract>>
 }
 
 game.scraps.special.LargeFruit -up-|> engine.items.Item
