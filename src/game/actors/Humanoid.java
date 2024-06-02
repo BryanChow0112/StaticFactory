@@ -8,8 +8,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.types.Ability;
 
+/**
+* Represents a humanoid entity within the game.
+*/
 public class Humanoid extends Actor {
 
+    /**
+    * Constructs a new Humanoid object.
+    */
     public Humanoid() {
         super("Humanoid", 'H', 5);
         this.addCapability(Ability.PURCHASE_ITEMS);

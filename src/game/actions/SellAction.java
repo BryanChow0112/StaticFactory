@@ -27,7 +27,7 @@ public class SellAction extends Action {
      *
      * @param actorSelling The actor performing the sell action.
      * @param map   The game map (not used in this action).
-     * @return The result message of the buy attempt.
+     * @return The result message of the sell attempt.
      */
     @Override
     public String execute(Actor actorSelling, GameMap map) {
