@@ -1,42 +1,53 @@
 @startuml
-participant "SproutNonFruitful : Growable" as Sprout
-participant "SaplingFruitful : Growable" as Sapling
-participant "YoungInheritreeNonFruitful : Growable" as YoungInheritree
-participant "MatureInheritreeFruitful" as MatureInheritree
-participant "SmallFruit : Consumable" as SmallFruit
-participant "LargeFruit : Consumable" as LargeFruit
+title CL_Lab34Team1 - Requirement 4
 
-Sprout -> Sprout: grow(Location location)
+participant ":Sprout" as Sprout
+participant ":Sapling" as Sapling
+participant ":YoungInheritree" as YoungInheritree
+participant ":MatureInheritree" as MatureInheritree
+participant ":LargeFruit" as LargeFruit
+participant Location
+
 activate Sprout
+Sprout -> Sprout: grow()
 Sprout -> Sprout: isMature()
-Sprout --> Sprout: return age >= growAge()
+Sprout -> Sprout: return age >= growAge()
 Sprout -> Sprout: nextStage()
+
 create Sapling
 Sprout -> Sapling: new()
 Sprout -> Location: setGround(Sapling)
 deactivate Sprout
 activate Sapling
-Sapling -> Sapling: grow(Location location)
+
+Sapling -> Sapling: grow()
 Sapling -> Sapling: isMature()
-Sapling --> Sapling: return age >= growAge()
+Sapling -> Sapling: return age >= growAge()
 Sapling -> Sapling: nextStage()
+
 create YoungInheritree
 Sapling -> YoungInheritree: new()
 Sapling -> Location: setGround(YoungInheritree)
 deactivate Sapling
 activate YoungInheritree
-YoungInheritree -> YoungInheritree: grow(Location location)
+
+YoungInheritree -> YoungInheritree: grow()
 YoungInheritree -> YoungInheritree: isMature()
-YoungInheritree --> YoungInheritree: return age >= growAge()
+YoungInheritree -> YoungInheritree: return age >= growAge()
 YoungInheritree -> YoungInheritree: nextStage()
+
 create MatureInheritree
 YoungInheritree -> MatureInheritree: new()
 YoungInheritree -> Location: setGround(MatureInheritree)
 deactivate YoungInheritree
 activate MatureInheritree
+
 MatureInheritree -> MatureInheritree: produceFruit(Location location)
+
 create LargeFruit
 MatureInheritree -> LargeFruit: new()
+activate LargeFruit
 MatureInheritree -> Location: addItem(LargeFruit)
+deactivate LargeFruit
 deactivate MatureInheritree
 @enduml
