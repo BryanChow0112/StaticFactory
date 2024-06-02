@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * An Action class that allows an Actor to teleport to another location on the game map.
+ */
 public class TeleportAction extends Action {
     private final String direction;
     private final Location destination;
